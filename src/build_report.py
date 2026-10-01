@@ -130,8 +130,8 @@ def build(data, output):
     extra = json.loads((ROOT/'results/day1_supplement.json').read_text())
 
     r.start('문제 정의 · EDA 1', '수명 분포와 배치별 차이')
-    r.paragraph('<b>분석 목표:</b> 초기 100사이클 정보로 배터리의 총수명(cycle_life)을 예측합니다. '
-                '얼마나 오래 사용할 수 있는지 사이클 수로 예측하기 위해 회귀를 선택했습니다. '
+    r.paragraph('<b>분석 목표:</b> 배터리의 초기 100사이클 데이터를 이용해 총수명(cycle_life)을 예측하고자 합니다. '
+                '장수명·단수명으로 구분하는 것보다 실제 수명을 사이클 수로 예측하기 위해 <b>회귀 문제로 설정했습니다.</b> '
                 '수명 기준은 정격 용량 1.1 Ah의 80%인 0.88 Ah이며, 셀 1개를 데이터 1개로 봅니다.')
     counts = {b['name']: b for b in data['meta']['batches']}
     r.table(['배치', '원본 → 분석', '평균 ± 표준편차', '중앙값', '수명 범위', '<500 n(%)', '>1000 n(%)'],
