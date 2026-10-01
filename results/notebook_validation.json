@@ -1,14 +1,14 @@
 {
   "status": "passed",
   "notebook": "notebooks/01_DAY1_EDA.ipynb",
-  "sha256": "ceb42fabefb8d83f02b4bf888f1f335d3e0a733adf18bdc07a4e1d9a84c08f79",
+  "sha256": "f55f53e5fbcab4d18002a0cd483c861d7485dd8c5207042f6f9df8b6d7fef56c",
   "total_cells": 33,
   "executed_code_cells": 15,
   "error_outputs": 0,
   "embedded_png_charts": 7,
   "scope": "DAY1 Batch1/2/3 descriptive EDA only; no prediction model fitting or reselection",
   "source": "src/build_notebook.py",
-  "source_sha256": "2fb8d2ed0da4c76966d0695f62a7932fd7b95a0c612805c2f5086c08a8fddc89",
+  "source_sha256": "52f3a2c81d11e68b1c0ebcd336f736df6011cb809922e9268a03f4a6643b7788",
   "supplement_json_sha256": "b6c5eedbedc147c88384ddce60fa695af092cc4465b494e0025e5da8ade6d493",
   "protected_files_checked": 25,
   "processed_data_split_and_day2_models_unchanged": true,
@@ -52,11 +52,8 @@
     "results/day2/models/C037.joblib": "22459bfbb2b9f806d7840c9995cd85e40a89a637b10987a046560c29ed18308e"
   },
   "visual_review": {
-    "date": "2026-10-01",
     "embedded_png_charts_reviewed": 7,
-    "result": "All7charts are readable, correctly labeled and unclipped; histogram uses150-2300 and DeltaQ group legends include counts.",
-    "preview_directory": "/tmp/day1-notebook-review",
-    "table_review": "All40 policy rows are displayed; each batch has8x8 correlation and pairwise sample-count tables; strong independent pairs are listed once."
+    "result": "All embedded charts visually inspected; axes, legends, labels and plots are legible and unclipped."
   },
   "supplement_validation": {
     "policy_correlations_rows": 9,
@@ -67,11 +64,18 @@
     "csv_json_numeric_agreement": true,
     "policy_group_counts_reconcile_to_115": true
   },
-  "validated_at": "2026-10-01T06:05:38.604903+00:00",
+  "validated_at": "2026-10-01T06:21:47.443120+00:00",
   "model_training_executed": false,
   "protected_inputs_models_results_unchanged": true,
   "final_markdown_revision": {
-    "change": "Removed reference boilerplate and revision-process wording",
+    "change": "Removed redundant reference-list prose",
     "code_cells_and_outputs_unchanged": true
+  },
+  "clean_checkout_execution": {
+    "status": "passed",
+    "executed_code_cells": 15,
+    "error_outputs": 0,
+    "source": "Tracked-file checkout with the recorded project dependency versions",
+    "final_revision": "Only prose and a display-string label changed after execution; all computational statements and numeric outputs preserved."
   }
 }

@@ -194,7 +194,7 @@ def build():
         'qd_change_100_10': 'QD100-QD10(Ah)',
         'qd_slope_10_100': '10~100사이클 QD 직선 기울기(Ah/cycle)',
         'ir_mean_2_100': '2~100사이클 양의 내부저항 평균',
-        'ir_change_early': '91~100 IR 평균 - 2~10 IR 평균(양의 값)',
+        'ir_change_early': '양의 IR 측정값으로 구한 91~100사이클 평균 - 2~10사이클 평균',
         'tavg_mean_2_100': '2~100사이클 유효 평균온도',
         'chargetime_mean_2_100': '2~100사이클 유효 충전시간 평균',
         'log10_deltaq_var': 'log10 Var[Q100(V)-Q10(V)], ddof=1',

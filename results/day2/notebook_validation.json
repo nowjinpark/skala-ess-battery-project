@@ -1,25 +1,33 @@
 {
   "status": "passed",
   "notebook": "notebooks/02_DAY2_Modeling.ipynb",
-  "sha256": "d17f6a2d356e21bb98685a3d044fd8c31451741a1d9f16861771c3794fbe1477",
-  "validated_at": "2026-10-01T06:05:38.604903+00:00",
+  "sha256": "7d9e9ad1f1ccce8016b896a6adbf6fcd2b81ab3cfcfa9f12c530dcb7697b9516",
+  "validated_at": "2026-10-01T06:21:47.443120+00:00",
   "total_cells": 36,
   "executed_code_cells": 17,
   "error_outputs": 0,
   "embedded_png_charts": 5,
   "model_training_executed": false,
   "protected_inputs_models_results_unchanged": true,
-  "code_cells_and_outputs_unchanged": true,
-  "code_and_outputs_sha256": "f3131c3219e1057032de18b9231147fecad5fe949905b77bee1f516d3f98f733",
+  "code_and_outputs_sha256": "3f278d4fb2f644308de2da8f9282b89282bc4b69e910a02563e66eb89585e4a3",
   "selected_candidate": "C037",
   "selection_changed": false,
   "metrics_independently_recomputed": true,
   "visual_review": {
     "embedded_png_charts_reviewed": 5,
-    "result": "Charts and all code outputs are unchanged; existing visual review remains applicable."
+    "result": "All embedded charts visually inspected; axes, legends, labels and plots are legible and unclipped."
   },
-  "final_markdown_revision": {
-    "change": "Removed reference boilerplate and revision-process wording",
-    "code_cells_and_outputs_unchanged": true
+  "source_sha256": "e7e7acdb32401c0dcb4d73f771e8c46a059580cefcba4eb2816d13cfcd9624e6",
+  "clean_checkout_execution": {
+    "status": "passed",
+    "executed_code_cells": 17,
+    "error_outputs": 0,
+    "source": "Tracked-file checkout with the recorded project dependency versions",
+    "final_revision": "Only prose and a display-string label changed after execution; all computational statements and numeric outputs preserved."
+  },
+  "code_and_outputs_hash_format": "SHA256 of UTF-8 json.dumps([{source, outputs} per code cell], ensure_ascii=False, sort_keys=True)",
+  "final_revision": {
+    "change": "IR change definition clarifies that positivity applies to input readings, not their difference",
+    "computational_logic_and_numeric_outputs_unchanged": true
   }
 }
