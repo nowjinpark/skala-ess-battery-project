@@ -4,7 +4,7 @@
   "page_count": 6,
   "page_format": "A4",
   "status": "passed",
-  "validated_at": "2026-10-01T14:01:51.449198+09:00",
+  "validated_at": "2026-10-01T14:02:41.448200+09:00",
   "revision": "DAY1 존댓말·쉬운 표현 수정, 색상 그래프·흑백 본문 6쪽",
   "checks": {
     "six_pages": true,
@@ -96,6 +96,10 @@
         "color_pixels": 0,
         "sha256": "bb5bf7cf831b9030966deda4351da86ffd03e3b70977bd4cf6e7774955235d50"
       }
+    ],
+    "final_refinement_pages_rechecked": [
+      2,
+      6
     ]
   },
   "style_verification": {
@@ -177,6 +181,7 @@
     "scope": "문체·표현 수정 검토. 분석 수치와 모델 자료는 수정하지 않음.",
     "label_provenance": "B1/B3 near-80% endpoint values vs B2 observed below-80% crossing still distinguished.",
     "knee_caveat": "두 직선 설명용 근사와 불확실성, 미래 관측 입력 제외 설명 유지.",
-    "day1_design_scope": "설계 문서의 계획 시제 유지; DAY2 학습 성능 수치 추가 없음."
+    "day1_design_scope": "설계 문서의 계획 시제 유지; DAY2 학습 성능 수치 추가 없음.",
+    "final_refinements": "2쪽의 제곱차 비교 대상이 변동을 줄인 값임을 명시한 문장, 6쪽 평서형 제목과 짧게 정리한 표 문장을 재확인했습니다."
   }
 }
