@@ -62,10 +62,11 @@
   ],
   "validated_at": "2026-10-01T04:47:09.288979+00:00",
   "scope": "Local report content, numeric consistency and visual QA. Not a grading prediction or external-submission completion.",
-  "submission_status": "not_submitted",
+  "submission_status": "github_public_uploaded; slack_not_performed",
   "review_path": "/Users/jinwon/workspace/데이터 분석 미니플젝/docs/final_day2_review.md",
-  "review_sha256": "e2f4c91048d085a2f8095da6725bdf2d22ffa7c97a9e99b0eb19e6a06fdbf80b",
-  "readme_sha256": "7aa0289a2344aae03c3bb29c697f2a053566f5be5b4b85ff7f89fea26319cc43",
+  "review_sha256": "fbefb330a83d03b2975a5696291a6867b2cfbb130f89f6dd10bca12624ec97b0",
+  "readme_sha256": "b8fb59a55cdddb3c21aa9d043ef364bf39e9e1d32533ce19f684c2afa740e2d4",
   "training_source_sha256": "739418fa6ff3ce248aae30d1eafc0ce68467cfd29e1d429c18a3a6130a794978",
-  "evaluation_sha256": "9f8e77a0ff137aac95cee238918c44ecd7a1532e6e43e29402ef16fc32bc7325"
+  "evaluation_sha256": "9f8e77a0ff137aac95cee238918c44ecd7a1532e6e43e29402ef16fc32bc7325",
+  "repository_url": "https://github.com/nowjinpark/skala-battery-cycle-life"
 }

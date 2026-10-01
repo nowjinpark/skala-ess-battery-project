@@ -194,7 +194,7 @@ python src/build_day2_notebook.py
 | 성능 리포팅·해석 | 20 | 4절 지정 6행 표·세 Gap·논문 참고 비교 |
 | 도메인 해석·한계 | 20 | 5-6절 오류 사례·반례·개선·현장 적용 한계 |
 
-배점은 공식 평가 가중치이며 자체 채점이나 점수 보장이 아니다. 노션의 실제 제출 형식은 public GitHub 링크이며 반별 Slack thread 제출을 안내한다. 로컬 결과 준비와 외부 게시·제출은 별도 단계다.
+배점은 공식 평가 가중치이며 자체 채점이나 점수 보장이 아니다. 노션의 실제 제출 형식에 맞춰 [공개 GitHub 저장소](https://github.com/nowjinpark/skala-battery-cycle-life)에 게시했다. 반별 Slack thread로 링크를 전송하는 단계는 수행하지 않았다.
 
 - [DS Mini Project 과제 안내](https://actually-war-1ea.notion.site/DS-Mini-Project-32d7f4c8669380338a27f90c471c1fcb) (2026-10-01 확인)
 - [Kaggle 데이터셋](https://www.kaggle.com/datasets/itshpark/data-driven-prediction-of-battery-cycle)
