@@ -1,11 +1,11 @@
 {
   "file": "/Users/jinwon/workspace/데이터 분석 미니플젝/output/pdf/DS-MINI-Design-울산_1반-박진원.pdf",
-  "sha256": "f372d03d8224cdd0e4a856c39f7b4462a9256225cdb1a101063393210b11ad58",
+  "sha256": "bde4c4e13195ce43de79b8fe3c076e1cd073573cead27d02303378892a45a269",
   "page_count": 6,
   "page_format": "A4",
   "status": "passed",
-  "validated_at": "2026-10-01T13:20:45.681749+09:00",
-  "revision": "평가 항목과 수업 내용 보완, 색상 그래프·흑백 본문 6쪽",
+  "validated_at": "2026-10-01T14:01:51.449198+09:00",
+  "revision": "DAY1 존댓말·쉬운 표현 수정, 색상 그래프·흑백 본문 6쪽",
   "checks": {
     "six_pages": true,
     "all_pages_rendered_and_visually_reviewed": true,
@@ -28,11 +28,15 @@
     "split_and_metrics_gap_stated": true,
     "development_eda_and_label_limitations_disclosed": true,
     "no_day2_performance_claim": true,
-    "no_draft_placeholders": true
+    "no_draft_placeholders": true,
+    "polite_korean_and_plain_language_reviewed": true,
+    "analysis_and_supplement_hashes_unchanged": true,
+    "all_page_renders_newer_than_pdf": true,
+    "statistical_numbers_preserved_after_language_edit": true
   },
   "visual_review": {
     "renderer": "Poppler pdftoppm",
-    "dpi": 135,
+    "dpi": 130,
     "pages_reviewed": [
       1,
       2,
@@ -41,63 +45,65 @@
       5,
       6
     ],
-    "result": "전 페이지 직접 시각 검토. 표·그래프·축·범례·본문·머리말·쪽수에 겹침, 잘림, 한글 깨짐, 빈 페이지 없음. 색상과 선/점 모양을 함께 사용하여 집단을 구분함.",
-    "representative_preview": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/pdfs_color_review/page-3.png",
+    "result": "존댓말 수정 후 130dpi Poppler 이미지 전6쪽 직접 확인. 본문·표·범례·축·쪽수에 잘림, 겹침, 한글 깨짐 없음. 색상 그래프와 흑백 본문 유지.",
+    "representative_preview": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/day1_polite_review/page-1.png",
     "pages": [
       {
         "page": 1,
-        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/pdfs_color_review/page-1.png",
-        "width": 1117,
-        "height": 1579,
-        "color_pixels": 28806,
-        "sha256": "816f285c25dafdb4caba8fdfcaf8f3af2ced4ac0d8c03590a94920681ecdd8c4"
+        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/day1_polite_review/page-1.png",
+        "width": 1075,
+        "height": 1521,
+        "color_pixels": 26798,
+        "sha256": "5f3477b08c7e22c117097eca0a9bab53d85dfbf8364d62258e2eac2d6e9fae40"
       },
       {
         "page": 2,
-        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/pdfs_color_review/page-2.png",
-        "width": 1117,
-        "height": 1579,
-        "color_pixels": 28750,
-        "sha256": "b62b6a28f8cc948cb5cf41facf3dfc25b7297b47f2840de633a6eb82de25bd10"
+        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/day1_polite_review/page-2.png",
+        "width": 1075,
+        "height": 1521,
+        "color_pixels": 24844,
+        "sha256": "8065a78fdbbda175b0758eef666aa9eedeabe27940924aa493a913feea90f33d"
       },
       {
         "page": 3,
-        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/pdfs_color_review/page-3.png",
-        "width": 1117,
-        "height": 1579,
-        "color_pixels": 44599,
-        "sha256": "8118cebd51d5a0fad5d3350325fefb674f4f6e6158bb1b23203ed5d36a4fed27"
+        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/day1_polite_review/page-3.png",
+        "width": 1075,
+        "height": 1521,
+        "color_pixels": 38730,
+        "sha256": "d192d6bdfcde146d683eff155fc8a2be439337cd9f05e3e54b1f5a73734b9a16"
       },
       {
         "page": 4,
-        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/pdfs_color_review/page-4.png",
-        "width": 1117,
-        "height": 1579,
-        "color_pixels": 85029,
-        "sha256": "ada4c583a2d194cc652fd641044145f156bdc3bbe2be5fd5535ff2288d073551"
+        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/day1_polite_review/page-4.png",
+        "width": 1075,
+        "height": 1521,
+        "color_pixels": 71777,
+        "sha256": "0ffe99f77c1fc74372561477e32e00c31c7c714712ea70d1a3696935ba3c6eab"
       },
       {
         "page": 5,
-        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/pdfs_color_review/page-5.png",
-        "width": 1117,
-        "height": 1579,
-        "color_pixels": 118746,
-        "sha256": "e107763bbd7f952802728e128f10b48febbb0c0b3dc477be737da403a5222429"
+        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/day1_polite_review/page-5.png",
+        "width": 1075,
+        "height": 1521,
+        "color_pixels": 105766,
+        "sha256": "56a1b4eb71531eb14643dcbc8c458e4774c83a0eca4a52f0ab9a1eb85691d304"
       },
       {
         "page": 6,
-        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/pdfs_color_review/page-6.png",
-        "width": 1117,
-        "height": 1579,
+        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/day1_polite_review/page-6.png",
+        "width": 1075,
+        "height": 1521,
         "color_pixels": 0,
-        "sha256": "a123ed90d81081628b8d38aa501a323187740a2392e6885d7baa64d974ad9b18"
+        "sha256": "bb5bf7cf831b9030966deda4351da86ffd03e3b70977bd4cf6e7774955235d50"
       }
     ]
   },
   "style_verification": {
     "colored_figures": true,
     "body_and_table_text_grayscale": true,
-    "note": "기존 전면 흑백 검수 기준을 색상 그래프·흑백 본문 기준으로 교체함."
+    "note": "본문과 표 설명을 존댓말로 통일하고 관찰/설계 시사점을 확인한 내용/모델에 반영할 내용 등으로 풀어 썼음을 확인함. 수치, 라벨 차이 및 해석 한계 유지.",
+    "polite_korean_reviewed": true,
+    "plain_language_reviewed": true
   },
   "rubric_coverage": [
     {
@@ -164,5 +170,13 @@
     "Knee fits are descriptive approximations using full-life records and never prediction inputs.",
     "All-batch correlations are descriptive; B1-development CV is used for final predictive model selection.",
     "MAPE gaps against the paper are contextual because dataset, cleaning, and split conditions differ."
-  ]
+  ],
+  "source_build_report_sha256": "6128cb04c146089eebadda506cbb4669fa0cdeed81516b2ad6c0dd5fee955020",
+  "language_revision_review": {
+    "previous_pdf_sha256": "f372d03d8224cdd0e4a856c39f7b4462a9256225cdb1a101063393210b11ad58",
+    "scope": "문체·표현 수정 검토. 분석 수치와 모델 자료는 수정하지 않음.",
+    "label_provenance": "B1/B3 near-80% endpoint values vs B2 observed below-80% crossing still distinguished.",
+    "knee_caveat": "두 직선 설명용 근사와 불확실성, 미래 관측 입력 제외 설명 유지.",
+    "day1_design_scope": "설계 문서의 계획 시제 유지; DAY2 학습 성능 수치 추가 없음."
+  }
 }
