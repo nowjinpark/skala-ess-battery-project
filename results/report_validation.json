@@ -1,0 +1,168 @@
+{
+  "file": "/Users/jinwon/workspace/데이터 분석 미니플젝/output/pdf/DS-MINI-Design-울산_1반-박진원.pdf",
+  "sha256": "f372d03d8224cdd0e4a856c39f7b4462a9256225cdb1a101063393210b11ad58",
+  "page_count": 6,
+  "page_format": "A4",
+  "status": "passed",
+  "validated_at": "2026-10-01T13:20:45.681749+09:00",
+  "revision": "평가 항목과 수업 내용 보완, 색상 그래프·흑백 본문 6쪽",
+  "checks": {
+    "six_pages": true,
+    "all_pages_rendered_and_visually_reviewed": true,
+    "all_body_and_table_text_grayscale": true,
+    "all_five_eda_charts_colored": true,
+    "model_strategy_page_grayscale": true,
+    "five_eda_sections": true,
+    "life_means_stdev_medians_match_analysis": true,
+    "life_group_percentages_match": true,
+    "provided_vs_observed_labels_preserved": true,
+    "different_batch2_version_not_stitched": true,
+    "iqr_outliers_descriptive_retained": true,
+    "newstructure_meaning_uncertain": true,
+    "knee_rounded_values_and_caveats": true,
+    "knee_estimates_not_search_boundaries": true,
+    "deltaq_three_statistics_and_redundancy": true,
+    "all_batch_feature_correlations_match_supplement": true,
+    "pairwise_missing_sample_sizes_disclosed": true,
+    "eight_feature_definitions_and_comparisons": true,
+    "split_and_metrics_gap_stated": true,
+    "development_eda_and_label_limitations_disclosed": true,
+    "no_day2_performance_claim": true,
+    "no_draft_placeholders": true
+  },
+  "visual_review": {
+    "renderer": "Poppler pdftoppm",
+    "dpi": 135,
+    "pages_reviewed": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "result": "전 페이지 직접 시각 검토. 표·그래프·축·범례·본문·머리말·쪽수에 겹침, 잘림, 한글 깨짐, 빈 페이지 없음. 색상과 선/점 모양을 함께 사용하여 집단을 구분함.",
+    "representative_preview": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/pdfs_color_review/page-3.png",
+    "pages": [
+      {
+        "page": 1,
+        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/pdfs_color_review/page-1.png",
+        "width": 1117,
+        "height": 1579,
+        "color_pixels": 28806,
+        "sha256": "816f285c25dafdb4caba8fdfcaf8f3af2ced4ac0d8c03590a94920681ecdd8c4"
+      },
+      {
+        "page": 2,
+        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/pdfs_color_review/page-2.png",
+        "width": 1117,
+        "height": 1579,
+        "color_pixels": 28750,
+        "sha256": "b62b6a28f8cc948cb5cf41facf3dfc25b7297b47f2840de633a6eb82de25bd10"
+      },
+      {
+        "page": 3,
+        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/pdfs_color_review/page-3.png",
+        "width": 1117,
+        "height": 1579,
+        "color_pixels": 44599,
+        "sha256": "8118cebd51d5a0fad5d3350325fefb674f4f6e6158bb1b23203ed5d36a4fed27"
+      },
+      {
+        "page": 4,
+        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/pdfs_color_review/page-4.png",
+        "width": 1117,
+        "height": 1579,
+        "color_pixels": 85029,
+        "sha256": "ada4c583a2d194cc652fd641044145f156bdc3bbe2be5fd5535ff2288d073551"
+      },
+      {
+        "page": 5,
+        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/pdfs_color_review/page-5.png",
+        "width": 1117,
+        "height": 1579,
+        "color_pixels": 118746,
+        "sha256": "e107763bbd7f952802728e128f10b48febbb0c0b3dc477be737da403a5222429"
+      },
+      {
+        "page": 6,
+        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/pdfs_color_review/page-6.png",
+        "width": 1117,
+        "height": 1579,
+        "color_pixels": 0,
+        "sha256": "a123ed90d81081628b8d38aa501a323187740a2392e6885d7baa64d974ad9b18"
+      }
+    ]
+  },
+  "style_verification": {
+    "colored_figures": true,
+    "body_and_table_text_grayscale": true,
+    "note": "기존 전면 흑백 검수 기준을 색상 그래프·흑백 본문 기준으로 교체함."
+  },
+  "rubric_coverage": [
+    {
+      "category": "EDA",
+      "weight_percent": 50,
+      "pages": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "evidence": "세 배치의 분포/평균/표준편차/비율/IQR, 초기·후기 기울기와 대표 knee 근사, Delta Q 평균·최소·분산, 충전정책과 수명·기울기, 전체 배치 상관 및 다중공선성을 다룸.",
+      "status": "covered"
+    },
+    {
+      "category": "EDA-모델 연결성",
+      "weight_percent": 30,
+      "pages": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "evidence": "각 EDA의 관찰·해석·설계 시사점에 실제 수치를 사용. 배치별 분포·관계 변화→외삽 점검, 초기 변화→파생 특성, Delta Q 중복→대체 비교, 다중공선성→Ridge로 연결함.",
+      "status": "covered"
+    },
+    {
+      "category": "모델 전략",
+      "weight_percent": 20,
+      "pages": [
+        6
+      ],
+      "evidence": "8개 후보의 정확한 정의, 7/8/중복 축소 및 Delta Q 대체 비교, Dummy/Linear/Ridge/RF 선정 이유, 28/8/39 분할·3-fold CV·fold 전처리·지표·Gap 계획을 명시함.",
+      "status": "covered"
+    }
+  ],
+  "rubric_note": "항목 충족 여부에 대한 독립 검토이며 실제 채점 결과나 만점을 보장하지 않음.",
+  "source_analysis_sha256": "699c8e4a960637c4dc2bab5079c50551f0dcaa4c59adb0199e483c3bf6fc4d8a",
+  "source_report_review_sha256": "eef9c4df174696d51e89d3d74970a425e80edc4a85b8bb142f1f037a45d9eff2",
+  "scope": {
+    "task": "regression",
+    "day1_batches": [
+      "Batch1",
+      "Batch2",
+      "Batch3"
+    ],
+    "raw_cells": 139,
+    "eligible_cells": 115,
+    "eligible_by_batch": {
+      "Batch1": 36,
+      "Batch2": 39,
+      "Batch3": 40
+    },
+    "model_training_executed": false,
+    "original_analysis_and_notebooks_changed_by_review": false
+  },
+  "reviewed_limitations": [
+    "B1/B3 endpoint proxies and B2 observed threshold crossings remain distinct.",
+    "newstructure physical meaning remains unverified.",
+    "IQR flags do not cause valid cells to be deleted.",
+    "Knee fits are descriptive approximations using full-life records and never prediction inputs.",
+    "All-batch correlations are descriptive; B1-development CV is used for final predictive model selection.",
+    "MAPE gaps against the paper are contextual because dataset, cleaning, and split conditions differ."
+  ]
+}

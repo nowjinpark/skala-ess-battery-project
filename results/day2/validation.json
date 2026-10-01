@@ -1,0 +1,244 @@
+{
+  "status": "passed",
+  "passed": true,
+  "validated_at": "2026-10-01T04:41:52.406367+00:00",
+  "checks": [
+    {
+      "check": "Original DAY1 cell IDs, roles and supplied labels preserved",
+      "status": "passed",
+      "role_counts": {
+        "Batch1_CV_development": 28,
+        "Batch1_holdout": 8,
+        "Batch2_final_test": 39,
+        "Batch3_EDA_only": 40,
+        "excluded": 24
+      },
+      "development_policy_groups": 18,
+      "baseline_rows": 93
+    },
+    {
+      "check": "Input, plan, training source, selection lock and timing hashes consistent",
+      "status": "passed",
+      "plan_at": "2026-10-01T04:32:41.503365+00:00",
+      "locked_at": "2026-10-01T04:32:48.938988+00:00",
+      "evaluated_at": "2026-10-01T04:33:09.479624+00:00"
+    },
+    {
+      "check": "Predeclared bounded candidate grid and early-feature whitelist",
+      "status": "passed",
+      "candidates": 113,
+      "families": {
+        "Dummy": 1,
+        "Linear": 16,
+        "Ridge": 64,
+        "RandomForest": 32
+      },
+      "feature_sets": 8
+    },
+    {
+      "check": "All ten candidate features recomputed using cycles <=100 only",
+      "status": "passed",
+      "cells": 75,
+      "feature_names": [
+        "chargetime_mean_2_100",
+        "deltaq_mean",
+        "deltaq_min",
+        "ir_change_early",
+        "ir_mean_2_100",
+        "log10_deltaq_var",
+        "qd_change_100_10",
+        "qd_cycle2",
+        "qd_slope_10_100",
+        "tavg_mean_2_100"
+      ],
+      "source": "Existing processed summaries and stored Q10/Q100 curves; no full raw MAT reload"
+    },
+    {
+      "check": "GroupKFold assignments reproduced; battery IDs and charging policies disjoint",
+      "status": "passed",
+      "folds": [
+        {
+          "fold": 1,
+          "train_n": 18,
+          "validation_n": 10,
+          "policy_overlap": 0
+        },
+        {
+          "fold": 2,
+          "train_n": 19,
+          "validation_n": 9,
+          "policy_overlap": 0
+        },
+        {
+          "fold": 3,
+          "train_n": 19,
+          "validation_n": 9,
+          "policy_overlap": 0
+        }
+      ]
+    },
+    {
+      "check": "All 339 fold preprocessors use training cells only; all OOF metrics and CV selection recomputed",
+      "status": "passed",
+      "candidates": 113,
+      "fold_records": 339,
+      "out_of_fold_predictions": 3164,
+      "ranking": "Unweighted mean of three MAPE percentages; sample SD (ddof=1)",
+      "winner": "C037",
+      "family_winners": {
+        "Dummy": "C000",
+        "Linear": "C104",
+        "Ridge": "C037",
+        "RandomForest": "C112"
+      }
+    },
+    {
+      "check": "Random CV diagnostic split and aggregation consistent; no reselection",
+      "status": "passed",
+      "overlap_counts": [
+        4,
+        3,
+        5
+      ],
+      "scope": "Individual random-CV predictions were not persisted; fold scores cannot be independently recalculated without refitting"
+    },
+    {
+      "check": "Four frozen models preserve hashes, preprocessing and candidate specifications",
+      "status": "passed",
+      "model_sha256": {
+        "C000": "4f45afee43654a5a25b94694e58cf6bd8114db2204686d97f38a5e899cbd88f6",
+        "C037": "22459bfbb2b9f806d7840c9995cd85e40a89a637b10987a046560c29ed18308e",
+        "C104": "36849c7068995dc5935b72a530bddd96044a6c7dcddded5151d8b14b9eeb650b",
+        "C112": "caa4b14ba1dfd21d8c6725c7b65c5a23c22b496ae42edc8e988d938a0abf128d"
+      },
+      "final_training_n": 28,
+      "extra_check": "Saved Linear/Ridge coefficients independently matched to closed-form dev-only objective"
+    },
+    {
+      "check": "All 188 final predictions and original-cycle metrics reproduced without fitting",
+      "status": "passed",
+      "predictions": 188,
+      "metric_rows": 8,
+      "no_batch3_predictions": true
+    },
+    {
+      "check": "Evaluation summary, gaps, subgroup errors, label counts, range shifts and interpretation consistent",
+      "status": "passed",
+      "subgroup_rows": 14,
+      "feature_range_rows": 14
+    }
+  ],
+  "check_count": 10,
+  "winner_id": "C037",
+  "independent_final_metrics": [
+    {
+      "candidate_id": "C000",
+      "dataset": "Valid_B1_holdout",
+      "n": 8,
+      "mape_pct": 21.262457106031835,
+      "mae_cycles": 170.23214285714286,
+      "rmse_cycles": 183.8195585405449,
+      "r2": -0.09180682867913137
+    },
+    {
+      "candidate_id": "C000",
+      "dataset": "Test_B2",
+      "n": 39,
+      "mape_pct": 59.32125034852124,
+      "mae_cycles": 286.97435897435895,
+      "rmse_cycles": 304.2300986165547,
+      "r2": -0.9239371838353796
+    },
+    {
+      "candidate_id": "C037",
+      "dataset": "Valid_B1_holdout",
+      "n": 8,
+      "mape_pct": 8.440339000096708,
+      "mae_cycles": 70.29377799165083,
+      "rmse_cycles": 78.80794606342293,
+      "r2": 0.7993207883015485
+    },
+    {
+      "candidate_id": "C037",
+      "dataset": "Test_B2",
+      "n": 39,
+      "mape_pct": 55.218457954664856,
+      "mae_cycles": 272.0021782629305,
+      "rmse_cycles": 287.08092410440975,
+      "r2": -0.7131492598816553
+    },
+    {
+      "candidate_id": "C104",
+      "dataset": "Valid_B1_holdout",
+      "n": 8,
+      "mape_pct": 7.915980918359224,
+      "mae_cycles": 73.10005796113077,
+      "rmse_cycles": 90.21031586257828,
+      "r2": 0.7370490309544513
+    },
+    {
+      "candidate_id": "C104",
+      "dataset": "Test_B2",
+      "n": 39,
+      "mape_pct": 28.569962964210543,
+      "mae_cycles": 141.37550597740346,
+      "rmse_cycles": 157.4474209659556,
+      "r2": 0.4847029760937692
+    },
+    {
+      "candidate_id": "C112",
+      "dataset": "Valid_B1_holdout",
+      "n": 8,
+      "mape_pct": 9.70064741956598,
+      "mae_cycles": 82.9964776820401,
+      "rmse_cycles": 99.39860038005382,
+      "r2": 0.6807558798902038
+    },
+    {
+      "candidate_id": "C112",
+      "dataset": "Test_B2",
+      "n": 39,
+      "mape_pct": 34.63431879309039,
+      "mae_cycles": 169.8518512565306,
+      "rmse_cycles": 177.18862627871295,
+      "r2": 0.3473832530493941
+    }
+  ],
+  "source_sha256": {
+    "data/processed/cells_analysis.csv": "0b58a3f9743ce09b9800d35c55a7057982f478aacd5260231b588a320a6c46e8",
+    "results/split_assignment.csv": "97ca9d514a0c1d83f6b280df20ed6a64898eb680f82a2ab691029eaa8bdeb300"
+  },
+  "artifact_sha256": {
+    "experiment_plan.json": "85452d7a947e1d767e6e76cc55597c3a80ad651c695af9d78bdd494553fe25f6",
+    "selection_lock.json": "39dfa91224dd295a69e7a18904af5c99af45fb2d5fc8df4239396b3974fc1dc7",
+    "evaluation.json": "9f8e77a0ff137aac95cee238918c44ecd7a1532e6e43e29402ef16fc32bc7325",
+    "cv_candidates.csv": "a40ceea58fb7041376a3a9afd5a7fcc9b6e04767224bfb14fe6053d58bacb848",
+    "cv_assignments.csv": "3e316619752886f9be33193cfe7ab66f5e481671d8948ed42e4e5d2c9cb6f6c2",
+    "cv_fold_metrics.csv": "ebcd335a741095db80bd74ee01ce70dd67b72b21f8cf72fc261360281da61494",
+    "cv_oof_predictions.csv": "d7f18517304ee913e36b06900075cc97c96f279b731387b5857765f46acbe2cf",
+    "fold_preprocessing_audit.json": "0dc9f390d505ec84da3a5cfa4b10b07d2e9533199f8894000baecf83e0fc040d",
+    "final_metrics.csv": "1b8d98129343a5aa151fdb91d7ab57a8348dc2149104555520bedd1598f11681",
+    "final_predictions.csv": "2193278083697a21ed2cc307300e895699baa6173df6d4f3647c248b040d2ed9",
+    "final_preprocessing_audit.json": "4f05b930a2906fe548a2d355913b56d3515a1439efe90dbec3cb01d28d43963a",
+    "random_cv_sensitivity.csv": "b2a022c89bbcfe06ff852afea6f7fa87dcef28e9d5278be07bafff46b85e22a6",
+    "random_cv_assignments.csv": "10ae602cb627596687873de5d1edffaa5f1b8d3969feed46f801e291ebda7ee0",
+    "subgroup_errors.csv": "e4bf6e0fce2ec17b251102df3726e146fcf2bf68a2fa6bae24523768c56ef402",
+    "feature_range_shift.json": "30d6cc3ebb9d936e2d4ce29f2bd20f7c2e67661ea91ddefa3285b601f4cae122"
+  },
+  "model_sha256": {
+    "C000": "4f45afee43654a5a25b94694e58cf6bd8114db2204686d97f38a5e899cbd88f6",
+    "C037": "22459bfbb2b9f806d7840c9995cd85e40a89a637b10987a046560c29ed18308e",
+    "C104": "36849c7068995dc5935b72a530bddd96044a6c7dcddded5151d8b14b9eeb650b",
+    "C112": "caa4b14ba1dfd21d8c6725c7b65c5a23c22b496ae42edc8e988d938a0abf128d"
+  },
+  "verifier_sha256": "e87ab4f0323eca0964075d0aa90b67474861cc038fd713e3372332972aad51e8",
+  "no_models_fitted_or_reselected": true,
+  "audit_limits": [
+    "This checks saved artifacts and reviewed code; it cannot prove that no unrecorded earlier experiments occurred.",
+    "Group-CV metrics were recomputed from stored OOF predictions, not from a second training run. Fold scaler variance was not persisted, so fold audit checks training IDs, imputer statistics and scaler means.",
+    "Random-CV diagnostic predictions were not saved; only its assignments, policy overlap and score aggregation are verified.",
+    "Processed early features are independently recomputed from existing summary/curve files; this audit does not repeat the raw MATLAB extraction.",
+    "Cell-ID disjointness does not establish physical-cell identity; opaque barcode/channel fields remain unresolved.",
+    "Correct calculations do not remove small-sample selection optimism, observed DAY1 test EDA, or batch/label-definition differences."
+  ]
+}

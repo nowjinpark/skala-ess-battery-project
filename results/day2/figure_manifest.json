@@ -1,0 +1,9 @@
+{
+  "style": "black/white text, colored graphs; consistent blue/orange; no predictive retraining",
+  "files": [
+    "results/day2/figures/actual_predictions.png",
+    "results/day2/figures/error_diagnostics.png",
+    "results/day2/figures/feature_ablation.png",
+    "results/day2/figures/coefficients.png"
+  ]
+}

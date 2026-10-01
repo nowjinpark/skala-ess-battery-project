@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+data/raw/
+data/downloads/
+.DS_Store
+tmp/
+
+.cache/
+
+output/*.zip
+
+references/author_*
+
+results/figures_bw/

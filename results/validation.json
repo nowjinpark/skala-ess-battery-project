@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "scope": "DAY1 Batch1+Batch2+Batch3 EDA",
+  "raw_cells": 139,
+  "eligible_cells": 115,
+  "deltaq_recomputed_cells": 115,
+  "checks": [
+    "cell-level uniqueness",
+    "disjoint split IDs",
+    "original Batch1/2 cohort and split unchanged",
+    "Batch3 EDA-only role",
+    "initial cycles <=100",
+    "actual cycle number and HDF5 slot mapping",
+    "Delta Q difference and variance",
+    "separate observed EOL and supplied endpoint-proxy labels",
+    "report counts and plots"
+  ],
+  "limits": [
+    "Cell ID disjointness is not proof of unique physical cells when barcode is unavailable.",
+    "Descriptive EDA includes Batch2 and Batch3 labels; no prediction model was fitted."
+  ]
+}

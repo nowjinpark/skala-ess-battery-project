@@ -1,0 +1,32 @@
+{
+  "scope": "Five report figures with color, line styles and markers; no model fitting",
+  "analysis_cells": 115,
+  "development_cells_for_correlation": 28,
+  "figures": {
+    "life_distribution": {
+      "file": "results/figures_report/life_distribution.png",
+      "width_pt": 518.4,
+      "height_pt": 187.2
+    },
+    "capacity_degradation": {
+      "file": "results/figures_report/capacity_degradation.png",
+      "width_pt": 518.4,
+      "height_pt": 352.8
+    },
+    "deltaq": {
+      "file": "results/figures_report/deltaq.png",
+      "width_pt": 518.4,
+      "height_pt": 356.4
+    },
+    "charge_policy": {
+      "file": "results/figures_report/charge_policy.png",
+      "width_pt": 518.4,
+      "height_pt": 356.4
+    },
+    "correlation": {
+      "file": "results/figures_report/correlation.png",
+      "width_pt": 518.4,
+      "height_pt": 280.8
+    }
+  }
+}

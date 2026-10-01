@@ -1,0 +1,22 @@
+{
+  "file": "2018-04-12_batchdata_updated_struct_errorcorrect.mat",
+  "batch": "Batch 3",
+  "n_cells": 46,
+  "batch_date": "2018-04-12",
+  "top_level_fields": [
+    "#refs#",
+    "#subsystem#",
+    "batch",
+    "batch_date"
+  ],
+  "cell_fields": [
+    "Vdlin",
+    "barcode",
+    "channel_id",
+    "cycle_life",
+    "cycles",
+    "policy",
+    "policy_readable",
+    "summary"
+  ]
+}

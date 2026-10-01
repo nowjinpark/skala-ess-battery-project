@@ -1,0 +1,64 @@
+{
+  "dataset_url": "https://www.kaggle.com/datasets/itshpark/data-driven-prediction-of-battery-cycle",
+  "metadata_url": "https://www.kaggle.com/api/v1/datasets/list/itshpark/data-driven-prediction-of-battery-cycle",
+  "retrieval_started_utc": "2026-10-01T02:08:18.499292+00:00",
+  "files": [
+    {
+      "name": "2017-05-12_batchdata_updated_struct_errorcorrect.mat",
+      "source_url": "https://www.kaggle.com/api/v1/datasets/download/itshpark/data-driven-prediction-of-battery-cycle/2017-05-12_batchdata_updated_struct_errorcorrect.mat",
+      "expected_uncompressed_bytes": 3025320241,
+      "status": "verified",
+      "expected_archive_bytes": 1772156153,
+      "expected_archive_md5_base64": "xQqBvmgbFT3b+BaDivvwBg==",
+      "completed_utc": "2026-10-01T02:20:35.680656+00:00",
+      "uncompressed_bytes": 3025320241,
+      "sha256": "9d928ab978f0e3c70b31cb833a749fedd35094d01af76475d69b40aa3497f5ba",
+      "archive_bytes": 1772156153,
+      "archive_sha256": "3dba4da068e1cf675f91a4ebcadebcb9a66d56189a348d531407c34647dca4fa",
+      "archive_md5_verified": true,
+      "zip_crc_verified": true,
+      "matlab_hdf5_header_verified": true,
+      "cloned_copy_verified_utc": "2026-10-01T02:43:49.684068+00:00",
+      "archive_retained_in_current_workspace": false
+    },
+    {
+      "name": "2018-02-20_batchdata_updated_struct_errorcorrect.mat",
+      "source_url": "https://www.kaggle.com/api/v1/datasets/download/itshpark/data-driven-prediction-of-battery-cycle/2018-02-20_batchdata_updated_struct_errorcorrect.mat",
+      "expected_uncompressed_bytes": 2022599329,
+      "status": "verified",
+      "expected_archive_bytes": 1377895420,
+      "expected_archive_md5_base64": "UDD3nndhQdPUV7X/jWwK+w==",
+      "completed_utc": "2026-10-01T02:19:26.472919+00:00",
+      "uncompressed_bytes": 2022599329,
+      "sha256": "3487db505ad08b6c805f41dd0560e73b54077c76aca04f706f06e2356ccf7845",
+      "archive_bytes": 1377895420,
+      "archive_sha256": "b68ae3b236c9130fe3158bc7c6bc34ec8f0feebe8a12487e3120c8cf7c3407b6",
+      "archive_md5_verified": true,
+      "zip_crc_verified": true,
+      "matlab_hdf5_header_verified": true,
+      "cloned_copy_verified_utc": "2026-10-01T02:43:49.684068+00:00",
+      "archive_retained_in_current_workspace": false
+    },
+    {
+      "name": "2018-04-12_batchdata_updated_struct_errorcorrect.mat",
+      "source_url": "https://www.kaggle.com/api/v1/datasets/download/itshpark/data-driven-prediction-of-battery-cycle/2018-04-12_batchdata_updated_struct_errorcorrect.mat",
+      "expected_uncompressed_bytes": 3236690412,
+      "status": "verified",
+      "expected_archive_bytes": 2202489496,
+      "expected_archive_md5_base64": "k7w5CG4iY/akTvY58MV6dg==",
+      "retrieval_started_utc": "2026-10-01T02:43:49.684068+00:00",
+      "archive_retained_in_current_workspace": true,
+      "completed_utc": "2026-10-01T02:55:34.669392+00:00",
+      "uncompressed_bytes": 3236690412,
+      "sha256": "62c30e413b63e6144720e016deed3661fac8468641794a5807b123fe84717998",
+      "archive_bytes": 2202489496,
+      "archive_sha256": "2660592bc6f3297ebaa1877ae4442a8bb26b4c809c7814855859abd35b41cf2e",
+      "archive_md5_verified": true,
+      "zip_crc_verified": true,
+      "matlab_hdf5_header_verified": true
+    }
+  ],
+  "excluded_files": [
+    "2018-04-03_varcharge_batchdata_updated_struct_errorcorrect.mat"
+  ]
+}

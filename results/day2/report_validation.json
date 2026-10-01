@@ -1,0 +1,71 @@
+{
+  "pdfpath": "/Users/jinwon/workspace/데이터 분석 미니플젝/output/pdf/DS-MINI-Result-울산_1반-박진원.pdf",
+  "sha256": "ef8a9b651ad5d5da4a0e7cc8437038cf855a441d0b270636bb427c89d923d7ae",
+  "status": "passed",
+  "pages": 5,
+  "checks": [
+    {
+      "id": "notion_requirements_and_rubric",
+      "status": "passed",
+      "evidence": "README sections2-6 and PDF pages1-5 cover the official20/40/20/20 categories; no self-assigned grade."
+    },
+    {
+      "id": "mandatory_scope",
+      "status": "passed",
+      "evidence": "B1development28/holdout8 and B2test39; optionalB3 evaluation explicitly omitted."
+    },
+    {
+      "id": "six_row_performance_table",
+      "status": "passed",
+      "evidence": "PDF page3 and README section4:8.23%,8.44%,55.22%; gaps+0.21,+46.78,+46.12 percentage points with formulas."
+    },
+    {
+      "id": "frozen_cv_selection_and_integrity",
+      "status": "passed",
+      "evidence": "C037 is minimum grouped CV MAPE among113; plan,lock,evaluation order and input/code/model hashes consistent; test did not select winner."
+    },
+    {
+      "id": "folds_and_preprocessing",
+      "status": "passed",
+      "evidence": "3fold validation sizes10/9/9,zero protocol overlap;339 training-only imputer/scaler statistics independently checked."
+    },
+    {
+      "id": "numeric_consistency",
+      "status": "passed",
+      "evidence": "113candidate OOF MAPE mean/SD, selected final MAPE/MAE/RMSE/R2 and gaps independently recomputed; ablation rows match."
+    },
+    {
+      "id": "error_analysis_and_domain_limits",
+      "status": "passed",
+      "evidence": "Worst5APE cases,range shifts,missingIR/known-policy counterexamples and label/batch confounding disclosed; no operational deployment claim."
+    },
+    {
+      "id": "course_alignment",
+      "status": "passed",
+      "evidence": "Statistics/MLDL/Wrap-up concepts trace to course_alignment_review.md; additional APIs distinguished from required course content."
+    },
+    {
+      "id": "visual_layout_all_pages",
+      "status": "passed",
+      "evidence": "All5 rendered pages inspected; no material clipping/overlap; corrected page2 rechecked."
+    },
+    {
+      "id": "font_glyph_repair",
+      "status": "passed",
+      "evidence": "Greek alpha omitted in initial page2; replaced by ASCII alpha and rerendered. Final5page text NUL counts are all0."
+    },
+    {
+      "id": "external_submission_status",
+      "status": "not_performed",
+      "evidence": "Local report QA passed. PublicGitHub URL creation and Slack submission remain separate and not completed."
+    }
+  ],
+  "validated_at": "2026-10-01T04:47:09.288979+00:00",
+  "scope": "Local report content, numeric consistency and visual QA. Not a grading prediction or external-submission completion.",
+  "submission_status": "not_submitted",
+  "review_path": "/Users/jinwon/workspace/데이터 분석 미니플젝/docs/final_day2_review.md",
+  "review_sha256": "e2f4c91048d085a2f8095da6725bdf2d22ffa7c97a9e99b0eb19e6a06fdbf80b",
+  "readme_sha256": "7aa0289a2344aae03c3bb29c697f2a053566f5be5b4b85ff7f89fea26319cc43",
+  "training_source_sha256": "739418fa6ff3ce248aae30d1eafc0ce68467cfd29e1d429c18a3a6130a794978",
+  "evaluation_sha256": "9f8e77a0ff137aac95cee238918c44ecd7a1532e6e43e29402ef16fc32bc7325"
+}

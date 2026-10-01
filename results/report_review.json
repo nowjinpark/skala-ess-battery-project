@@ -1,0 +1,471 @@
+{
+  "scope": "Descriptive EDA only; Batch2/3 correlations do not select or tune the predictive model",
+  "batch_correlations": [
+    {
+      "batch": "Batch 1",
+      "feature": "qd_cycle2",
+      "n": 36,
+      "pearson": 0.16054410943752817,
+      "spearman": 0.16102458622258672
+    },
+    {
+      "batch": "Batch 1",
+      "feature": "qd_change_100_10",
+      "n": 36,
+      "pearson": 0.5044159023374521,
+      "spearman": 0.4907967604050545
+    },
+    {
+      "batch": "Batch 1",
+      "feature": "qd_slope_10_100",
+      "n": 36,
+      "pearson": 0.5162424679273394,
+      "spearman": 0.5045694468365628
+    },
+    {
+      "batch": "Batch 1",
+      "feature": "ir_mean_2_100",
+      "n": 36,
+      "pearson": 0.2240016634388757,
+      "spearman": 0.19552066064916804
+    },
+    {
+      "batch": "Batch 1",
+      "feature": "ir_change_early",
+      "n": 36,
+      "pearson": 0.12103973770619508,
+      "spearman": -0.22280860012094136
+    },
+    {
+      "batch": "Batch 1",
+      "feature": "tavg_mean_2_100",
+      "n": 36,
+      "pearson": -0.17270810876504028,
+      "spearman": -0.11635989284190121
+    },
+    {
+      "batch": "Batch 1",
+      "feature": "chargetime_mean_2_100",
+      "n": 36,
+      "pearson": 0.5697695328050202,
+      "spearman": 0.4255373957249175
+    },
+    {
+      "batch": "Batch 1",
+      "feature": "log10_deltaq_var",
+      "n": 36,
+      "pearson": -0.8265843267936158,
+      "spearman": -0.8262324691948716
+    },
+    {
+      "batch": "Batch 2",
+      "feature": "qd_cycle2",
+      "n": 39,
+      "pearson": -0.28432994402007195,
+      "spearman": 0.08492762468857089
+    },
+    {
+      "batch": "Batch 2",
+      "feature": "qd_change_100_10",
+      "n": 39,
+      "pearson": -0.1872538924600604,
+      "spearman": -0.05456017843520824
+    },
+    {
+      "batch": "Batch 2",
+      "feature": "qd_slope_10_100",
+      "n": 39,
+      "pearson": -0.48442174648260533,
+      "spearman": -0.27097884540083944
+    },
+    {
+      "batch": "Batch 2",
+      "feature": "ir_mean_2_100",
+      "n": 33,
+      "pearson": -0.6255133874742117,
+      "spearman": -0.1992145072552431
+    },
+    {
+      "batch": "Batch 2",
+      "feature": "ir_change_early",
+      "n": 33,
+      "pearson": 0.2107281265681241,
+      "spearman": 0.28177488190632544
+    },
+    {
+      "batch": "Batch 2",
+      "feature": "tavg_mean_2_100",
+      "n": 39,
+      "pearson": 0.4253120270489283,
+      "spearman": 0.16550258208082647
+    },
+    {
+      "batch": "Batch 2",
+      "feature": "chargetime_mean_2_100",
+      "n": 39,
+      "pearson": -0.9174099479141918,
+      "spearman": -0.7562506365295747
+    },
+    {
+      "batch": "Batch 2",
+      "feature": "log10_deltaq_var",
+      "n": 39,
+      "pearson": -0.9018830736836406,
+      "spearman": -0.7089786451951733
+    },
+    {
+      "batch": "Batch 3",
+      "feature": "qd_cycle2",
+      "n": 40,
+      "pearson": 0.23563173596471995,
+      "spearman": 0.2046158185193982
+    },
+    {
+      "batch": "Batch 3",
+      "feature": "qd_change_100_10",
+      "n": 40,
+      "pearson": 0.3171465248713013,
+      "spearman": -0.015104606502348973
+    },
+    {
+      "batch": "Batch 3",
+      "feature": "qd_slope_10_100",
+      "n": 40,
+      "pearson": 0.3532569628677231,
+      "spearman": 0.1627732439849408
+    },
+    {
+      "batch": "Batch 3",
+      "feature": "ir_mean_2_100",
+      "n": 40,
+      "pearson": 0.20081813449178754,
+      "spearman": 0.21287175250825974
+    },
+    {
+      "batch": "Batch 3",
+      "feature": "ir_change_early",
+      "n": 40,
+      "pearson": -0.26367122045787417,
+      "spearman": -0.13331457043377573
+    },
+    {
+      "batch": "Batch 3",
+      "feature": "tavg_mean_2_100",
+      "n": 40,
+      "pearson": -0.03945145456591711,
+      "spearman": 0.017356224862947578
+    },
+    {
+      "batch": "Batch 3",
+      "feature": "chargetime_mean_2_100",
+      "n": 40,
+      "pearson": 0.5976439629273913,
+      "spearman": 0.042780748851373486
+    },
+    {
+      "batch": "Batch 3",
+      "feature": "log10_deltaq_var",
+      "n": 40,
+      "pearson": -0.7416614991152237,
+      "spearman": -0.7586077526583466
+    }
+  ],
+  "life_iqr_audit": [
+    {
+      "batch": "Batch 1",
+      "q1": 681.0,
+      "q3": 871.5,
+      "lower_fence": 395.25,
+      "upper_fence": 1157.25,
+      "short_outlier_ids": [],
+      "upper_outlier_ids": []
+    },
+    {
+      "batch": "Batch 2",
+      "q1": 439.5,
+      "q3": 508.5,
+      "lower_fence": 336.0,
+      "upper_fence": 612.0,
+      "short_outlier_ids": [],
+      "upper_outlier_ids": [
+        "b2c7",
+        "b2c8",
+        "b2c9",
+        "b2c32",
+        "b2c33",
+        "b2c34",
+        "b2c43",
+        "b2c44",
+        "b2c45"
+      ]
+    },
+    {
+      "batch": "Batch 3",
+      "q1": 827.25,
+      "q3": 1122.75,
+      "lower_fence": 384.0,
+      "upper_fence": 1566.0,
+      "short_outlier_ids": [],
+      "upper_outlier_ids": [
+        "b3c7",
+        "b3c16",
+        "b3c38",
+        "b3c45"
+      ]
+    }
+  ],
+  "representative_knee_method": "Closest to batch median lifetime, ties by cell ID. Observed cycles 10..supplied lifetime. Rolling median7; Q=a+b*cycle+c*max(0,cycle-k). Search20..90% lifetime, choose lowest SSE with steeper negative post-slope. Exploratory curve summary, not validated detection and not a predictor.",
+  "representative_knees": [
+    {
+      "batch": "Batch 1",
+      "cell_id": "b1c11",
+      "cycle_life": 788.0,
+      "cycle": 593,
+      "sse": 0.012572140028536212,
+      "beta": [
+        1.0675010358304524,
+        -6.339619180578271e-05,
+        -0.0006569152818910767
+      ],
+      "before_slope": -6.339619180578271e-05,
+      "after_slope": -0.0007203114736968594,
+      "at_search_boundary": false,
+      "search_range_sensitivity": {
+        "0.1-0.90": 593,
+        "0.2-0.95": 593
+      }
+    },
+    {
+      "batch": "Batch 2",
+      "cell_id": "b2c16",
+      "cycle_life": 472.0,
+      "cycle": 339,
+      "sse": 0.032203941565518465,
+      "beta": [
+        1.1102394607420976,
+        -0.00015653601072470038,
+        -0.000995700610918724
+      ],
+      "before_slope": -0.00015653601072470038,
+      "after_slope": -0.0011522366216434243,
+      "at_search_boundary": false,
+      "search_range_sensitivity": {
+        "0.1-0.90": 339,
+        "0.2-0.95": 339
+      }
+    },
+    {
+      "batch": "Batch 3",
+      "cell_id": "b3c25",
+      "cycle_life": 989.0,
+      "cycle": 823,
+      "sse": 0.016942933610017905,
+      "beta": [
+        1.0730439257825455,
+        -6.00593025775134e-05,
+        -0.0007220163462316208
+      ],
+      "before_slope": -6.00593025775134e-05,
+      "after_slope": -0.0007820756488091342,
+      "at_search_boundary": false,
+      "search_range_sensitivity": {
+        "0.1-0.90": 823,
+        "0.2-0.95": 823
+      }
+    }
+  ],
+  "b2_newstructure_groups": [
+    {
+      "newstructure_label": false,
+      "n": 30,
+      "mean": 453.0,
+      "median": 451.0,
+      "min": 392.0,
+      "max": 514.0
+    },
+    {
+      "newstructure_label": true,
+      "n": 9,
+      "mean": 941.5555555555555,
+      "median": 904.0,
+      "min": 777.0,
+      "max": 1186.0
+    }
+  ],
+  "b2_same_protocol_groups": [
+    {
+      "base_policy": "3.6C(30%)-6C",
+      "newstructure_label": false,
+      "n": 2,
+      "mean": 421.0,
+      "median": 421.0
+    },
+    {
+      "base_policy": "3.6C(9%)-5C",
+      "newstructure_label": false,
+      "n": 2,
+      "mean": 394.5,
+      "median": 394.5
+    },
+    {
+      "base_policy": "4.65C(44%)-5C",
+      "newstructure_label": false,
+      "n": 2,
+      "mean": 482.5,
+      "median": 482.5
+    },
+    {
+      "base_policy": "4.65C(69%)-6C",
+      "newstructure_label": false,
+      "n": 2,
+      "mean": 452.0,
+      "median": 452.0
+    },
+    {
+      "base_policy": "4.8C(80%)-4.8C",
+      "newstructure_label": false,
+      "n": 5,
+      "mean": 483.6,
+      "median": 492.0
+    },
+    {
+      "base_policy": "4.8C(80%)-4.8C",
+      "newstructure_label": true,
+      "n": 3,
+      "mean": 871.6666666666666,
+      "median": 809.0
+    },
+    {
+      "base_policy": "5.2C(50%)-4.25C",
+      "newstructure_label": false,
+      "n": 5,
+      "mean": 454.0,
+      "median": 449.0
+    },
+    {
+      "base_policy": "5.2C(58%)-4C",
+      "newstructure_label": false,
+      "n": 4,
+      "mean": 477.75,
+      "median": 483.0
+    },
+    {
+      "base_policy": "5.2C(58%)-4C",
+      "newstructure_label": true,
+      "n": 3,
+      "mean": 961.6666666666666,
+      "median": 904.0
+    },
+    {
+      "base_policy": "5.6C(26%)-4.5C",
+      "newstructure_label": false,
+      "n": 6,
+      "mean": 448.5,
+      "median": 446.0
+    },
+    {
+      "base_policy": "5.6C(26%)-4.5C",
+      "newstructure_label": true,
+      "n": 3,
+      "mean": 991.3333333333334,
+      "median": 997.0
+    },
+    {
+      "base_policy": "6C(60%)-3C",
+      "newstructure_label": false,
+      "n": 2,
+      "mean": 400.0,
+      "median": 400.0
+    }
+  ],
+  "deltaq_group_medians": [
+    {
+      "batch": "Batch 1",
+      "life_group": "long",
+      "n": 5,
+      "deltaq_mean": -0.0123585685628461,
+      "deltaq_min": -0.0287244756962299,
+      "log10_deltaq_var": -4.058949165995528
+    },
+    {
+      "batch": "Batch 1",
+      "life_group": "middle",
+      "n": 31,
+      "deltaq_mean": -0.0179835888032468,
+      "deltaq_min": -0.0394782064842472,
+      "log10_deltaq_var": -3.768443388453706
+    },
+    {
+      "batch": "Batch 2",
+      "life_group": "long",
+      "n": 3,
+      "deltaq_mean": -0.008120054579074,
+      "deltaq_min": -0.0191648421122405,
+      "log10_deltaq_var": -4.27134741684955
+    },
+    {
+      "batch": "Batch 2",
+      "life_group": "middle",
+      "n": 8,
+      "deltaq_mean": -0.011180540932815699,
+      "deltaq_min": -0.027065812650061048,
+      "log10_deltaq_var": -4.152906040394658
+    },
+    {
+      "batch": "Batch 2",
+      "life_group": "short",
+      "n": 28,
+      "deltaq_mean": -0.02866502375951535,
+      "deltaq_min": -0.05617991969714345,
+      "log10_deltaq_var": -3.445668260579963
+    },
+    {
+      "batch": "Batch 3",
+      "life_group": "long",
+      "n": 19,
+      "deltaq_mean": -0.0096210189293608,
+      "deltaq_min": -0.0223241775540682,
+      "log10_deltaq_var": -4.285108198625103
+    },
+    {
+      "batch": "Batch 3",
+      "life_group": "middle",
+      "n": 21,
+      "deltaq_mean": -0.0117654801974339,
+      "deltaq_min": -0.0276460839609007,
+      "log10_deltaq_var": -4.091369245668356
+    }
+  ],
+  "deltaq_development_correlations": {
+    "deltaq_mean": 0.7230478755778779,
+    "deltaq_min": 0.7635071033333243,
+    "log10_deltaq_var": -0.7822890007184483
+  },
+  "deltaq_feature_correlations": {
+    "deltaq_mean": {
+      "deltaq_mean": 1.0,
+      "deltaq_min": 0.990222622167174,
+      "log10_deltaq_var": -0.9661464148100909
+    },
+    "deltaq_min": {
+      "deltaq_mean": 0.990222622167174,
+      "deltaq_min": 1.0,
+      "log10_deltaq_var": -0.9886051086082713
+    },
+    "log10_deltaq_var": {
+      "deltaq_mean": -0.9661464148100909,
+      "deltaq_min": -0.9886051086082713,
+      "log10_deltaq_var": 1.0
+    }
+  },
+  "nonnegative_early_slope_counts": {
+    "Batch 1": 7,
+    "Batch 2": 22,
+    "Batch 3": 1
+  },
+  "limits": [
+    "newstructure is an original text label with unverified physical meaning, not an added model feature.",
+    "An IQR flag is descriptive and does not justify deleting a valid observation.",
+    "Knee approximation uses future observations for EDA only; it is not an early-life predictive model."
+  ]
+}

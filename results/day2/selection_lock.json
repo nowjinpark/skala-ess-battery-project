@@ -1,0 +1,163 @@
+{
+  "locked_at": "2026-10-01T04:32:48.938988+00:00",
+  "source_sha256": {
+    "data/processed/cells_analysis.csv": "0b58a3f9743ce09b9800d35c55a7057982f478aacd5260231b588a320a6c46e8",
+    "results/split_assignment.csv": "97ca9d514a0c1d83f6b280df20ed6a64898eb680f82a2ab691029eaa8bdeb300"
+  },
+  "plan_sha256": "85452d7a947e1d767e6e76cc55597c3a80ad651c695af9d78bdd494553fe25f6",
+  "cv_results_sha256": "a40ceea58fb7041376a3a9afd5a7fcc9b6e04767224bfb14fe6053d58bacb848",
+  "winner_id": "C037",
+  "family_winners": {
+    "Dummy": "C000",
+    "Linear": "C104",
+    "Ridge": "C037",
+    "RandomForest": "C112"
+  },
+  "specs": {
+    "C000": {
+      "id": "C000",
+      "family": "Dummy",
+      "feature_set": "basic7",
+      "params": {},
+      "target_transform": "raw"
+    },
+    "C037": {
+      "family": "Ridge",
+      "feature_set": "no_qd_change7",
+      "params": {
+        "alpha": 10.0
+      },
+      "target_transform": "log",
+      "id": "C037"
+    },
+    "C104": {
+      "family": "Linear",
+      "feature_set": "deltaq_only1",
+      "params": {},
+      "target_transform": "log",
+      "id": "C104"
+    },
+    "C112": {
+      "family": "RandomForest",
+      "feature_set": "deltaq_only1",
+      "params": {
+        "n_estimators": 300,
+        "max_depth": null,
+        "min_samples_leaf": 3,
+        "max_features": 1.0,
+        "random_state": 42,
+        "n_jobs": 1
+      },
+      "target_transform": "raw",
+      "id": "C112"
+    }
+  },
+  "feature_sets": {
+    "basic7": [
+      "qd_cycle2",
+      "qd_change_100_10",
+      "qd_slope_10_100",
+      "ir_mean_2_100",
+      "ir_change_early",
+      "tavg_mean_2_100",
+      "chargetime_mean_2_100"
+    ],
+    "deltaq8": [
+      "qd_cycle2",
+      "qd_change_100_10",
+      "qd_slope_10_100",
+      "ir_mean_2_100",
+      "ir_change_early",
+      "tavg_mean_2_100",
+      "chargetime_mean_2_100",
+      "log10_deltaq_var"
+    ],
+    "no_qd_change7": [
+      "qd_cycle2",
+      "qd_slope_10_100",
+      "ir_mean_2_100",
+      "ir_change_early",
+      "tavg_mean_2_100",
+      "chargetime_mean_2_100",
+      "log10_deltaq_var"
+    ],
+    "no_qd_slope7": [
+      "qd_cycle2",
+      "qd_change_100_10",
+      "ir_mean_2_100",
+      "ir_change_early",
+      "tavg_mean_2_100",
+      "chargetime_mean_2_100",
+      "log10_deltaq_var"
+    ],
+    "deltaq_mean8": [
+      "qd_cycle2",
+      "qd_change_100_10",
+      "qd_slope_10_100",
+      "ir_mean_2_100",
+      "ir_change_early",
+      "tavg_mean_2_100",
+      "chargetime_mean_2_100",
+      "deltaq_mean"
+    ],
+    "deltaq_min8": [
+      "qd_cycle2",
+      "qd_change_100_10",
+      "qd_slope_10_100",
+      "ir_mean_2_100",
+      "ir_change_early",
+      "tavg_mean_2_100",
+      "chargetime_mean_2_100",
+      "deltaq_min"
+    ],
+    "no_ir6": [
+      "qd_cycle2",
+      "qd_change_100_10",
+      "qd_slope_10_100",
+      "tavg_mean_2_100",
+      "chargetime_mean_2_100",
+      "log10_deltaq_var"
+    ],
+    "deltaq_only1": [
+      "log10_deltaq_var"
+    ]
+  },
+  "model_sha256": {
+    "C000": "4f45afee43654a5a25b94694e58cf6bd8114db2204686d97f38a5e899cbd88f6",
+    "C037": "22459bfbb2b9f806d7840c9995cd85e40a89a637b10987a046560c29ed18308e",
+    "C104": "36849c7068995dc5935b72a530bddd96044a6c7dcddded5151d8b14b9eeb650b",
+    "C112": "caa4b14ba1dfd21d8c6725c7b65c5a23c22b496ae42edc8e988d938a0abf128d"
+  },
+  "training_ids": [
+    "b1c5",
+    "b1c6",
+    "b1c7",
+    "b1c9",
+    "b1c11",
+    "b1c14",
+    "b1c15",
+    "b1c16",
+    "b1c17",
+    "b1c18",
+    "b1c19",
+    "b1c20",
+    "b1c24",
+    "b1c25",
+    "b1c27",
+    "b1c28",
+    "b1c29",
+    "b1c30",
+    "b1c32",
+    "b1c33",
+    "b1c34",
+    "b1c35",
+    "b1c37",
+    "b1c38",
+    "b1c39",
+    "b1c42",
+    "b1c43",
+    "b1c44"
+  ],
+  "training_source_sha256": "739418fa6ff3ce248aae30d1eafc0ce68467cfd29e1d429c18a3a6130a794978",
+  "selection_basis": "GroupKFold validation mean MAPE only, before any DAY2 holdout/B2 predictions"
+}

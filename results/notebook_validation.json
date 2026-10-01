@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "notebook": "notebooks/01_DAY1_EDA.ipynb",
+  "sha256": "5bad30793b36fbab1c8a77c5bf228279513f62f4e64a6d47bbdf9a676dcd479f",
+  "total_cells": 23,
+  "executed_code_cells": 11,
+  "error_outputs": 0,
+  "embedded_png_charts": 7,
+  "visual_review": "All 7 embedded charts reviewed by notebook agent",
+  "scope": "DAY1 Batch1/2/3 EDA; no prediction model training",
+  "text_only_review": {
+    "date": "2026-10-01",
+    "change": "Clarified Pearson linear association versus Spearman rank-based monotonic association; neither establishes causation or prediction performance.",
+    "changed_markdown_cell_indices_zero_based": [
+      18
+    ],
+    "code_source_sha256_before": "45c7ef5ffb44fdd932bc08682f1600c571830c688cefb95ad01ca8a7b50535f5",
+    "code_source_sha256_after": "45c7ef5ffb44fdd932bc08682f1600c571830c688cefb95ad01ca8a7b50535f5",
+    "code_cells_with_outputs_sha256_before": "389cd1b9ee43504a4bfa41a2f1cf49ec475ab1526157ca242f2f497044796a72",
+    "code_cells_with_outputs_sha256_after": "389cd1b9ee43504a4bfa41a2f1cf49ec475ab1526157ca242f2f497044796a72",
+    "generator_code_cells_unchanged": true,
+    "code_cells_and_outputs_unchanged": true,
+    "reexecuted": false,
+    "previous_notebook_sha256": "d5c9a7a9e13febdc8ba644cbeeccb9c0f5161dc152587d68beb4ecfbbb121285"
+  }
+}
