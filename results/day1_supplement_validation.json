@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "validated_at": "2026-10-01T05:50:53.761176+00:00",
+  "scope": "Independent descriptive cross-check; no model changes",
+  "charging_pattern_correlations_checked": 9,
+  "feature_correlations_checked": 192,
+  "policy_groups_checked": 40,
+  "source_sha256": {
+    "data/processed/cells_analysis.csv": "0b58a3f9743ce09b9800d35c55a7057982f478aacd5260231b588a320a6c46e8",
+    "results/degradation_slopes.csv": "32405c4af84116544776655d81a79685b6b743ad7a0ef8587eba318e5b264a1e",
+    "results/split_assignment.csv": "97ca9d514a0c1d83f6b280df20ed6a64898eb680f82a2ab691029eaa8bdeb300"
+  },
+  "protected_files_unchanged": true
+}

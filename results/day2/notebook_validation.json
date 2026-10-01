@@ -1,55 +1,25 @@
 {
   "status": "passed",
   "notebook": "notebooks/02_DAY2_Modeling.ipynb",
-  "sha256": "d5011f89d1e462e0d2255edfd7fa8fa82c9abc794e912207ae92ddd5921baf64",
+  "sha256": "35427923285de6e7a9c560366aacf05babc3b95b1f7fc35057560a37afae50a8",
+  "validated_at": "2026-10-01T05:50:53.761176+00:00",
   "total_cells": 36,
   "executed_code_cells": 17,
   "error_outputs": 0,
   "embedded_png_charts": 5,
-  "chart_review_paths": [
-    "/var/folders/9c/64vncq517zj8tsjs6vbqkc3w0000gn/T/day2-notebook-charts-_ft41iwl/chart-1.png",
-    "/var/folders/9c/64vncq517zj8tsjs6vbqkc3w0000gn/T/day2-notebook-charts-_ft41iwl/chart-2.png",
-    "/var/folders/9c/64vncq517zj8tsjs6vbqkc3w0000gn/T/day2-notebook-charts-_ft41iwl/chart-3.png",
-    "/var/folders/9c/64vncq517zj8tsjs6vbqkc3w0000gn/T/day2-notebook-charts-_ft41iwl/chart-4.png",
-    "/var/folders/9c/64vncq517zj8tsjs6vbqkc3w0000gn/T/day2-notebook-charts-_ft41iwl/chart-5.png"
-  ],
   "model_training_executed": false,
-  "selection_changed": false,
+  "protected_inputs_models_results_unchanged": true,
+  "code_cells_and_outputs_unchanged": true,
+  "code_and_outputs_sha256": "f3131c3219e1057032de18b9231147fecad5fe949905b77bee1f516d3f98f733",
   "selected_candidate": "C037",
+  "selection_changed": false,
   "metrics_independently_recomputed": true,
-  "all_saved_model_predictions_reproduced": true,
-  "fold_preprocessing_audit_rows_checked": 339,
-  "required_six_row_table": [
-    "Train (Batch1 CV)",
-    "Valid (Batch1 Hold-out)",
-    "Test (Batch2)",
-    "Gap (Train-Valid)",
-    "Gap (Valid-Test)",
-    "Gap (Target-Test)"
-  ],
-  "source_selection_lock_sha256": "39dfa91224dd295a69e7a18904af5c99af45fb2d5fc8df4239396b3974fc1dc7",
-  "scope": "DAY2 result walkthrough: B1 development/holdout and B2 Test; no B3 model evaluation",
-  "validated_at": "2026-10-01T04:44:29.961883+00:00",
   "visual_review": {
-    "reviewed_png_charts": 5,
-    "result": "All five embedded charts viewed. Axes, legends, bars, error bars and labels are readable with no clipping or overlap."
+    "embedded_png_charts_reviewed": 5,
+    "result": "Charts and all code outputs are unchanged; existing visual review remains applicable."
   },
   "final_markdown_revision": {
-    "changed_cell_indices_zero_based": [
-      6,
-      34
-    ],
-    "code_cells_and_outputs_unchanged": true,
-    "code_and_outputs_sha256": "0b82bc89a5cfc53061d5cced4174d3adb2d06161af0f82d09cbb314c266abb22"
-  },
-  "protected_inputs_models_results_unchanged": true,
-  "training_fit_calls_in_executed_cells": 0,
-  "displayed_required_performance_values": [
-    "8.23%",
-    "8.44%",
-    "55.22%",
-    "+0.21 %p",
-    "+46.78 %p",
-    "+46.12 %p"
-  ]
+    "markdown_cells_edited": 19,
+    "code_cells_and_outputs_unchanged": true
+  }
 }

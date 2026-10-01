@@ -1,12 +1,11 @@
-"""Build the Korean DAY 1 study notebook without running analysis or training.
+"""Build the Korean DAY1 submission notebook; execution is a separate step.
 
-Run from any directory: python /path/to/project/src/build_notebook.py
-Only writes notebooks/01_DAY1_EDA.ipynb; raw/processed data are read by its cells.
+Run: python src/build_notebook.py
+The generated notebook reads existing data and checks its input hashes.
 """
 from pathlib import Path
 import json
 import textwrap
-
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -22,40 +21,42 @@ def build_notebook():
         cells.append({"cell_type": "code", "execution_count": None, "metadata": {},
                       "outputs": [], "source": textwrap.dedent(source).strip() + "\n"})
 
-    md("""
-    # DAY 1 — 초기 배터리 데이터로 수명을 예측하기 위한 EDA
+    md(r"""
+    # DAY 1 — 초기 배터리 데이터와 수명 예측 설계
 
-    **목표:** 첫 100 cycle까지 관측한 정보로 최종 `cycle_life`를 예측할 준비를 한다.
-    오늘은 **Batch 1·Batch 2·Batch 3의 구조, 데이터 품질, 분포, 피처 후보**를 확인한다.
-    녹음의 DAY 1 안내에 따라 세 배치를 EDA에 사용하며, Extra 데이터는 제외한다.
-    모델 학습과 하이퍼파라미터 탐색은 다음 단계에서 진행한다.
+    **박진원 · 울산 1반**
 
-    - **분석 단위:** 배터리 셀 기록 한 개. 수만 개의 cycle 행은 독립 배터리 수가 아니다.
-      물리 셀 식별자는 미해독 상태이므로 셀 기록 간 물리적 중복이 없다고 확정하지 않는다.
-    - **X 후보:** 100 cycle 이내 용량·온도·내부저항·충전시간·방전곡선 변화.
-    - **Y:** 제공 수명 라벨. 원본 `cycle_life_raw`와 분석용 `cycle_life`를 구분한다.
-      Batch 1·Batch 3은 80% 근처의 **근사 종료 라벨**, Batch 2는 **80% 임계값 교차 라벨**이다.
-      근사 라벨도 원본 값을 그대로 유지하며 실제 임계값 교차를 확인한 정답이라고 부르지 않는다.
-    - **평가 설계:** Batch 1 개발 구간에서 교차검증·모델 선택, 고정한 Batch 1 holdout에서 내부 평가,
-      Batch 2에서 배치 간 평가를 진행한다. **Batch 3은 현재 `Batch3_EDA_only`로 둔다.**
-      DAY 2에서 Batch 3을 추가 성능 평가에 쓰는 것은 선택 사항이며 오늘은 모델을 평가하지 않는다.
-      오늘은 holdout과 Batch 2의 분포도 확인하므로 완전히 보지 않은 테스트라고 부르지 않는다.
-      모델 선택을 위한 피처·타깃 상관 분석은 개발 구간으로 제한한다.
+    첫 100사이클에서 얻은 정보로 제공된 총수명 `cycle_life`를 예측하기 위한 분석입니다.
+    Batch 1·2·3의 분포, 열화 곡선, 초기 방전곡선 차이, 충전 조건과 변수의 관계를 확인합니다.
+    회귀와 분류 중에서는 **회귀**를 선택했습니다. 수명을 두 그룹으로만 나누기보다,
+    배터리 사이의 총사이클 수 차이를 연속적인 값으로 예측하려는 목적에 맞기 때문입니다.
 
-    이 노트북은 연구 보조 도구로 생성했다. 셀을 실행하고 결과와 제외 근거를 직접 확인한 뒤,
-    마지막 질문에 자신의 해석을 적는다. 실행 전에는 어떠한 성능도 달성했다고 주장하지 않는다.
+    - **분석 단위:** 배터리 셀 기록 한 개입니다. 사이클별 측정 행 수를 독립 배터리 수로 세지 않습니다.
+      물리 셀 식별자는 미해독 상태이므로 서로 다른 기록의 물리적 중복이 없다고 확정하지는 않습니다.
+    - **입력 후보:** 100사이클 이내의 용량·온도·내부저항·충전 시간과 방전곡선 변화입니다.
+    - **예측할 값:** 원본의 제공 수명 라벨입니다. B1·B3는 80% 근처의 근사 종료 라벨이고,
+      B2는 80% 임계값 교차를 관측한 라벨입니다. 이 차이를 유지하며 원본 값을 바꾸지 않습니다.
+    - **평가 설계:** B1 개발용 28개에서 교차검증과 모델 선택을 진행하고, 고정된 B1 holdout 8개와
+      B2 39개에서 평가하도록 설계했습니다. B3 40개는 여기서 EDA에만 사용합니다.
+      DAY2의 B3 추가 성능 평가는 선택 사항입니다.
+
+    이 노트북은 DAY1의 분석과 설계를 다룹니다. 모델 학습과 성능 결과는 DAY2 노트북에 정리되어 있습니다.
+    전체 배치를 비교하는 설명용 분석과 B1 개발용 데이터로 판단하는 모델 설계 근거를 구분했습니다.
+    holdout과 B2 분포를 EDA에서 확인했으므로, 이들을 전혀 관찰하지 않은 데이터라고 주장하지 않습니다.
     """)
 
-    md("""
+    md(r"""
     ## 1. 환경과 데이터 준비 상태
 
-    프로젝트 폴더 또는 `notebooks/`에서 실행할 수 있다. 원본 MAT를 다시 읽는 대신
-    데이터 준비 단계에서 만든 작은 표와 cycle 10·100 곡선을 읽는다.
-    필요한 파일이 없으면 준비 단계를 먼저 완료한다. 이 노트북은 데이터를 다운로드하거나 변경하지 않는다.
+    프로젝트 폴더 또는 `notebooks/`에서 실행할 수 있습니다. 원본 MAT 파일을 다시 읽는 대신,
+    준비 단계에서 만든 표와 사이클 10·100의 곡선을 사용합니다. 데이터 준비와 보완 분석이 완료된 상태에서
+    실행하며, 아래 코드는 데이터를 다운로드하거나 원본·정제·분할·모델 결과를 바꾸지 않습니다.
     """)
+
     code(r"""
     from pathlib import Path
     import sys
+    import hashlib
     import json
     import numpy as np
     import pandas as pd
@@ -88,8 +89,18 @@ def build_notebook():
                          'axes.titlesize': 12, 'axes.labelsize': 11})
     pd.set_option('display.max_columns', 25)
     print('프로젝트:', ROOT)
+    print('Python:', sys.executable)
     print('분석 대상 판정표:', COHORT_PATH.relative_to(ROOT))
+
+    SUPPLEMENT_PATH = ROOT / 'results' / 'day1_supplement.json'
+    if not SUPPLEMENT_PATH.is_file():
+        raise FileNotFoundError('먼저 src/supplement_day1.py를 실행해 주세요.')
+    protected_paths = needed + [COHORT_PATH, ROOT/'results/degradation_slopes.csv',
+                                ROOT/'results/split_assignment.csv']
+    input_hashes_before = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
+                           for p in protected_paths}
     """)
+
     code(r"""
     raw_parts, summary_parts, curves = [], [], {}
     for batch, prefix in BATCHES.items():
@@ -126,25 +137,25 @@ def build_notebook():
     display(cells.groupby(['batch', 'split_role']).size().rename('battery_count').to_frame())
     """)
 
-    md("""
+    md(r"""
     ## 2. 변수와 표의 단위
 
-    | 변수 | 뜻 | 사용 시점 |
+    | 변수 | 뜻 | 분석에서의 역할 |
     |---|---|---|
-    | `cell_id`, `barcode`, `batch` | 파일 내 ID, 물리 셀 식별자, 실험 배치 | 추적·분할용; 예측 피처로 바로 넣지 않음 |
-    | `cycle` | 충전·방전 반복 번호 | 100 cycle 이내 정보만 X에 사용 |
-    | `QDischarge`, `QCharge` | 방전·충전 용량(Ah) | 초기 추세·변동을 요약 |
-    | `IR` | 내부저항 | 0·누락·단위·측정 조건 점검 |
-    | `Tavg`, `Tmax`, `Tmin` | cycle별 온도 요약 | 초기 평균·상승 정도 후보 |
-    | `chargetime` | 충전시간 | 측정 단위와 정의를 원자료와 대조 |
-    | `Qdlin`, `Vdlin` | 공통 전압 격자 위의 방전 용량곡선과 전압 | cycle 10·100의 곡선 차이 계산 |
-    | `cycle_life_raw` | 원본 파일의 수명 라벨 | 관측 중단·예외 여부 점검 |
-    | `cycle_life` | 검토 후 유지한 제공 라벨; 배치별 근사/실측 차이 있음 | 예측할 정답 Y |
-    | `label_status` | 근사 종료·80% 교차·미해결 라벨 구분 | 라벨 신뢰성과 분석 한계 설명 |
+    | `cell_id`, `barcode`, `batch` | 파일 내 ID, 물리 셀 식별자, 실험 배치 | 추적·분할에 사용하며 예측 입력에서는 제외합니다. |
+    | `cycle` | 충전·방전 반복 번호 | 예측 입력은 100사이클 이내로 제한합니다. |
+    | `QDischarge`, `QCharge` | 방전·충전 용량(Ah) | 초기 수준과 변화를 요약합니다. |
+    | `IR` | 내부저항 | 양수 측정값으로 초기 평균과 변화를 계산합니다. |
+    | `Tavg`, `Tmax`, `Tmin` | 사이클별 온도 요약 | 초기 온도 특성을 확인합니다. |
+    | `chargetime` | 충전 시간 | 초기 평균을 입력 후보로 사용합니다. |
+    | `Qdlin`, `Vdlin` | 전압 격자 위의 방전 용량과 전압 | 사이클 10·100의 곡선 차이를 계산합니다. |
+    | `cycle_life_raw`, `cycle_life` | 원본 및 분석용 제공 수명 라벨 | 값은 유지하고 품질 판정을 별도로 기록합니다. |
+    | `label_status` | 근사 종료·관측 교차·미해결 라벨 구분 | 라벨의 차이와 한계를 설명합니다. |
 
-    공칭 용량 1.1Ah의 80%는 **0.88Ah**다. 초기 데이터에 0이 포함되거나 측정이 일시적으로
-    흔들릴 수 있으므로, 단순히 최초로 0.88보다 작은 값만 찾고 수명이라고 단정하지 않는다.
+    공칭 용량 1.1Ah의 80%는 **0.88Ah**입니다. 측정 오류나 관측 중단 여부를 함께 확인해야 하므로,
+    일시적으로 0.88Ah 아래로 내려갔다는 사실만으로 모든 기록의 수명을 확정하지는 않습니다.
     """)
+
     code(r"""
     inventory = raw.groupby('batch').agg(
         raw_cells=('cell_id', 'nunique'), cycle_rows=('n_summary', 'sum'),
@@ -166,38 +177,29 @@ def build_notebook():
         max_final_qd=('last_qd', 'max')))
     assert np.allclose(eligible.cycle_life, eligible.cycle_life_raw), '원본 라벨 변경 여부를 확인하세요.'
     """)
-    md("""
-    **제외는 점수가 좋아지는 방향으로 결정하지 않는다.** 관측 중단, 수명 라벨 부재, 측정 오류처럼
-    미리 설명할 수 있는 품질 기준으로 결정하고 원본은 보존한다. `capacity_plausible`은 준비 단계의
-    탐색용 점검 범위(0.2~1.5Ah)이며 물리적인 판정 법칙이 아니다. 이 범위 때문에 빠진 값도 확인한다.
 
-    **이번 데이터에서 실제 확인한 라벨 차이**
+    md(r"""
+    **제외 근거와 라벨의 차이**
 
-    - Batch 1의 원본 46개 모두 `cycle_life_raw = n_summary + 1`이며, 엄격한 0.88Ah 교차를
-      직접 관측한 라벨이 아니다. 원저자 자료의 비완주 5개와 다른 날짜의 후속 기록 연결이 필요한 5개,
-      총 10개를 제외했다.
-    - 유지한 Batch 1 **36개**의 종료 용량은 약 **0.88006~0.88336Ah**다.
-      제공된 근사 라벨을 그대로 사용하고 `provided_near80_endpoint_proxy`로 표시한다.
-      0.885Ah는 종료 상태 점검값이며 새로운 EOL 정의가 아니다. 엄격한 EOL은 여전히 0.88Ah다.
-    - Batch 2는 원본 **47개** 중 수명 라벨이 없는 8개를 제외했다. 유지한 **39개**는 제공 라벨과
-      실제 최초 QD<0.88Ah cycle이 일치하며 `observed_80pct_crossing`으로 표시한다.
-    - Batch 3은 원본 **46개** 중 원저자 제외 목록의 **6개**를 분리했다. 파일 날짜와 원본 셀 순서를
-      확인한 후 0부터 시작하는 셀 번호 `b3c37/2/23/32/42/43`을 적용했다.
-      유지한 **40개**는 모두 `cycle_life_raw = n_summary + 1`이고 엄격한 0.88Ah 교차 관측이 없다.
-      종료 용량은 약 **0.880005~0.881670Ah**이며 `provided_near80_endpoint_proxy`로 표시한다.
-      Batch 3은 EDA에만 사용하고 Batch 1 개발/holdout이나 Batch 2 평가에 합치지 않는다.
+    관측 중단, 라벨 부재와 원저자의 제외 근거를 사용했으며, 모델 점수를 보고 제외 대상을 고르지 않았습니다.
+    `capacity_plausible`의 0.2~1.5Ah는 탐색용 측정 점검 범위입니다. 이 범위가 새로운 물리 법칙이나 EOL 기준은 아닙니다.
 
-    세 배치의 **원본 139개 중 분석 대상은 115개(36/39/40)**다. 원본 cycle 행 **116,722개**를
-    독립 배터리 표본 수로 세면 안 된다.
+    - **B1:** 원본 46개의 라벨은 모두 `n_summary + 1`이며 엄격한 0.88Ah 교차가 관측되지 않았습니다.
+      원저자 자료의 비완주 5개와 다른 날짜의 후속 기록 연결이 필요한 5개를 제외했습니다.
+      남은 36개의 종료 용량은 약 0.88006~0.88336Ah입니다. 제공된 근사 종료 라벨을 그대로 유지했습니다.
+    - **B2:** 원본 47개 중 수명 라벨이 없는 8개를 제외했습니다. 남은 39개는 제공 수명과 최초 QD<0.88Ah 사이클이 일치했습니다.
+    - **B3:** 원본 46개 중 원저자 제외 목록의 6개(`b3c37/2/23/32/42/43`)를 분리했습니다.
+      남은 40개는 모두 `n_summary + 1` 형태의 근사 종료 라벨입니다. 종료 용량은 약 0.880005~0.881670Ah입니다.
 
-    따라서 모든 분석 대상을 **“실제 EOL을 확인한 셀”**이라고 묶어 부르면 부정확하다.
-    라벨 정의 차이와 제외로 인한 분포 변화도 배치 간 오차의 원인이 될 수 있다.
-    다음 단계에서는 근접 종료 판정값 0.8825/0.885Ah의 민감도를 점검한다.
+    원본 **139개 중 115개(36/39/40)**를 분석했습니다. 원본 사이클 행 **116,722개**를 독립 배터리 수로 세지 않습니다.
+    0.885Ah는 종료 상태 점검값이며, EOL 기준을 바꾼 값은 아닙니다. B1·B3의 라벨을 B2와 동일하게 관측된 정답이라고
+    묶어서 설명하면 부정확합니다. 라벨 차이와 제외에 따른 분포 변화도 배치 간 평가의 한계에 포함합니다.
 
-    **데이터 출처 주의:** 이번 Batch 2 파일은 `2018-02-20`이다. 원저자의 논문용 Batch 2 로더는
-    `2017-06-30`을 사용한다. 따라서 원저자 코드의 고정 ID 삭제나 배치 연결을 복사해 적용하면 안 된다.
-    원논문의 9.1%는 참고 목표이며 데이터·분할 조건이 같은 재현 결과로 주장하지 않는다.
+    이번 B2 파일의 날짜는 `2018-02-20`이고, 원저자의 논문용 B2 로더는 `2017-06-30`을 사용합니다.
+    다른 파일에 적용된 셀 번호 보정이나 기록 연결을 그대로 복사하지 않았습니다.
+    논문의 MAPE 9.1%는 과제의 참고값이며, 이번 분석을 동일 조건의 재현이라고 표현하지 않습니다.
     """)
+
     code(r"""
     # batch_date는 기록된 값과 파일명 모두 확인한다.
     metadata_rows = []
@@ -217,14 +219,14 @@ def build_notebook():
     print('barcode 누락 수:', ids.barcode.eq('').sum(), '— 누락이면 중복이 없다고 확정할 수 없습니다.')
     """)
 
-    md("""
+    md(r"""
     ## 3. 수명 분포와 장·단수명 비율
 
-    원본 라벨 분포와 분석 대상으로 확정한 라벨 분포를 구별한다.
-    Batch 1·3 근사 라벨과 Batch 2 임계값 교차 라벨의 차이를 유지한 채 세 배치를 비교한다.
-    아래의 **단수명 <500, 장수명 >1,000**은 EDA용 구간이다.
-    이번 회귀의 정답을 이진 분류로 바꾸는 기준은 아니다. 비율의 분모는 각 배치의 분석 대상 배터리 수다.
+    원본의 제공 라벨과 분석 대상의 분포를 구분했습니다. 히스토그램은 과제에서 제시한 **150~2,300사이클** 범위를 사용합니다.
+    단수명 `<500`, 장수명 `>1,000`은 EDA용 구간이며 회귀 타깃을 이진화하는 기준이 아닙니다.
+    비율의 분모는 각 배치의 분석 대상 셀 수입니다.
     """)
+
     code(r"""
     display(eligible.groupby('batch').cycle_life.describe().round(1))
     life_bands = eligible[['batch', 'cell_id', 'cycle_life']].copy()
@@ -238,8 +240,7 @@ def build_notebook():
     display(counts)
     display(percentages.round(1).add_suffix(' (%)'))
 
-    all_life = pd.concat([raw.cycle_life_raw, eligible.cycle_life]).dropna()
-    bins = np.linspace(0, max(1000, all_life.max()) * 1.05, 14)
+    bins = np.linspace(150, 2300, 15)
     fig, axes = plt.subplots(2, 2, figsize=(12, 8), layout='constrained')
     for ax, batch in zip(axes.flat, BATCHES):
         raw_life = raw.loc[raw.batch.eq(batch), 'cycle_life_raw'].dropna()
@@ -248,7 +249,7 @@ def build_notebook():
                 label=f'Raw nonmissing labels (n={len(raw_life)})')
         ax.hist(kept_life, bins=bins, alpha=.65, color=COLORS[batch],
                 label=f'Analysis cohort (n={len(kept_life)})')
-        ax.set(title=batch, xlabel='Cycle life', ylabel='Battery count')
+        ax.set(title=batch, xlabel='Cycle life', ylabel='Battery count', xlim=(150, 2300))
         ax.legend(fontsize=9)
     percentages.plot.bar(stacked=True, ax=axes[1, 1],
                          color=['#C96F57', '#ADBDD0', '#4D8779'])
@@ -258,12 +259,39 @@ def build_notebook():
     plt.show()
     """)
 
-    md("""
-    ## 4. 배터리별 방전용량 곡선
-
-    전체 수명 곡선은 데이터 이해와 라벨 점검에 사용한다. **100 cycle 이후의 값·전체 기록 길이·마지막
-    용량을 X에 넣으면 미래 정보를 보는 누수**가 된다. 초기 용량이 거의 줄지 않아도 최종 수명은 다를 수 있다.
+    code(r"""
+    iqr_rows = []
+    for batch, group in eligible.groupby('batch'):
+        q1, q3 = group.cycle_life.quantile([.25, .75])
+        lower, upper = q1 - 1.5*(q3-q1), q3 + 1.5*(q3-q1)
+        iqr_rows.append({'batch': batch, 'lower_fence': lower, 'upper_fence': upper,
+                         'lower_outlier_ids': group.loc[group.cycle_life.lt(lower), 'cell_id'].tolist(),
+                         'upper_outlier_ids': group.loc[group.cycle_life.gt(upper), 'cell_id'].tolist()})
+    display(pd.DataFrame(iqr_rows))
+    display(eligible.nsmallest(3, 'cycle_life')[['batch', 'cell_id', 'cycle_life', 'policy']])
+    b2 = eligible.loc[eligible.batch.eq('Batch 2')].copy()
+    b2['newstructure_label'] = b2.policy.str.contains('newstructure', case=False, na=False)
+    display(b2.groupby('newstructure_label').cycle_life.agg(['size', 'median', 'min', 'max']))
     """)
+
+    md(r"""
+    B1·B2·B3의 장수명 비율은 각각 13.9%, 7.7%, 47.5%입니다.
+    IQR의 아래쪽 경계를 벗어난 셀은 없었습니다. 위쪽 경계 밖의 B2 9개·B3 4개도 유효 관측으로 유지했습니다.
+    전체에서 짧은 사례인 `b2c19=392`, `b2c6=393`, `b2c15=396`을 짧다는 이유만으로 이상치나 오류라고 부르지는 않았습니다.
+
+    B2의 `newstructure` 표기가 없는 30개와 있는 9개는 수명 중앙값이 451과 904사이클로 달랐습니다.
+    표기가 나누는 실험 조건이 수명 차이와 함께 나타났다는 가설은 세울 수 있지만,
+    표기의 물리적 의미가 확인되지 않아 짧은 수명의 원인이라고 확정하거나 모델 입력으로 추가하지는 않았습니다.
+    """)
+
+    md(r"""
+    ## 4. 배터리별 방전 용량과 열화가 빨라지는 지점
+
+    전체 수명 곡선은 데이터 이해와 라벨 점검에 사용합니다. 초기 용량이 거의 줄지 않아도 최종 수명은 다를 수 있습니다.
+    **100사이클 이후의 값, 전체 기록 길이, 마지막 용량을 예측 입력으로 사용하면 미래 정보를 포함하게 됩니다.**
+    전체 관측 구간과 초기 100사이클을 나누어 비교했습니다.
+    """)
+
     code(r"""
     plot_data = summary.loc[summary.capacity_plausible.astype(str).str.lower().eq('true')
                             & summary.cell_id.isin(eligible.cell_id) & summary.cycle.ge(2)].copy()
@@ -295,17 +323,59 @@ def build_notebook():
         plt.show()
     """)
 
-    md("""
-    ## 5. ΔQ(V): cycle 10과 100에서 방전곡선이 얼마나 달라졌는가?
+    code(r"""
+    from review_day1 import knee_fit
 
-    같은 **전압 값**에서 측정한 용량의 차이를 `ΔQ(V) = Q100(V) − Q10(V)`로 계산한다.
-    이 차이곡선의 분산은 용량 총량만 보았을 때 놓칠 수 있는 곡선 모양의 변화를 요약한다.
-    분산에 `log10`을 취한 값이 피처 후보 `log10_deltaq_var`다.
-
-    배열의 인덱스와 실제 cycle 번호는 다를 수 있다. 아래에서는 추출 단계가 기록한 cycle 위치를 먼저
-    보고, 곡선 길이·전압 격자·유한값·차이 계산·분산 계산이 서로 맞는지 확인한다.
-    **로그를 계산할 수 없는 0 분산을 임의의 작은 상수로 몰래 바꾸지 않는다.**
+    knee_rows = []
+    for batch, group in eligible.groupby('batch'):
+        representative = group.assign(distance=(group.cycle_life-group.cycle_life.median()).abs()).sort_values(
+            ['distance', 'cell_id']).iloc[0]
+        trace = summary.loc[summary.cell_id.eq(representative.cell_id)
+            & summary.capacity_plausible.astype(str).str.lower().eq('true')
+            & summary.cycle.between(10, representative.cycle_life)].sort_values('cycle')
+        x = trace.cycle.to_numpy()
+        y = trace.QDischarge.rolling(7, center=True, min_periods=1).median().to_numpy()
+        approximate = knee_fit(x, y, representative.cycle_life)
+        knee_rows.append({'batch': batch, 'cell_id': representative.cell_id,
+            'provided_life': representative.cycle_life, 'approximate_knee': approximate['cycle'],
+            'before_slope': approximate['before_slope'], 'after_slope': approximate['after_slope'],
+            'search_10_90': knee_fit(x, y, representative.cycle_life, .1, .9)['cycle'],
+            'search_20_95': knee_fit(x, y, representative.cycle_life, .2, .95)['cycle']})
+    display(pd.DataFrame(knee_rows))
+    display(eligible.assign(nonnegative=eligible.qd_slope_10_100.ge(0)).groupby('batch').nonnegative.sum()
+            .rename('nonnegative_initial_slope_cells').to_frame())
     """)
+
+    md(r"""
+    각 배치의 수명 중앙값에 가장 가까운 대표 셀을 먼저 고르고, 동률이면 셀 ID순으로 선택했습니다.
+    10사이클부터 제공 수명까지의 곡선을 7개 구간 이동 중앙값으로 완화한 뒤,
+    서로 이어지는 두 직선으로 기울기가 달라지는 위치를 탐색했습니다.
+    제공 수명의 20~90% 범위에서 후기 기울기가 더 음수인 후보 중 제곱오차가 가장 작은 위치를 사용했습니다.
+
+    탐색적 근사는 B1 `b1c11` 약 590, B2 `b2c16` 약 340, B3 `b3c25` 약 820사이클이었습니다.
+    탐색 범위를 10~90%·20~95%로 바꾸어도 같은 위치가 나왔습니다.
+    이는 대표 곡선을 설명하는 **근사 위치**이며, 검증된 knee 검출 방법이나 전체 배터리의 공통 임계점은 아닙니다.
+
+    초기 기울기가 0 이상인 셀도 B1 7/36, B2 22/39, B3 1/40개였습니다.
+    초기에는 용량이 유지되거나 증가하다가 후기 감소가 가팔라지는 경우가 있어 일정한 열화 속도를 가정하기 어렵습니다.
+    초기 기울기와 ΔQ를 후보로 검토하되, 미래 관측이 필요한 knee 위치는 예측 입력에서 제외합니다.
+    """)
+
+    md(r"""
+    ## 5. ΔQ(V): 초기 방전곡선의 변화
+
+    같은 전압에서의 용량 차이를 `ΔQ(V) = Q100(V) − Q10(V)`로 계산합니다.
+    차이곡선의 평균·최솟값·분산은 초기 용량 총량만으로 드러나지 않는 변화를 요약합니다.
+    분산은 표본분산(`ddof=1`)을 사용하고 `log10`을 적용했습니다.
+
+    배열 인덱스와 실제 사이클 번호가 다를 수 있어, 추출된 사이클 위치·곡선 길이·전압 격자·유한값을 확인합니다.
+    0 분산을 임의의 작은 수로 바꾸어 로그값을 만들지는 않습니다.
+
+    **B3의 비교 한계:** 과제 참고 자료에는 배치에 따라 방전곡선 시작 조건이 다를 수 있다는 설명이 있습니다.
+    공통 전압 격자를 확인해 같은 셀의 100–10 차이를 계산했더라도 시작 조건의 영향이 제거되었다고 볼 수는 없습니다.
+    따라서 B3의 ΔQ 절댓값 차이를 곧바로 열화 정도 차이로 해석하지 않고, 배치별 조건과 함께 살펴봅니다.
+    """)
+
     code(r"""
     available = eligible.loc[eligible.cell_id.map(lambda k: f'{k}_q10' in curves
                                                  and f'{k}_q100' in curves)].copy()
@@ -351,13 +421,12 @@ def build_notebook():
     plt.show()
     """)
 
-    md("""
-    같은 차이곡선을 세 배치 전체에서도 비교한다. 이는 과제의 기술적 EDA이며,
-    Batch 2를 완전히 보지 않은 평가셋으로 주장하지 않는 이유이기도 하다.
-    장수명(>1,000)·단수명(<500) 그룹의 차이곡선 분산 중앙값과 표본 수도 기술적으로 비교한다.
-    표본이 적거나 한쪽 그룹이 없으면 배치별 차이를 일반화하기 어렵다.
-    모델 선택용 수치 분석은 다음 절에서 개발 구간만 사용한다.
+    md(r"""
+    전체 차이곡선은 장수명·중간·단수명 그룹으로 나누었습니다. 곡선의 모양과 통계값 중앙값을 함께 비교합니다.
+    B1·B3에는 단수명 셀이 없어 같은 배치 안에서 양극단을 직접 비교할 수 없습니다. B2 장수명도 3개뿐이므로
+    그룹 차이를 모든 배터리에 일반화하기는 어렵습니다. 아래 전체 배치 비교는 설명용이며 모델 선택에는 사용하지 않습니다.
     """)
+
     code(r"""
     fig, axes = plt.subplots(2, 2, figsize=(12, 8), sharex=True, sharey=True, layout='constrained')
     for ax, batch in zip(axes.flat, BATCHES):
@@ -386,14 +455,16 @@ def build_notebook():
         transform=axes[1, 1].transAxes, va='top', linespacing=1.8)
     plt.show()
 
-    delta_groups = available[['batch', 'cell_id', 'cycle_life', 'log10_deltaq_var']].copy()
+    delta_groups = available[['batch', 'cell_id', 'cycle_life', 'log10_deltaq_var', 'deltaq_mean', 'deltaq_min']].copy()
     delta_groups['life_group'] = np.select(
         [delta_groups.cycle_life < 500, delta_groups.cycle_life > 1000],
         ['Short: <500', 'Long: >1000'], default='Middle: 500–1000')
     delta_extremes = delta_groups.loc[delta_groups.life_group.ne('Middle: 500–1000')]
     group_delta_stats = delta_extremes.groupby(['batch', 'life_group']).agg(
         n=('cell_id', 'size'), valid_logvar=('log10_deltaq_var', 'count'),
-        median_logvar=('log10_deltaq_var', 'median')).reindex(
+        median_logvar=('log10_deltaq_var', 'median'),
+        median_deltaq_mean=('deltaq_mean', 'median'),
+        median_deltaq_min=('deltaq_min', 'median')).reindex(
             pd.MultiIndex.from_product([list(BATCHES), ['Short: <500', 'Long: >1000']],
                                        names=['batch', 'life_group']))
     group_delta_stats[['n', 'valid_logvar']] = group_delta_stats[['n', 'valid_logvar']].fillna(0).astype(int)
@@ -401,34 +472,75 @@ def build_notebook():
     print('중앙값 비교는 EDA용입니다. 그룹 표본 수를 함께 보고, 평가셋으로 피처를 고르지 않습니다.')
     """)
 
-    md("""
-    ## 6. 충전 정책별 수명과 표본 수
+    md(r"""
+    B2 단수명 28개의 ΔQ 로그분산 중앙값은 약 -3.45, 장수명 3개는 약 -4.27이었습니다.
+    평균·최솟값도 함께 보면 단수명 그룹의 차이가 더 음수이고 전압에 따른 변화가 큰 경향을 보였습니다.
+    B1·B3에는 단수명 그룹이 없으므로 같은 관계를 해당 배치 안에서 직접 확인했다고 표현하지 않았습니다.
 
-    평균이 높은 정책이 항상 더 좋다는 뜻은 아니다. 정책마다 배터리 수와 실험 조건이 다르고,
-    배치 차이가 섞여 있을 수 있다. **평균과 n을 함께** 읽고 인과관계로 단정하지 않는다.
+    B1 개발용 28개에서 ΔQ 평균·최솟값·로그분산과 수명의 상관은 각각 +0.723, +0.764, -0.782였습니다.
+    세 통계 사이의 |r|도 0.966~0.990으로 높아 한꺼번에 넣으면 비슷한 정보를 중복할 수 있습니다.
+    로그분산을 우선 후보로 두고 평균·최솟값 대체 조합을 같은 교차검증 조건에서 비교하도록 설계했습니다.
     """)
+
+    md(r"""
+    ## 6. 충전 조건과 수명·후반 열화의 관계
+
+    평균 수명이 높은 충전 방식이 언제나 더 좋다는 뜻은 아닙니다. 표본 수와 실험 조건이 다르므로
+    배치 안에서 전체 충전 방식별 **셀 수·평균 수명·후반 기울기**를 함께 비교했습니다.
+    전체 표는 배치×정책 **40개 그룹**이며, 서로 다른 정책 문자열은 **37개**입니다.
+
+    기록된 `첫 C-rate(SOC%)-후속 C-rate`에서 세 조건을 구분했습니다.
+    후반 기울기는 제공 수명의 80% 시점부터 종료까지의 QD 선형 기울기(Ah/사이클)입니다.
+    더 음수일수록 용량 감소가 가파릅니다. 이 값은 전체 수명을 관찰한 EDA용이며 초기 예측 입력으로 사용하지 않습니다.
+    `newstructure`는 원자료의 문자열을 유지했으며 물리적 의미를 임의로 해석하지 않았습니다.
+    """)
+
     code(r"""
-    policy_view = eligible.copy()
-    policy_view['policy'] = policy_view.policy.fillna('(missing)').replace('', '(missing)')
-    policy_stats = policy_view.groupby(['batch', 'policy'], dropna=False).agg(
-        n=('cell_id', 'size'), mean_life=('cycle_life', 'mean'),
-        median_life=('cycle_life', 'median'), std_life=('cycle_life', 'std')).reset_index()
-    display(policy_stats.sort_values(['batch', 'mean_life'], ascending=[True, False]).round(1))
-    print('표본 1개뿐인 정책 그룹:', int(policy_stats.n.eq(1).sum()))
+    from supplement_day1 import build_supplement
+
+    # 같은 입력에서 보완 통계만 재계산합니다. 이 함수는 파일을 쓰거나 모델을 학습하지 않습니다.
+    supplement = build_supplement(ROOT)
+    saved_supplement = json.loads(SUPPLEMENT_PATH.read_text())
+    assert supplement == saved_supplement, '보완 분석 입력 또는 저장 결과를 확인해 주세요.'
+    policy_conditions = pd.DataFrame(supplement['policy_correlations'])
+    policy_stats = pd.DataFrame(supplement['policy_groups'])
+    assert len(policy_stats) == 40 and policy_stats.n.sum() == len(eligible)
+    print('배치별 충전 조건과 후반 기울기의 Pearson 상관계수입니다.')
+    display(policy_conditions[['batch', 'predictor', 'n', 'pearson_r']].round(3))
+    print('전체 40개 배치·정책 그룹입니다. 기울기의 단위는 Ah/사이클입니다.')
+    with pd.option_context('display.max_rows', 50, 'display.max_colwidth', 50):
+        display(policy_stats[['batch', 'policy', 'n', 'mean_life', 'late_slope_n',
+                              'late_slope_mean', 'late_slope_median']].round(
+                                  {'mean_life': 1, 'late_slope_mean': 6, 'late_slope_median': 6}))
+    print('셀이 1개뿐인 그룹:', supplement['counts']['singleton_groups'])
+    print('같은 첫 전류 8C·후속 전류 3.6C에서 전환 SOC를 비교합니다.')
+    display(pd.DataFrame(supplement['same_current_soc_example'])[
+        ['transition_soc_pct', 'n', 'mean_life', 'late_slope_mean', 'late_slope_median']].round(6))
     """)
 
-    md("""
-    ## 7. 초기 피처와 수명의 관계 — Batch 1 개발 구간만 사용
+    md(r"""
+    B3에서는 첫 C-rate가 클수록 후반 기울기가 더 음수인 경향(r=-0.493)이 있었고,
+    후속 C-rate와의 r은 +0.401, 전환 SOC와의 r은 +0.275였습니다.
+    B1·B2에서는 관계가 다르므로 첫 전류 하나로 전체 배치의 열화를 설명하기 어렵습니다.
 
-    피처 후보는 예측 시점인 100 cycle 이내에서 계산한다. `qd_slope_10_100`은 초기 용량의 기울기,
-    `ir_change_early`는 초기와 후반 초기구간의 내부저항 차이, `log10_deltaq_var`는 앞에서 계산한 값이다.
-    여기서 상관계수와 다중공선성은 **Batch 1의 개발 구간만** 살핀다.
-    `Batch1_holdout`, `Batch2_final_test`, `Batch3_EDA_only`에 속한 배터리는 이 분석에 넣지 않는다.
-
-    Pearson은 선형 관계를, Spearman은 순위 기반의 단조 관계를 요약한다.
-    두 계수 모두 인과관계나 최종 예측 성능을 확정하지 않는다. 작은 표본, 결측값, 이상치의
-    영향을 함께 본다. 피처 사이 상관이 높으면 비슷한 정보를 중복으로 담을 수 있다.
+    B1의 첫 8C·후속 3.6C를 사용하는 세 그룹은 SOC 15/25/35%에서 평균 수명이 1008.5/676.5/607.5사이클이고,
+    후반 기울기는 약 -0.000641/-0.000949/-0.001060Ah/사이클이었습니다(각 2개).
+    같은 전류에서도 전환 시점과 전체 충전 방식에 따라 다른 열화 양상이 나타났습니다.
+    다만 세 조건과 배치의 다른 조건이 함께 변하고 표본도 작으므로 독립 효과나 인과효과를 분리한 결과는 아닙니다.
     """)
+
+    md(r"""
+    ## 7. 초기 변수와 수명의 관계
+
+    먼저 **B1 개발용 28개**에서 모델 설계에 사용할 근거를 확인합니다.
+    초기 변수는 모두 100사이클 이내에 계산했습니다. `qd_slope_10_100`은 용량 기울기이고,
+    `ir_change_early`는 91~100사이클과 2~10사이클의 양수 내부저항 평균 차이입니다.
+
+    Pearson은 선형 관계를, Spearman은 순위에 기반한 단조 관계를 요약합니다.
+    어느 계수도 인과관계나 최종 예측 성능을 확정하지 않습니다. 아래 개발용 분석 뒤에는 과제의 배치 비교를 위해
+    전체 B1·B2·B3의 수명 상관과 변수끼리의 상관을 별도로 제시합니다. 이 설명용 결과로 후보를 다시 고르지 않습니다.
+    """)
+
     code(r"""
     FEATURES = ['qd_cycle2', 'qd_change_100_10',
                 'qd_slope_10_100', 'ir_mean_2_100', 'ir_change_early',
@@ -448,6 +560,7 @@ def build_notebook():
     display(relationships.sort_values('pearson_r_with_life', key=lambda s: s.abs(),
                                      ascending=False).round(3))
     """)
+
     code(r"""
     pair = train_eda[['log10_deltaq_var', 'cycle_life', 'cell_id']].dropna()
     fig, ax = plt.subplots(figsize=(5.6, 3.8))
@@ -472,58 +585,113 @@ def build_notebook():
     display(strong.round(3))
     """)
 
-    md("""
-    ## 8. EDA에서 다음 실험으로 연결하기
+    md(r"""
+    ### 배치별 상관 비교와 다중공선성
 
-    | 오늘 확인할 근거 | 다음 단계에서 시도할 내용 |
-    |---|---|
-    | 수명 분포·독립 배터리 수 | 고정된 Batch 1 개발/holdout 분할과 개발 구간 CV를 사용 |
-    | 초기 용량만으로 보이는 관련성 | 용량 피처만 사용하는 작은 기준 모델 |
-    | ΔQ(V)의 관련성과 계산 신뢰성 | `log10_deltaq_var` 한 개 피처 모델과 비교 |
-    | 온도·저항·충전시간의 추가 정보 | 소수 피처를 추가한 Ridge/ElasticNet 등의 비교 |
-    | 높은 피처 간 상관·결측 | 훈련 fold에서만 대치·스케일 조정, 중복 피처 정리 또는 규제 |
-    | Batch 1/2/3 분포 차이 | 실험 조건 차이·외삽 가능성을 정리하고 Batch 3은 EDA 역할로 유지 |
-
-    **아직 모델 성능 결과는 없다.** 다음 단계에서는 Batch 1 개발 구간의 CV로 설계를 결정한 후,
-    고정한 holdout과 Batch 2에서 MAPE를 평가하고 RMSE/MAE와 과대·과소 예측도 함께 본다.
-    원논문의 9.1% 목표를 맞추려고 Batch 2 정답을 보고 피처나 제외 대상을 바꾸지 않는다.
-    holdout·Batch 2의 분포를 EDA에서 본 사실은 최종 보고에도 밝힌다.
-    Batch 3을 DAY 2 추가 평가에 사용할지는 별도로 결정하며, 오늘의 EDA가 모델 성능 평가를 뜻하지 않는다.
-
-    전체 수명과 `last_cycle`, 기록 개수, 최종 용량, `first_below_80` 등은 품질 검토용이다.
-    초기 수명 예측의 입력 피처로 넣지 않는다. 결측 대치와 표준화도 전체 데이터에서 먼저 맞추면 안 된다.
+    수명과 각 변수의 상관은 예측 신호를 살피는 용도이고, 변수끼리의 상관은 중복 정보를 확인하는 용도입니다.
+    두 질문을 구분해 전체 배치에서 비교합니다. 결측값을 대치하지 않고 각 변수쌍의 유효한 셀만 사용했으므로
+    표본 수 `n`을 함께 확인합니다. |r|≥0.85는 설명용으로 강한 쌍을 정리하는 기준이며 통계적 유의성 판정이나 자동 제거 규칙은 아닙니다.
     """)
 
-    md("""
-    ## 9. 직접 답해 보는 DAY 1 마무리 질문
+    code(r"""
+    batch_target_rows = []
+    for batch, group in eligible.groupby('batch'):
+        for feature in FEATURES:
+            pair = group[[feature, 'cycle_life']].replace([np.inf, -np.inf], np.nan).dropna()
+            batch_target_rows.append({'batch': batch, 'feature': feature, 'n': len(pair),
+                                      'pearson_r': pair[feature].corr(pair.cycle_life)})
+    batch_targets = pd.DataFrame(batch_target_rows)
+    print('각 변수와 수명의 상관입니다.')
+    display(batch_targets.pivot(index='feature', columns='batch', values='pearson_r').reindex(FEATURES).round(3))
+    display(batch_targets.pivot(index='feature', columns='batch', values='n').reindex(FEATURES))
 
-    1. **표본 수와 라벨:** cycle 행 수와 배터리 셀 기록 수는 각각 얼마인가?
-       분석 제외 대상을 하나 골라 원본 라벨을 그대로 신뢰하기 어려운 이유를 설명해 보자.
-       Batch 1·3의 유지된 라벨도 Batch 2와 같은 방식의 실측 정답이라고 부를 수 있는가?
-       Batch 3을 추가했을 때 수명 분포와 장·단수명 비율은 어떻게 달라졌는가?
-       **내 답:**
+    all_feature_pairs = pd.DataFrame(supplement['feature_correlations'])
+    short_labels = dict(zip(FEATURES, ['QD2', 'Delta QD', 'QD slope', 'Mean IR', 'Delta IR',
+                                     'Mean temp', 'Charge time', 'Log var DQ']))
+    for batch in BATCHES:
+        one = all_feature_pairs.loc[all_feature_pairs.batch.eq(batch)]
+        matrix = one.pivot(index='feature_1', columns='feature_2', values='pearson_r').reindex(index=FEATURES, columns=FEATURES)
+        ns = one.pivot(index='feature_1', columns='feature_2', values='n').reindex(index=FEATURES, columns=FEATURES)
+        assert np.allclose(matrix, matrix.T, equal_nan=True)
+        print(batch, '변수끼리의 Pearson r과 각 쌍의 표본 수 n입니다.')
+        display(matrix.rename(index=short_labels, columns=short_labels).round(3))
+        display(ns.rename(index=short_labels, columns=short_labels))
+    print('각 배치에서 |r|≥0.85인 독립 변수쌍입니다.')
+    display(pd.DataFrame(supplement['strong_pairs'])[['batch', 'feature_1', 'feature_2', 'n', 'pearson_r']].round(3))
+    """)
 
-    2. **피처 근거:** 초기 방전용량 총량과 ΔQ(V) 피처 중 어떤 관찰이 더 설득력 있었는가?
-       그래프나 실제 수치를 하나 인용하고, 상관만으로 결론을 내릴 수 없는 이유도 적어 보자.
-       **내 답:**
+    md(r"""
+    8개 후보 중 B1·B3에서는 ΔQ 로그분산(r=-0.827/-0.742), B2에서는 충전 시간(r=-0.917)이
+    수명과 가장 강한 선형 관계를 보였습니다. 충전 시간과 수명의 상관 부호가 배치에 따라 달라
+    같은 변수 관계가 그대로 유지된다고 가정하기 어렵습니다.
 
-    3. **검증과 누수:** Batch 2에서 오차가 크다면 무엇부터 점검하겠는가?
-       확인할 수 있는 데이터 조건과, 테스트 정답을 보며 바꾸면 안 되는 설계를 구분해 보자.
-       Batch 3의 DAY 1 EDA와 선택적인 DAY 2 추가 평가의 차이는 무엇인가?
-       **내 답:**
+    용량 변화량과 기울기의 상관은 전체 B1/B2/B3에서 0.986/0.889/0.993으로 높았습니다.
+    B2에서는 충전 시간과 ΔQ 로그분산도 0.957이었습니다.
+    특성 사이의 중복 정도가 배치별로 다를 수 있다는 관찰이며, 모델 설계의 변수 제거·Ridge 비교는 B1 개발용 근거로 정했습니다.
+    보완된 B2·B3 결과로 기존 특성 집합이나 모델을 다시 선택하지 않았습니다.
+    """)
+
+    md(r"""
+    ## 8. EDA 결과를 반영한 모델 설계
+
+    | 확인한 근거 | 모델 설계에 반영한 내용 |
+    |---|---|
+    | B1보다 B2에 짧은 수명이 많습니다. | B1 개발/holdout과 B2 평가를 구분하고 배치 간 일반화를 확인합니다. |
+    | 초기 용량만으로 수명 차이가 충분히 드러나지 않습니다. | 평균 예측을 기준선으로 두고 초기 변화량·기울기와 ΔQ를 비교합니다. |
+    | ΔQ 로그분산이 B1 개발용 수명과 관련이 있고 평균·최솟값과 중복됩니다. | 로그분산을 우선 후보로 사용하며 평균·최솟값으로 대체한 경우도 같은 CV에서 비교합니다. |
+    | 용량 변화량과 기울기의 상관이 높습니다. | 하나를 제외한 조합과 Ridge를 비교해 중복 정보의 영향을 확인합니다. |
+    | 온도·저항·충전 시간이 추가 정보를 줄 수 있습니다. | 소수 변수를 조합한 Linear·Ridge와 비선형 관계를 확인하는 Random Forest를 비교합니다. |
+    | B2의 초기 저항에 결측이 있고 표본 수가 적습니다. | 대치·표준화는 각 훈련 fold 안에서만 적용하고, 저항 제외 조합도 비교합니다. |
+
+    Random Forest는 학습한 수명의 범위 밖으로 예측하기 어려우므로, B1보다 짧은 B2 수명에 한계가 있을 수 있습니다.
+    Linear·Ridge는 범위 밖 예측이 가능하지만 배치가 바뀌어도 같은 관계가 유지된다는 보장은 없습니다.
+    따라서 **모델 선택은 B1 개발용 교차검증의 MAPE**로 진행하도록 설계했습니다.
+    별도 holdout과 B2에서는 MAPE, MAE, RMSE, R² 및 오차 사례를 확인합니다.
+
+    수업의 전처리·교차검증 원칙에 따라 같은 충전 정책이 한 CV fold의 학습·검증에 섞이지 않도록 그룹을 구분합니다.
+    고정 holdout은 셀 단위로 분리되어 있으며, 정책까지 모두 처음 보는 데이터라고 주장하지 않습니다.
+    B2 정답을 보고 제외 기준이나 특성·모델을 바꾸어 같은 B2를 새로운 미관측 테스트로 제시하지 않습니다.
+    전체 기록 길이·최종 용량·후반 기울기·knee 근사 위치는 예측 입력에서 제외합니다.
+    """)
+
+    md(r"""
+    ## 9. 분석의 결론과 한계
+
+    분석 대상은 B1 36개, B2 39개, B3 40개입니다. 수명 중앙값은 각각 772.5, 472.0, 964.5사이클로 달랐습니다.
+    B1·B3에는 500사이클 미만의 단수명이 없었고, B2에서는 28/39개가 해당했습니다.
+    따라서 B1 내부 검증이 좋아도 B2에서 같은 수준의 성능이 나온다고 단정할 수 없습니다.
+
+    초기 변화가 작다는 이유만으로 오래 사용할 수 있다고 판단하기도 어렵습니다.
+    ΔQ와 용량 추세를 함께 검토하되 중복 변수와 결측값을 고려하고, 배치 차이는 별도 평가에서 확인하도록 설계했습니다.
+    충전 조건과 열화의 관계는 실험 조건이 함께 달라진 관찰 결과이므로 원인과 결과로 확정하지 않았습니다.
+
+    B1·B3의 제공 근사 종료 라벨과 B2의 관측 교차 라벨은 정의가 완전히 같지 않습니다.
+    B3의 방전곡선 시작 조건 차이, 작은 정책별 표본, 미해독 물리 셀 식별자도 한계로 남습니다.
+    이 노트북의 후반 열화와 knee 분석은 데이터 설명용이며, 그 값을 초기 수명 예측에 넣지 않습니다.
+    DAY2 결과는 별도 노트북에 있으며, 이번 보완 통계로 이미 선택한 모델을 다시 선택하거나 학습하지 않았습니다.
 
     ### 참고와 재현 범위
 
+    - [과제 안내](https://actually-war-1ea.notion.site/DS-Mini-Project-32d7f4c8669380338a27f90c471c1fcb)
     - [Severson 등, Nature Energy 2019 원논문](https://web.mit.edu/braatzgroup/Severson_NatureEnergy_2019.pdf)
     - [원저자 데이터 처리 저장소](https://github.com/rdbraatz/data-driven-prediction-of-battery-cycle-life-before-capacity-degradation)
-    - 이번 분석의 Batch 2 날짜와 원논문의 Batch 2 날짜가 다르며, 배치 분할도 원논문과 다르다.
-      이번 과제는 동일 조건의 논문 성능 재현이라고 표현하지 않는다.
-    - 제외 판정과 원본 수명 라벨은 준비 단계의 audit 및 `cells_analysis.csv`와 대조한다.
-      이 노트북은 이미 기록된 판정을 보여 주며 데이터를 자동 재라벨링하지 않는다.
-    - Batch 1·3의 근사 종료 라벨과 Batch 2의 임계값 교차 라벨 차이를 최종 성능 설명에도 남긴다.
-    - 수업 녹음에서는 DAY 1 EDA에 Batch 1·2·3을 사용하고 Extra를 제외한다.
-      Batch 3의 모델 추가 성능 평가는 DAY 2 선택 항목이다.
+    - 원본·제외·라벨은 `data/processed/cells_analysis.csv`에서 확인할 수 있습니다.
+    - 충전 패턴과 배치별 변수 상관의 보완 표는 `src/supplement_day1.py`로 다시 계산할 수 있습니다.
+      전체 정책 표와 상관계수별 표본 수는 `results/day1_supplement_*.csv`에 저장됩니다.
+    - 대표 knee 근사는 기존 `src/review_day1.py`의 방법을 해당 분석 셀에서 재계산했습니다.
+      배치·정제·분할 조건이 논문과 다르므로 논문의 9.1%를 동일 조건으로 재현했다고 주장하지 않습니다.
     """)
+
+    code(r"""
+    input_hashes_after = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
+                          for p in protected_paths}
+    assert input_hashes_before == input_hashes_after, '입력 파일 변경 여부를 확인해 주세요.'
+    assert len(eligible) == 115 and len(train_eda) == 28
+    assert len(policy_stats) == 40 and len(all_feature_pairs) == 192
+    print('원본 추출표·정제 대상·기존 분할의 해시가 실행 전후 동일합니다.')
+    print('DAY1 분석 셀 실행을 마쳤으며, 예측 모델을 학습하거나 다시 선택하지 않았습니다.')
+    """)
+
     return {"cells": cells,
             "metadata": {"kernelspec": {"display_name": "Python 3", "language": "python", "name": "python3"},
                          "language_info": {"name": "python", "file_extension": ".py",

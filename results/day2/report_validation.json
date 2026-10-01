@@ -1,72 +1,84 @@
 {
-  "pdfpath": "/Users/jinwon/workspace/데이터 분석 미니플젝/output/pdf/DS-MINI-Result-울산_1반-박진원.pdf",
-  "sha256": "ef8a9b651ad5d5da4a0e7cc8437038cf855a441d0b270636bb427c89d923d7ae",
   "status": "passed",
+  "validated_at": "2026-10-01T05:50:53.761176+00:00",
+  "page_format": "A4",
+  "scope": "Report content, calculations, course/rubric alignment and rendered layout; no grade prediction.",
+  "visual_review": {
+    "renderer": "Poppler pdftoppm",
+    "result": "All pages visually reviewed; no material clipping, overlap or missing glyphs. DAY2 alpha was replaced by ASCII and rechecked."
+  },
+  "protected_input_model_result_sha256": {
+    "src/train_day2.py": "739418fa6ff3ce248aae30d1eafc0ce68467cfd29e1d429c18a3a6130a794978",
+    "data/processed/cells_analysis.csv": "0b58a3f9743ce09b9800d35c55a7057982f478aacd5260231b588a320a6c46e8",
+    "results/split_assignment.csv": "97ca9d514a0c1d83f6b280df20ed6a64898eb680f82a2ab691029eaa8bdeb300",
+    "results/day2/selection_lock.json": "39dfa91224dd295a69e7a18904af5c99af45fb2d5fc8df4239396b3974fc1dc7",
+    "results/day2/experiment_plan.json": "85452d7a947e1d767e6e76cc55597c3a80ad651c695af9d78bdd494553fe25f6",
+    "results/day2/evaluation.json": "9f8e77a0ff137aac95cee238918c44ecd7a1532e6e43e29402ef16fc32bc7325",
+    "results/day2/cv_candidates.csv": "a40ceea58fb7041376a3a9afd5a7fcc9b6e04767224bfb14fe6053d58bacb848",
+    "results/day2/final_predictions.csv": "2193278083697a21ed2cc307300e895699baa6173df6d4f3647c248b040d2ed9",
+    "results/day2/final_metrics.csv": "1b8d98129343a5aa151fdb91d7ab57a8348dc2149104555520bedd1598f11681",
+    "results/day2/models/C112.joblib": "caa4b14ba1dfd21d8c6725c7b65c5a23c22b496ae42edc8e988d938a0abf128d",
+    "results/day2/models/C000.joblib": "4f45afee43654a5a25b94694e58cf6bd8114db2204686d97f38a5e899cbd88f6",
+    "results/day2/models/C104.joblib": "36849c7068995dc5935b72a530bddd96044a6c7dcddded5151d8b14b9eeb650b",
+    "results/day2/models/C037.joblib": "22459bfbb2b9f806d7840c9995cd85e40a89a637b10987a046560c29ed18308e"
+  },
+  "language": "Natural polite Korean; numeric results and limitations retained.",
+  "rubric_note": "Coverage evidence, not a self-assigned score or guarantee.",
+  "pdfpath": "/Users/jinwon/workspace/데이터 분석 미니플젝/output/pdf/DS-MINI-Result-울산_1반-박진원.pdf",
+  "sha256": "bc89438e8bdd247d091f5debad8839a40ba0d6814d7bbfde9ed5538f383f867c",
   "pages": 5,
-  "checks": [
-    {
-      "id": "notion_requirements_and_rubric",
-      "status": "passed",
-      "evidence": "README sections2-6 and PDF pages1-5 cover the official20/40/20/20 categories; no self-assigned grade."
-    },
-    {
-      "id": "mandatory_scope",
-      "status": "passed",
-      "evidence": "B1development28/holdout8 and B2test39; optionalB3 evaluation explicitly omitted."
-    },
-    {
-      "id": "six_row_performance_table",
-      "status": "passed",
-      "evidence": "PDF page3 and README section4:8.23%,8.44%,55.22%; gaps+0.21,+46.78,+46.12 percentage points with formulas."
-    },
-    {
-      "id": "frozen_cv_selection_and_integrity",
-      "status": "passed",
-      "evidence": "C037 is minimum grouped CV MAPE among113; plan,lock,evaluation order and input/code/model hashes consistent; test did not select winner."
-    },
-    {
-      "id": "folds_and_preprocessing",
-      "status": "passed",
-      "evidence": "3fold validation sizes10/9/9,zero protocol overlap;339 training-only imputer/scaler statistics independently checked."
-    },
-    {
-      "id": "numeric_consistency",
-      "status": "passed",
-      "evidence": "113candidate OOF MAPE mean/SD, selected final MAPE/MAE/RMSE/R2 and gaps independently recomputed; ablation rows match."
-    },
-    {
-      "id": "error_analysis_and_domain_limits",
-      "status": "passed",
-      "evidence": "Worst5APE cases,range shifts,missingIR/known-policy counterexamples and label/batch confounding disclosed; no operational deployment claim."
-    },
-    {
-      "id": "course_alignment",
-      "status": "passed",
-      "evidence": "Statistics/MLDL/Wrap-up concepts trace to course_alignment_review.md; additional APIs distinguished from required course content."
-    },
-    {
-      "id": "visual_layout_all_pages",
-      "status": "passed",
-      "evidence": "All5 rendered pages inspected; no material clipping/overlap; corrected page2 rechecked."
-    },
-    {
-      "id": "font_glyph_repair",
-      "status": "passed",
-      "evidence": "Greek alpha omitted in initial page2; replaced by ASCII alpha and rerendered. Final5page text NUL counts are all0."
-    },
-    {
-      "id": "external_submission_status",
-      "status": "not_performed",
-      "evidence": "Local report QA passed. PublicGitHub URL creation and Slack submission remain separate and not completed."
-    }
-  ],
-  "validated_at": "2026-10-01T04:47:09.288979+00:00",
-  "scope": "Local report content, numeric consistency and visual QA. Not a grading prediction or external-submission completion.",
-  "submission_status": "github_public_uploaded; slack_not_performed",
+  "readme_sha256": "f25b2e168d107a0a683a5a6042d6f32e59ddca3f61c3e325654f6f73f087ad7e",
+  "source_build_report_sha256": "80c1f4497bd4df3ceb1e8a3c2b5387669a620cb6237393ce8f98493779ca2787",
   "review_path": "/Users/jinwon/workspace/데이터 분석 미니플젝/docs/final_day2_review.md",
-  "review_sha256": "fbefb330a83d03b2975a5696291a6867b2cfbb130f89f6dd10bca12624ec97b0",
-  "readme_sha256": "b8fb59a55cdddb3c21aa9d043ef364bf39e9e1d32533ce19f684c2afa740e2d4",
-  "training_source_sha256": "739418fa6ff3ce248aae30d1eafc0ce68467cfd29e1d429c18a3a6130a794978",
-  "evaluation_sha256": "9f8e77a0ff137aac95cee238918c44ecd7a1532e6e43e29402ef16fc32bc7325",
-  "repository_url": "https://github.com/nowjinpark/skala-battery-cycle-life"
+  "review_sha256": "ac3e2b58cc29d0c8a53c2b905d3b2c4fd71d6089609d74af2a0b1379155a5441",
+  "submission_status": "github_public_uploaded; slack_not_performed",
+  "repository_url": "https://github.com/nowjinpark/skala-battery-cycle-life",
+  "checks": {
+    "strategy_implementation": true,
+    "fixed_splits_fold_preprocessing_and_initial_inputs": true,
+    "required_six_row_table_and_three_gap_formulas": true,
+    "locked_candidate_and_metrics_preserved": true,
+    "error_cases_counterexamples_improvements_and_domain_limits": true,
+    "course_alignment_and_concise_readme": true,
+    "five_pages_visually_checked": true,
+    "alpha_glyph_repaired": true
+  },
+  "external_submission_status": {
+    "github_repository": "public",
+    "slack_sent": false
+  },
+  "rubric_coverage": [
+    {
+      "category": "Strategy implementation",
+      "weight": 20,
+      "pages": [
+        1,
+        2
+      ]
+    },
+    {
+      "category": "Pipeline",
+      "weight": 40,
+      "pages": [
+        1,
+        2,
+        5
+      ]
+    },
+    {
+      "category": "Performance reporting",
+      "weight": 20,
+      "pages": [
+        3
+      ]
+    },
+    {
+      "category": "Domain interpretation and limitations",
+      "weight": 20,
+      "pages": [
+        4,
+        5
+      ]
+    }
+  ]
 }

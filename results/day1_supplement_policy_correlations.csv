@@ -1,0 +1,10 @@
+batch,predictor,response,n,x_unique,y_unique,pearson_r
+Batch 1,c_rate_stage1,late_slope,36,6,36,-0.2790699888238563
+Batch 1,c_rate_stage2,late_slope,36,5,36,-0.07947677399327567
+Batch 1,transition_soc_pct,late_slope,36,9,36,-0.04307469206009921
+Batch 2,c_rate_stage1,late_slope,39,6,39,-0.037812024231451205
+Batch 2,c_rate_stage2,late_slope,39,7,39,0.23574754738444847
+Batch 2,transition_soc_pct,late_slope,39,9,39,0.002584105394872648
+Batch 3,c_rate_stage1,late_slope,40,6,40,-0.4931419120124784
+Batch 3,c_rate_stage2,late_slope,40,6,40,0.4006916079971158
+Batch 3,transition_soc_pct,late_slope,40,8,40,0.2748869518361784

@@ -1,115 +1,58 @@
-# 초기 100사이클로 배터리 총수명 예측하기 - DAY 1
+# 초기 100사이클로 배터리 총수명 예측하기 — DAY 1
 
-울산 1반 박진원. 현재 범위는 데이터 이해, EDA, 특성·모델 설계다.
-예측 모델 학습 및 성능 평가는 DAY 2에 수행한다.
+**울산 1반 · 박진원**
 
-## 과제 범위
+배터리의 초기 100사이클 정보로 총수명을 예측하기 위한 분석과 모델 설계를 진행했습니다. 수명을 구체적인 사이클 수로 예측하기 위해 회귀를 선택했습니다. DAY 1에서는 세 배치를 비교하고, 분석 결과를 입력 변수와 모델 후보 선정에 연결했습니다.
 
-- 회귀: 초기 100사이클에서 계산한 정보로 80% 정격 용량에 도달하는 총수명 `cycle_life`를 예측한다.
-- 강의 녹음본을 확인하여 **DAY 1 EDA는 Batch 1·2·3**, Extra는 제외한다. Batch 3의 추가 모델 성능 평가는 DAY 2 선택 사항이다.
-- Batch 1 내부 개발/CV 및 holdout, Batch 2 최종 평가를 설계한다. Batch 3는 현재 EDA 전용이며 모델 선택에 사용하지 않는다.
-- 데이터 수명분포, 열화곡선, Q100(V)-Q10(V), 충전조건, 초기특성 상관관계를 조사한다.
-- 원본 파일은 수정하지 않으며 `sources/`의 수업 자료와 기존 실습도 수정하지 않는다.
+## 보고서와 분석 자료
 
-작업 위치: `/Users/jinwon/workspace/데이터 분석 미니플젝`
+- [DAY 1 설계 보고서](../output/pdf/DS-MINI-Design-울산_1반-박진원.pdf): 다섯 EDA 질문의 결과·해석과 모델 설계입니다.
+- [실행 노트북](../notebooks/01_DAY1_EDA.ipynb): 분석 코드와 실행 결과를 확인할 수 있습니다.
+- [충전 방식별 전체 결과](../results/day1_supplement_policy_groups.csv): 배치와 충전 방식을 구분한 40개 그룹의 표본 수·수명·후반 열화 기울기입니다.
+- [제외한 셀과 이유](../results/excluded_cells.csv) · [고정한 데이터 분할](../results/split_assignment.csv)
 
-강의 녹음본 315행에서 세 배치의 EDA를 안내하고, 350~376행의 Batch 3 선택 사항은 DAY 2 추가 평가에 해당한다.
-이 프로젝트는 DAY 1에 필요한 정리·탐색·설계까지만 수행한다.
+## 데이터와 핵심 발견
 
-## 먼저 볼 파일
+원본 139개 셀 중 분석 조건을 충족한 115개를 사용했습니다. 배터리 셀 1개를 데이터 1개로 보며, 수명 기준은 정격 1.1 Ah의 80%인 0.88 Ah입니다.
 
-1. `notebooks/01_DAY1_EDA.ipynb`: 설명과 코드를 함께 읽는 학습용 노트북.
-2. `output/pdf/DS-MINI-Design-울산_1반-박진원.pdf`: DAY 1 평가항목에 집중한 6쪽 설계서(본문·표 흑백, 그래프 색상).
-3. `results/analysis.json`: 실제 계산한 수치와 관찰.
-4. `results/excluded_cells.csv`: 제외한 배터리와 사유.
-5. `results/split_assignment.csv`: DAY 2에서 그대로 사용할 고정 분할.
-6. `docs/troubleshooting.md`: 확인된 문제, 판단 근거, 남은 한계.
-7. `docs/requirements.md`: 녹음본과 과제 안내를 대조한 DAY 1 범위.
-8. `docs/final_day1_review.md`, `docs/course_alignment_review.md`: 노션 세부 요구와 수업 개념의 최종 대조 기록.
+| 배치 | 분석 셀 | 수명 중앙값 | 모델 개발에서의 역할 |
+|---|---:|---:|---|
+| Batch 1 | 36 | 772.5사이클 | 개발 28 / 별도 검증 8 |
+| Batch 2 | 39 | 472.0사이클 | 최종 평가 |
+| Batch 3 | 40 | 964.5사이클 | DAY 1 EDA만 수행 |
 
-## 실행
+| 분석 질문 | 확인한 내용 | 모델 설계에 반영한 내용 |
+|---|---|---|
+| 수명 분포 | B2는 28/39개가 500사이클 미만이며 B1·B3에는 해당 셀이 없었습니다. | 학습한 수명 범위 밖에서의 예측 한계를 살펴보겠습니다. |
+| 용량 감소와 knee | 후반 용량 감소가 더 가팔랐으며 대표 셀의 변화 지점을 살펴봤습니다. | 초기 변화량·기울기를 사용하고, 이후 측정값과 knee 위치는 입력에서 제외하겠습니다. |
+| ΔQ(V) | B1 개발용 셀에서 ΔQ 로그 분산과 수명의 상관은 -0.782였습니다. | 로그 분산을 추가하고 평균·최솟값으로 바꾼 경우도 비교하겠습니다. |
+| 충전 조건 | 첫 전류가 같아도 전류 전환 SOC에 따라 수명과 후반 기울기가 달랐습니다. | 첫 전류만으로 수명을 설명하지 않고 실제 초기 충전 시간도 검토하겠습니다. |
+| 변수 간 관계 | 용량 변화량과 기울기의 상관이 높았고, 변수와 수명의 관계는 배치마다 달랐습니다. | 중복 변수를 줄인 경우와 Ridge를 비교하겠습니다. |
 
-프로젝트 폴더에서 Python 3.12 가상환경을 활성화한 뒤 아래 순서로 실행한다.
-실제 사용 버전은 `requirements.txt`에 기록한다.
+B1·B3는 제공된 근사 종료 수명이고 B2는 80% 아래로 내려간 시점을 확인한 수명입니다. B3의 방전곡선은 시작 시점 차이로 배치 간 비교가 왜곡될 수 있습니다. 세 배치 비교는 설명용 분석이며, 모델 선택과 전처리 기준은 B1 개발 데이터 안에서 정하겠습니다.
+
+## 모델 설계
+
+평균 예측 모델을 기준으로 선형회귀, Ridge, Random Forest를 비교하겠습니다. 초기 100사이클에서 용량·내부저항·온도·충전 시간·ΔQ 특성을 계산하고, 같은 충전 방식의 셀을 묶어 B1 개발 데이터에서 3분할 교차검증을 수행하겠습니다. 결측값 대체와 표준화도 각 학습 부분에서만 계산하겠습니다.
+
+주지표는 MAPE이며 MAE·RMSE·R²를 함께 확인하겠습니다. B1 별도 검증과 B2 평가 결과, 논문 참고값 9.1%와의 차이를 DAY 2에서 보고하겠습니다. B2 분포를 EDA에서 이미 확인한 점과 작은 표본 수는 평가의 한계로 남습니다.
+
+## 실행 방법과 출처
+
+Python 3.12에서 아래 환경을 준비한 뒤 노트북을 위에서부터 실행하면 됩니다. 포함된 추출 데이터를 사용하므로 원본 MAT 파일을 다시 내려받을 필요는 없습니다.
 
 ```sh
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
-python src/prepare_data.py
-python src/analyze.py
 python src/verify_day1.py
-python src/build_notebook.py
-python src/review_day1.py
-python src/build_report_figures.py
+```
+
+보완 분석과 보고서는 다음 순서로 다시 만들 수 있습니다.
+
+```sh
+python src/supplement_day1.py
 python src/build_report.py
 ```
 
-노트북에서는 프로젝트 `.venv`를 Python 커널로 선택한다.
-`build_notebook.py`는 학습용 노트북을 생성한다. 결과를 갱신하려면 노트북에서 전체 셀 실행을 선택한다.
-전체 MAT 파일을 다시 읽지 않아도 `data/processed/`의 작은 추출 파일로 EDA를 재실행할 수 있다.
-MATLAB 7.3 파일은 HDF5 형식이므로 h5py로 필요한 필드만 읽는다.
-보고서용 색상 그림은 `results/figures_report/`에 별도로 생성한다. 이전 흑백 그림은 `results/figures_bw/`에 보존했다. 기존 학습용 노트북의 색상 그림과 분석 결과는 유지한다.
-보고서 한글 폰트와 사용권은 `assets/fonts/`에 포함했다.
-
-## 데이터와 출처
-
-[Kaggle 과제 데이터](https://www.kaggle.com/datasets/itshpark/data-driven-prediction-of-battery-cycle)의 다음 파일을 `data/raw/`에 둔다.
-
-- `2017-05-12_batchdata_updated_struct_errorcorrect.mat`
-- `2018-02-20_batchdata_updated_struct_errorcorrect.mat`
-- `2018-04-12_batchdata_updated_struct_errorcorrect.mat`
-
-원본 MAT와 다운로드 압축 파일은 용량이 크므로 `.gitignore`에 포함했다.
-출처·크기·무결성 확인 기록은 다운로드 manifest를 참고한다.
-GitHub/Slack 제출은 이 작업에서 수행하지 않는다.
-
-[과제 안내](https://actually-war-1ea.notion.site/DS-Mini-Project-32d7f4c8669380338a27f90c471c1fcb)
-및 제공 `30-ESSHealth-scratch.ipynb`를 참고하여 분석 흐름을 구성했다.
-
-Severson et al. (2019), [Data-driven prediction of battery cycle life before capacity degradation](https://doi.org/10.1038/s41560-019-0356-8).
-원저자 [공개 코드](https://github.com/rdbraatz/data-driven-prediction-of-battery-cycle-life-before-capacity-degradation)는 `references/author_...`에 참고용으로 보존했다.
-
-**버전 주의:** 원저자 BuildPkl_Batch2/LoadData.m의 Batch 2는 2017-06-30이며 과제 파일은 2018-02-20이다.
-인덱스 기반 동일 배터리 연결 및 수명 가산 규칙을 확인 없이 복사하지 않는다.
-검열된 수명 라벨은 원본을 보존하고 확정된 수명과 구분한다.
-Batch 1 분석 대상 36개와 Batch 3 분석 대상 40개는 실제 80% 임계값 교차를 직접 관측한 라벨이 아니다.
-제공된 근사 종료 라벨로 유지했으며 Batch 2의 직접 관측 라벨과 구분한다.
-
-## 실행 결과
-
-원본 배터리 139개 / 반복 측정 116,722행에서, 제외 사유를 기록한 뒤 배터리 115개를 EDA했다.
-
-| 배치 | 원본 | 분석 대상 | 수명 중앙값 | 현재 역할 |
-|---|---:|---:|---:|---|
-| Batch 1 | 46 | 36 | 772.5사이클 | 개발 28 / 내부 holdout 8 설계 |
-| Batch 2 | 47 | 39 | 472.0사이클 | DAY 2 최종 평가 설계 |
-| Batch 3 | 46 | 40 | 964.5사이클 | DAY 1 EDA 전용 |
-
-- B1·B3는 제공 근사 종료 라벨, B2는 실제 80% 교차 라벨이다. 배치 차이를 해석할 때 고려한다.
-- B1 개발 28개에서 log10 Var(Delta Q)와 수명의 상관은 약 -0.782였다. 예측 성능 개선 여부는 DAY 2 검증 전이다.
-- 단수명(<500) 표본은 B2에 28개 있지만 B1·B3에는 없다. 모델이 학습한 범위 밖을 예측할 때의 한계를 설계에 반영했다.
-- 데이터·곡선 계산·초기 관측 범위·B3 역할·B1/B2 분할 보존 검증을 통과했다.
-- 세 배치의 특성 상관은 설명용 EDA로 비교했다. 모델 선택용 개발 상관과 검증은 B1 개발 28개만 사용한다.
-- 대표 3셀의 두 직선 근사는 전체 수명 곡선의 탐색적 요약이다. 수업 필수 검출법이나 초기 예측 입력으로 주장하지 않는다.
-- 노트북 전체 실행과 PDF 렌더링 검수 기록은 `results/`에 저장한다.
-- `output/DAY1_분석자료.zip`에는 코드·작은 추출 데이터·노트북·PDF를 묶는다. 대용량 원본과 가상환경은 포함하지 않는다.
-
-## DAY 1을 이해하는 순서
-
-1. 노트북 첫 부분에서 “100사이클까지 보고 총수명을 예측한다”는 문제와 데이터 단위를 확인한다.
-2. 배터리 1개가 표본 1개라는 점, 원본 기록과 분석 대상이 다른 이유를 확인한다.
-3. 다섯 EDA 질문을 그래프 → 관찰 → 해석 → 모델 설계 순으로 읽는다.
-4. 특히 Q100(V)-Q10(V)의 분산과 로그가 왜 수명 후보 특성이 되는지 설명해 본다.
-5. PDF의 후보 모델·검증 설계를 읽고, 각 모델을 비교하려는 이유를 자신의 말로 정리한다.
-
-## DAY 2에 지킬 규칙
-
-- 배터리 하나가 모델 입력 한 행이다. 동일 배터리의 사이클 행을 무작위로 나눠 학습/검증하지 않는다.
-- 용량 80% 기준과 열화곡선 전체는 EDA 및 정답 검증에 사용한다. 모델 특성은 초기 100사이클 이내로 제한한다.
-- 3-fold CV의 각 학습 부분 안에서 결측치 대체·스케일링을 학습하는 Pipeline을 사용한다.
-- Dummy/선형/Ridge/Random Forest를 같은 분할에서 비교한다. 기본 특성 집합에 Delta Q를 추가하는 비교를 포함한다.
-- 모델 선택은 Batch 1 개발 데이터에서 수행한다. Batch 2 점수를 보고 반복 튜닝하지 않는다.
-- DAY 1 EDA에서 Batch 2 라벨과 Batch 1 holdout 분포를 관찰했다는 한계를 공개한다.
-- MAPE는 백분율로 보고하고 MAE/RMSE는 사이클 단위로 보고한다. Gap은 계산 방향과 %p를 명시한다.
-- 논문의 9.1%는 다른 데이터 분할/정제/배치 버전의 참고치다. 동일 조건의 재현 또는 운영 성과로 표현하지 않는다.
+[노션 과제 안내](https://actually-war-1ea.notion.site/DS-Mini-Project-32d7f4c8669380338a27f90c471c1fcb), [Kaggle 데이터](https://www.kaggle.com/datasets/itshpark/data-driven-prediction-of-battery-cycle), [Severson et al. (2019)](https://doi.org/10.1038/s41560-019-0356-8)와 수업의 Statistics·MLDL·Wrap-up 자료를 참고했습니다. 데이터 정제·분석·설계의 세부 근거는 노트북과 `docs/`에 정리했습니다.

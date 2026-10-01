@@ -1,0 +1,5 @@
+batch,feature_1,feature_2,n,x_unique,y_unique,pearson_r
+Batch 1,qd_change_100_10,qd_slope_10_100,36,36,36,0.9862307011529893
+Batch 2,qd_change_100_10,qd_slope_10_100,39,39,39,0.8893075995418861
+Batch 2,chargetime_mean_2_100,log10_deltaq_var,39,39,39,0.9567159862663065
+Batch 3,qd_change_100_10,qd_slope_10_100,40,40,40,0.9925999821676937

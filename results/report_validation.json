@@ -1,131 +1,64 @@
 {
-  "file": "/Users/jinwon/workspace/데이터 분석 미니플젝/output/pdf/DS-MINI-Design-울산_1반-박진원.pdf",
-  "sha256": "bde4c4e13195ce43de79b8fe3c076e1cd073573cead27d02303378892a45a269",
-  "page_count": 6,
-  "page_format": "A4",
   "status": "passed",
-  "validated_at": "2026-10-01T14:02:41.448200+09:00",
-  "revision": "DAY1 존댓말·쉬운 표현 수정, 색상 그래프·흑백 본문 6쪽",
-  "checks": {
-    "six_pages": true,
-    "all_pages_rendered_and_visually_reviewed": true,
-    "all_body_and_table_text_grayscale": true,
-    "all_five_eda_charts_colored": true,
-    "model_strategy_page_grayscale": true,
-    "five_eda_sections": true,
-    "life_means_stdev_medians_match_analysis": true,
-    "life_group_percentages_match": true,
-    "provided_vs_observed_labels_preserved": true,
-    "different_batch2_version_not_stitched": true,
-    "iqr_outliers_descriptive_retained": true,
-    "newstructure_meaning_uncertain": true,
-    "knee_rounded_values_and_caveats": true,
-    "knee_estimates_not_search_boundaries": true,
-    "deltaq_three_statistics_and_redundancy": true,
-    "all_batch_feature_correlations_match_supplement": true,
-    "pairwise_missing_sample_sizes_disclosed": true,
-    "eight_feature_definitions_and_comparisons": true,
-    "split_and_metrics_gap_stated": true,
-    "development_eda_and_label_limitations_disclosed": true,
-    "no_day2_performance_claim": true,
-    "no_draft_placeholders": true,
-    "polite_korean_and_plain_language_reviewed": true,
-    "analysis_and_supplement_hashes_unchanged": true,
-    "all_page_renders_newer_than_pdf": true,
-    "statistical_numbers_preserved_after_language_edit": true
-  },
+  "validated_at": "2026-10-01T05:50:53.761176+00:00",
+  "page_format": "A4",
+  "scope": "Report content, calculations, course/rubric alignment and rendered layout; no grade prediction.",
   "visual_review": {
     "renderer": "Poppler pdftoppm",
-    "dpi": 130,
-    "pages_reviewed": [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6
-    ],
-    "result": "존댓말 수정 후 130dpi Poppler 이미지 전6쪽 직접 확인. 본문·표·범례·축·쪽수에 잘림, 겹침, 한글 깨짐 없음. 색상 그래프와 흑백 본문 유지.",
-    "representative_preview": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/day1_polite_review/page-1.png",
-    "pages": [
-      {
-        "page": 1,
-        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/day1_polite_review/page-1.png",
-        "width": 1075,
-        "height": 1521,
-        "color_pixels": 26798,
-        "sha256": "5f3477b08c7e22c117097eca0a9bab53d85dfbf8364d62258e2eac2d6e9fae40"
-      },
-      {
-        "page": 2,
-        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/day1_polite_review/page-2.png",
-        "width": 1075,
-        "height": 1521,
-        "color_pixels": 24844,
-        "sha256": "8065a78fdbbda175b0758eef666aa9eedeabe27940924aa493a913feea90f33d"
-      },
-      {
-        "page": 3,
-        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/day1_polite_review/page-3.png",
-        "width": 1075,
-        "height": 1521,
-        "color_pixels": 38730,
-        "sha256": "d192d6bdfcde146d683eff155fc8a2be439337cd9f05e3e54b1f5a73734b9a16"
-      },
-      {
-        "page": 4,
-        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/day1_polite_review/page-4.png",
-        "width": 1075,
-        "height": 1521,
-        "color_pixels": 71777,
-        "sha256": "0ffe99f77c1fc74372561477e32e00c31c7c714712ea70d1a3696935ba3c6eab"
-      },
-      {
-        "page": 5,
-        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/day1_polite_review/page-5.png",
-        "width": 1075,
-        "height": 1521,
-        "color_pixels": 105766,
-        "sha256": "56a1b4eb71531eb14643dcbc8c458e4774c83a0eca4a52f0ab9a1eb85691d304"
-      },
-      {
-        "page": 6,
-        "path": "/Users/jinwon/workspace/데이터 분석 미니플젝/tmp/day1_polite_review/page-6.png",
-        "width": 1075,
-        "height": 1521,
-        "color_pixels": 0,
-        "sha256": "bb5bf7cf831b9030966deda4351da86ffd03e3b70977bd4cf6e7774955235d50"
-      }
-    ],
-    "final_refinement_pages_rechecked": [
-      2,
-      6
-    ]
+    "result": "All pages visually reviewed; no material clipping, overlap or missing glyphs. DAY2 alpha was replaced by ASCII and rechecked."
   },
-  "style_verification": {
-    "colored_figures": true,
-    "body_and_table_text_grayscale": true,
-    "note": "본문과 표 설명을 존댓말로 통일하고 관찰/설계 시사점을 확인한 내용/모델에 반영할 내용 등으로 풀어 썼음을 확인함. 수치, 라벨 차이 및 해석 한계 유지.",
-    "polite_korean_reviewed": true,
-    "plain_language_reviewed": true
+  "protected_input_model_result_sha256": {
+    "src/train_day2.py": "739418fa6ff3ce248aae30d1eafc0ce68467cfd29e1d429c18a3a6130a794978",
+    "data/processed/cells_analysis.csv": "0b58a3f9743ce09b9800d35c55a7057982f478aacd5260231b588a320a6c46e8",
+    "results/split_assignment.csv": "97ca9d514a0c1d83f6b280df20ed6a64898eb680f82a2ab691029eaa8bdeb300",
+    "results/day2/selection_lock.json": "39dfa91224dd295a69e7a18904af5c99af45fb2d5fc8df4239396b3974fc1dc7",
+    "results/day2/experiment_plan.json": "85452d7a947e1d767e6e76cc55597c3a80ad651c695af9d78bdd494553fe25f6",
+    "results/day2/evaluation.json": "9f8e77a0ff137aac95cee238918c44ecd7a1532e6e43e29402ef16fc32bc7325",
+    "results/day2/cv_candidates.csv": "a40ceea58fb7041376a3a9afd5a7fcc9b6e04767224bfb14fe6053d58bacb848",
+    "results/day2/final_predictions.csv": "2193278083697a21ed2cc307300e895699baa6173df6d4f3647c248b040d2ed9",
+    "results/day2/final_metrics.csv": "1b8d98129343a5aa151fdb91d7ab57a8348dc2149104555520bedd1598f11681",
+    "results/day2/models/C112.joblib": "caa4b14ba1dfd21d8c6725c7b65c5a23c22b496ae42edc8e988d938a0abf128d",
+    "results/day2/models/C000.joblib": "4f45afee43654a5a25b94694e58cf6bd8114db2204686d97f38a5e899cbd88f6",
+    "results/day2/models/C104.joblib": "36849c7068995dc5935b72a530bddd96044a6c7dcddded5151d8b14b9eeb650b",
+    "results/day2/models/C037.joblib": "22459bfbb2b9f806d7840c9995cd85e40a89a637b10987a046560c29ed18308e"
+  },
+  "language": "Natural polite Korean; numeric results and limitations retained.",
+  "rubric_note": "Coverage evidence, not a self-assigned score or guarantee.",
+  "file": "/Users/jinwon/workspace/데이터 분석 미니플젝/output/pdf/DS-MINI-Design-울산_1반-박진원.pdf",
+  "sha256": "aa2d13b008e3e675053f3c1b2b35585b48fc1c541f034fef0e813e195b840cdd",
+  "page_count": 6,
+  "source_analysis_sha256": "699c8e4a960637c4dc2bab5079c50551f0dcaa4c59adb0199e483c3bf6fc4d8a",
+  "source_report_review_sha256": "eef9c4df174696d51e89d3d74970a425e80edc4a85b8bb142f1f037a45d9eff2",
+  "source_supplement_sha256": "b6c5eedbedc147c88384ddce60fa695af092cc4465b494e0025e5da8ade6d493",
+  "source_build_report_sha256": "69132bb570fdbe645bb0fa737a8c933a7bfdb557df864ac73db6e2ff8d4e9f51",
+  "checks": {
+    "regression_reason_and_target": true,
+    "five_eda_questions_across_three_batches": true,
+    "life_range_groups_outliers": true,
+    "degradation_and_exploratory_knee": true,
+    "deltaq_and_batch3_comparison_caveat": true,
+    "full_policy_groups_and_stage1_stage2_soc_late_slope_relationships": true,
+    "target_and_feature_feature_correlations_across_batches": true,
+    "eda_findings_link_to_features_models_validation": true,
+    "no_future_inputs_or_test_based_reselection": true,
+    "source_counts_and_201_reported_correlations_independently_recomputed": true,
+    "six_pages_visually_checked": true
   },
   "rubric_coverage": [
     {
       "category": "EDA",
-      "weight_percent": 50,
+      "weight": 50,
       "pages": [
         1,
         2,
         3,
         4,
         5
-      ],
-      "evidence": "세 배치의 분포/평균/표준편차/비율/IQR, 초기·후기 기울기와 대표 knee 근사, Delta Q 평균·최소·분산, 충전정책과 수명·기울기, 전체 배치 상관 및 다중공선성을 다룸.",
-      "status": "covered"
+      ]
     },
     {
-      "category": "EDA-모델 연결성",
-      "weight_percent": 30,
+      "category": "EDA to strategy",
+      "weight": 30,
       "pages": [
         1,
         2,
@@ -133,55 +66,15 @@
         4,
         5,
         6
-      ],
-      "evidence": "각 EDA의 관찰·해석·설계 시사점에 실제 수치를 사용. 배치별 분포·관계 변화→외삽 점검, 초기 변화→파생 특성, Delta Q 중복→대체 비교, 다중공선성→Ridge로 연결함.",
-      "status": "covered"
+      ]
     },
     {
-      "category": "모델 전략",
-      "weight_percent": 20,
+      "category": "Modeling strategy",
+      "weight": 20,
       "pages": [
+        1,
         6
-      ],
-      "evidence": "8개 후보의 정확한 정의, 7/8/중복 축소 및 Delta Q 대체 비교, Dummy/Linear/Ridge/RF 선정 이유, 28/8/39 분할·3-fold CV·fold 전처리·지표·Gap 계획을 명시함.",
-      "status": "covered"
+      ]
     }
-  ],
-  "rubric_note": "항목 충족 여부에 대한 독립 검토이며 실제 채점 결과나 만점을 보장하지 않음.",
-  "source_analysis_sha256": "699c8e4a960637c4dc2bab5079c50551f0dcaa4c59adb0199e483c3bf6fc4d8a",
-  "source_report_review_sha256": "eef9c4df174696d51e89d3d74970a425e80edc4a85b8bb142f1f037a45d9eff2",
-  "scope": {
-    "task": "regression",
-    "day1_batches": [
-      "Batch1",
-      "Batch2",
-      "Batch3"
-    ],
-    "raw_cells": 139,
-    "eligible_cells": 115,
-    "eligible_by_batch": {
-      "Batch1": 36,
-      "Batch2": 39,
-      "Batch3": 40
-    },
-    "model_training_executed": false,
-    "original_analysis_and_notebooks_changed_by_review": false
-  },
-  "reviewed_limitations": [
-    "B1/B3 endpoint proxies and B2 observed threshold crossings remain distinct.",
-    "newstructure physical meaning remains unverified.",
-    "IQR flags do not cause valid cells to be deleted.",
-    "Knee fits are descriptive approximations using full-life records and never prediction inputs.",
-    "All-batch correlations are descriptive; B1-development CV is used for final predictive model selection.",
-    "MAPE gaps against the paper are contextual because dataset, cleaning, and split conditions differ."
-  ],
-  "source_build_report_sha256": "6128cb04c146089eebadda506cbb4669fa0cdeed81516b2ad6c0dd5fee955020",
-  "language_revision_review": {
-    "previous_pdf_sha256": "f372d03d8224cdd0e4a856c39f7b4462a9256225cdb1a101063393210b11ad58",
-    "scope": "문체·표현 수정 검토. 분석 수치와 모델 자료는 수정하지 않음.",
-    "label_provenance": "B1/B3 near-80% endpoint values vs B2 observed below-80% crossing still distinguished.",
-    "knee_caveat": "두 직선 설명용 근사와 불확실성, 미래 관측 입력 제외 설명 유지.",
-    "day1_design_scope": "설계 문서의 계획 시제 유지; DAY2 학습 성능 수치 추가 없음.",
-    "final_refinements": "2쪽의 제곱차 비교 대상이 변동을 줄인 값임을 명시한 문장, 6쪽 평서형 제목과 짧게 정리한 표 문장을 재확인했습니다."
-  }
+  ]
 }

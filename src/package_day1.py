@@ -27,7 +27,7 @@ def main():
              and (p.suffix.lower() != ".pdf" or p in pdfs)]
     target = ROOT / "output/DAY1_분석자료.zip"
     with zipfile.ZipFile(target, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as archive:
-        archive.write(ROOT / "docs/day1_readme.md", "README.md")
+        archive.writestr("README.md", (ROOT / "docs/day1_readme.md").read_text().replace("](../", "]("))
         for path in sorted(set(files)):
             archive.write(path, path.relative_to(ROOT))
     with zipfile.ZipFile(target) as archive:
