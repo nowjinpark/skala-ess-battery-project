@@ -1,14 +1,14 @@
 {
   "status": "passed",
   "notebook": "notebooks/01_DAY1_EDA.ipynb",
-  "sha256": "c4f57f0bdd94dff9e7348e452dbb7e39443de3b278dc28a54c425f7b25c8a236",
+  "sha256": "ceb42fabefb8d83f02b4bf888f1f335d3e0a733adf18bdc07a4e1d9a84c08f79",
   "total_cells": 33,
   "executed_code_cells": 15,
   "error_outputs": 0,
   "embedded_png_charts": 7,
   "scope": "DAY1 Batch1/2/3 descriptive EDA only; no prediction model fitting or reselection",
   "source": "src/build_notebook.py",
-  "source_sha256": "05202286aa87488f0db2a55887b116561b42a295b2ee3099b26ab9728196e52a",
+  "source_sha256": "2fb8d2ed0da4c76966d0695f62a7932fd7b95a0c612805c2f5086c08a8fddc89",
   "supplement_json_sha256": "b6c5eedbedc147c88384ddce60fa695af092cc4465b494e0025e5da8ade6d493",
   "protected_files_checked": 25,
   "processed_data_split_and_day2_models_unchanged": true,
@@ -67,11 +67,11 @@
     "csv_json_numeric_agreement": true,
     "policy_group_counts_reconcile_to_115": true
   },
-  "validated_at": "2026-10-01T05:50:53.761176+00:00",
+  "validated_at": "2026-10-01T06:05:38.604903+00:00",
   "model_training_executed": false,
   "protected_inputs_models_results_unchanged": true,
   "final_markdown_revision": {
-    "change": "Knee calculation location wording corrected after execution",
+    "change": "Removed reference boilerplate and revision-process wording",
     "code_cells_and_outputs_unchanged": true
   }
 }

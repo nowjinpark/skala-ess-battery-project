@@ -6,7 +6,7 @@
 
 ## 1. 분석 목표와 데이터
 
-**초기 100사이클 정보로 제공된 총수명 `cycle_life`를 예측하는 회귀 과제**를 선택했습니다. 장·단수명으로만 나누기보다 수명이 몇 사이클인지와 얼마나 빗나갔는지를 직접 비교하기 위해서입니다. 수명 기준은 정격 1.1 Ah의 80%인 0.88 Ah입니다. 배터리 셀 1개를 데이터 1개로 보았으며, 예측 대상은 남은 일수가 아닌 총사이클 수입니다. EDA의 단수명(<500)·장수명(>1000) 구분은 비교용으로만 사용했습니다.
+**초기 100사이클 정보로 제공된 총수명 `cycle_life`를 예측하는 회귀 과제**를 선택했습니다. [Kaggle 배터리 데이터](https://www.kaggle.com/datasets/itshpark/data-driven-prediction-of-battery-cycle)를 사용했습니다. 장·단수명으로만 나누기보다 수명이 몇 사이클인지와 얼마나 빗나갔는지를 직접 비교하기 위해서입니다. 수명 기준은 정격 1.1 Ah의 80%인 0.88 Ah입니다. 배터리 셀 1개를 데이터 1개로 보았으며, 예측 대상은 남은 일수가 아닌 총사이클 수입니다. EDA의 단수명(<500)·장수명(>1000) 구분은 비교용으로만 사용했습니다.
 
 | 데이터 | 원본 → 분석 | 사용한 곳 |
 |---|---:|---|
@@ -69,7 +69,7 @@ Gap은 양수가 오차 증가를 뜻하도록 계산 방향을 적었습니다.
 
 별도 검증의 MAE/RMSE는 70.29/78.81사이클, R²는 0.799이었습니다. B2는 각각 272.00/287.08사이클, -0.713이었습니다. B2의 음수 R²는 해당 배치의 실제 평균 수명을 아는 상수 예측보다 제곱오차가 컸다는 뜻입니다.
 
-논문의 참고 MAPE 9.1%보다 46.12%p 높았습니다. 다만 데이터 버전·정제·분할·수명값의 기준이 달라 같은 조건의 논문 재현이라고 보지는 않았습니다.
+[논문의 참고 MAPE 9.1%](https://doi.org/10.1038/s41560-019-0356-8)보다 46.12%p 높았습니다. 다만 데이터 버전·정제·분할·수명값의 기준이 달라 같은 조건의 논문 재현이라고 보지는 않았습니다.
 
 ## 5. 크게 틀린 셀에서 원인을 살펴봤습니다
 
@@ -97,7 +97,7 @@ B2의 30/39개는 개발용 최소수명 534보다 짧았습니다. 초기 용�
 
 추가 현장 검증을 거치면 점검·교체 검토의 우선순위를 정하는 보조 정보로 활용할 수 있다고 보았습니다. 하지만 이번 모델은 짧은 수명을 길게 예측해 교체 검토가 늦어질 수 있습니다. **현재 결과만으로 실제 ESS 교체 시점이나 충전 제어를 자동 결정하기는 어렵습니다.** 실험 셀의 총사이클 수를 실제 팩의 남은 사용 일수로 바로 바꿀 수는 없으며, 다른 배터리 종류·온도·운전 조건·팩 구성과 예측 불확실성도 확인해야 합니다.
 
-## 7. 실행 방법, 산출물과 출처
+## 7. 실행 방법과 산출물
 
 Python 3.12와 [requirements.txt](requirements.txt)의 버전을 사용했습니다. 프로젝트 폴더에서 아래 명령으로 환경을 준비하고 저장 결과를 확인할 수 있습니다.
 
@@ -113,13 +113,7 @@ python src/verify_day2.py
 | 산출물 | 내용 |
 |---|---|
 | [DAY 1 설계서](output/pdf/DS-MINI-Design-울산_1반-박진원.pdf) · [EDA 노트북](notebooks/01_DAY1_EDA.ipynb) | 배치별 EDA와 모델 설계 |
-| [DAY 2 결과 보고서](output/pdf/DS-MINI-Result-울산_1반-박진원.pdf) · [모델링 노트북](notebooks/02_DAY2_Modeling.ipynb) | 모델 비교, 예측 결과와 오류 해석 |
+| [모델링 노트북](notebooks/02_DAY2_Modeling.ipynb) | 모델 비교, 예측 결과와 오류 해석 |
 | [학습 코드](src/train_day2.py) · [결과 폴더](results/day2/) | 실행 코드, 후보 비교, 저장 모델과 예측값 |
-| [과제 요구사항](docs/notion_day2_requirements.txt) · [수업 개념 대응](docs/course_alignment_review.md) | 과제 기준과 수업 내용 연결 |
-
-- [DS Mini Project 안내](https://actually-war-1ea.notion.site/DS-Mini-Project-32d7f4c8669380338a27f90c471c1fcb), 제공 강의 자료와 녹음을 참고했습니다.
-- 데이터는 [Kaggle: data-driven-prediction-of-battery-cycle](https://www.kaggle.com/datasets/itshpark/data-driven-prediction-of-battery-cycle), 전처리는 [원저자 코드](https://github.com/rdbraatz/data-driven-prediction-of-battery-cycle-life-before-capacity-degradation)를 참고했습니다.
-- 논문은 Severson et al. (2019), [Data-driven prediction of battery cycle life before capacity degradation](https://doi.org/10.1038/s41560-019-0356-8), *Nature Energy*입니다.
-- 구현은 scikit-learn의 [GroupKFold](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GroupKFold.html), [Pipeline](https://scikit-learn.org/stable/modules/compose.html#pipeline-chaining-estimators), [TransformedTargetRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.compose.TransformedTargetRegressor.html)를 참고했습니다.
 
 **작성자:** 울산 1반 박진원. 데이터 정제·EDA·입력 변수 설계·모델 비교·오류 해석·보고서 작성을 진행했습니다.

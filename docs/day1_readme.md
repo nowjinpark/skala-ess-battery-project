@@ -13,7 +13,7 @@
 
 ## 데이터와 핵심 발견
 
-원본 139개 셀 중 분석 조건을 충족한 115개를 사용했습니다. 배터리 셀 1개를 데이터 1개로 보며, 수명 기준은 정격 1.1 Ah의 80%인 0.88 Ah입니다.
+[Kaggle 배터리 데이터](https://www.kaggle.com/datasets/itshpark/data-driven-prediction-of-battery-cycle)의 원본 139개 셀 중 분석 조건을 충족한 115개를 사용했습니다. 배터리 셀 1개를 데이터 1개로 보며, 수명 기준은 정격 1.1 Ah의 80%인 0.88 Ah입니다.
 
 | 배치 | 분석 셀 | 수명 중앙값 | 모델 개발에서의 역할 |
 |---|---:|---:|---|
@@ -35,9 +35,9 @@ B1·B3는 제공된 근사 종료 수명이고 B2는 80% 아래로 내려간 시
 
 평균 예측 모델을 기준으로 선형회귀, Ridge, Random Forest를 비교하겠습니다. 초기 100사이클에서 용량·내부저항·온도·충전 시간·ΔQ 특성을 계산하고, 같은 충전 방식의 셀을 묶어 B1 개발 데이터에서 3분할 교차검증을 수행하겠습니다. 결측값 대체와 표준화도 각 학습 부분에서만 계산하겠습니다.
 
-주지표는 MAPE이며 MAE·RMSE·R²를 함께 확인하겠습니다. B1 별도 검증과 B2 평가 결과, 논문 참고값 9.1%와의 차이를 DAY 2에서 보고하겠습니다. B2 분포를 EDA에서 이미 확인한 점과 작은 표본 수는 평가의 한계로 남습니다.
+주지표는 MAPE이며 MAE·RMSE·R²를 함께 확인하겠습니다. B1 별도 검증과 B2 평가 결과, [논문 참고값 9.1%](https://doi.org/10.1038/s41560-019-0356-8)와의 차이를 DAY 2에서 보고하겠습니다. B2 분포를 EDA에서 이미 확인한 점과 작은 표본 수는 평가의 한계로 남습니다.
 
-## 실행 방법과 출처
+## 실행 방법
 
 Python 3.12에서 아래 환경을 준비한 뒤 노트북을 위에서부터 실행하면 됩니다. 포함된 추출 데이터를 사용하므로 원본 MAT 파일을 다시 내려받을 필요는 없습니다.
 
@@ -54,5 +54,3 @@ python src/verify_day1.py
 python src/supplement_day1.py
 python src/build_report.py
 ```
-
-[노션 과제 안내](https://actually-war-1ea.notion.site/DS-Mini-Project-32d7f4c8669380338a27f90c471c1fcb), [Kaggle 데이터](https://www.kaggle.com/datasets/itshpark/data-driven-prediction-of-battery-cycle), [Severson et al. (2019)](https://doi.org/10.1038/s41560-019-0356-8)와 수업의 Statistics·MLDL·Wrap-up 자료를 참고했습니다. 데이터 정제·분석·설계의 세부 근거는 노트북과 `docs/`에 정리했습니다.

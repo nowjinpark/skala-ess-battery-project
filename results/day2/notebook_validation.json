@@ -1,8 +1,8 @@
 {
   "status": "passed",
   "notebook": "notebooks/02_DAY2_Modeling.ipynb",
-  "sha256": "35427923285de6e7a9c560366aacf05babc3b95b1f7fc35057560a37afae50a8",
-  "validated_at": "2026-10-01T05:50:53.761176+00:00",
+  "sha256": "d17f6a2d356e21bb98685a3d044fd8c31451741a1d9f16861771c3794fbe1477",
+  "validated_at": "2026-10-01T06:05:38.604903+00:00",
   "total_cells": 36,
   "executed_code_cells": 17,
   "error_outputs": 0,
@@ -19,7 +19,7 @@
     "result": "Charts and all code outputs are unchanged; existing visual review remains applicable."
   },
   "final_markdown_revision": {
-    "markdown_cells_edited": 19,
+    "change": "Removed reference boilerplate and revision-process wording",
     "code_cells_and_outputs_unchanged": true
   }
 }

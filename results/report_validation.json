@@ -1,11 +1,11 @@
 {
   "status": "passed",
-  "validated_at": "2026-10-01T05:50:53.761176+00:00",
+  "validated_at": "2026-10-01T06:05:38.604903+00:00",
   "page_format": "A4",
   "scope": "Report content, calculations, course/rubric alignment and rendered layout; no grade prediction.",
   "visual_review": {
     "renderer": "Poppler pdftoppm",
-    "result": "All pages visually reviewed; no material clipping, overlap or missing glyphs. DAY2 alpha was replaced by ASCII and rechecked."
+    "result": "All six current pages verified: changed pages 3, 4 and 6 visually inspected; pages 1, 2 and 5 pixel-identical to reviewed renders. No clipping, overlap or missing glyphs."
   },
   "protected_input_model_result_sha256": {
     "src/train_day2.py": "739418fa6ff3ce248aae30d1eafc0ce68467cfd29e1d429c18a3a6130a794978",
@@ -25,12 +25,12 @@
   "language": "Natural polite Korean; numeric results and limitations retained.",
   "rubric_note": "Coverage evidence, not a self-assigned score or guarantee.",
   "file": "/Users/jinwon/workspace/데이터 분석 미니플젝/output/pdf/DS-MINI-Design-울산_1반-박진원.pdf",
-  "sha256": "aa2d13b008e3e675053f3c1b2b35585b48fc1c541f034fef0e813e195b840cdd",
+  "sha256": "41da942fb2a34785808bd427095eb3aac1485e130e46d25192ac574f8961062d",
   "page_count": 6,
   "source_analysis_sha256": "699c8e4a960637c4dc2bab5079c50551f0dcaa4c59adb0199e483c3bf6fc4d8a",
   "source_report_review_sha256": "eef9c4df174696d51e89d3d74970a425e80edc4a85b8bb142f1f037a45d9eff2",
   "source_supplement_sha256": "b6c5eedbedc147c88384ddce60fa695af092cc4465b494e0025e5da8ade6d493",
-  "source_build_report_sha256": "69132bb570fdbe645bb0fa737a8c933a7bfdb557df864ac73db6e2ff8d4e9f51",
+  "source_build_report_sha256": "3c3162b173a1e595a48e4c53dd3cabed68f432e83c1d9e0a6f9420356592f860",
   "checks": {
     "regression_reason_and_target": true,
     "five_eda_questions_across_three_batches": true,
@@ -76,5 +76,6 @@
         6
       ]
     }
-  ]
+  ],
+  "editorial_revision": "Removed source-list and course-reference boilerplate; substantive evidence retained."
 }

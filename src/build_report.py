@@ -189,7 +189,7 @@ def build(data, output):
               '세 변수끼리도 |r|=0.966-0.990으로 높아 비슷한 정보를 담고 있습니다. '
               '따라서 로그 분산을 우선 사용하고, 평균·최솟값으로 바꾼 경우도 교차검증으로 비교하겠습니다. '
               '분산은 표본분산(ddof=1)에 log10을 적용합니다. 상관계수만으로 예측 성능을 판단하지는 않았습니다.')
-    r.paragraph('<b>비교 시 주의점:</b> 노션에서 안내한 B3 곡선의 시작 시점 차이로 배치 간 단순 비교가 왜곡될 수 있습니다. '
+    r.paragraph('<b>비교 시 주의점:</b> B3 곡선의 시작 시점 차이로 배치 간 단순 비교가 왜곡될 수 있습니다. '
                 '사이클 번호와 전압 격자는 확인했지만, 측정 조건까지 같다고 확인한 것은 아닙니다.', size=8.5, leading=12, gap=0)
 
     r.start('EDA 4', '충전 조건과 수명의 관계')
@@ -216,7 +216,7 @@ def build(data, output):
     r.finding('모델에 반영할 내용', '첫 전류 하나에 의존하지 않고 실제 초기 충전 시간도 입력 후보로 검토하겠습니다. '
               '같은 충전 방식의 셀을 묶어 검증하고, 배치가 바뀔 때 관계가 유지되는지도 살펴보겠습니다.')
     r.paragraph('배치와 충전 방식을 함께 구분한 40개 그룹 중 4개는 셀이 1개뿐입니다. '
-                '전체 그룹의 수명·기울기·표본 수는 노트북 6절과 results/day1_supplement_policy_groups.csv에 정리했습니다.',
+                '전체 그룹의 수명·기울기·표본 수는 제출 노트북 6절에 정리했습니다.',
                 size=8.1, leading=11.5, gap=0)
 
     r.start('EDA 5', '초기 변수와 수명의 관계')
@@ -270,12 +270,9 @@ def build(data, output):
                 'B3는 DAY 1 분석에 사용하며, 추가 모델 평가는 선택 사항입니다.', size=9, leading=13)
     r.paragraph('<b>평가 지표:</b> 논문과 비교할 MAPE(%)를 주지표로 쓰겠습니다. 실제 사이클 오차는 MAE·RMSE로 보고, R²도 함께 확인하겠습니다. '
                 'DAY 2에서 MAPE 차이(Gap)는 별도 검증-CV, B2-별도 검증, B2-논문 참고값 9.1%로 계산하고 %p로 표시하겠습니다. '
-                'DAY 1에서는 분석과 설계까지 진행했습니다.', size=9, leading=13)
+                , size=9, leading=13)
     r.paragraph('<b>결과를 볼 때 주의할 점:</b> 세 배치의 분포는 이미 살펴봤지만 B2 점수로 모델을 조정하지는 않겠습니다. '
                 'CV는 개발 과정의 점수로 해석하겠습니다. B1·B3의 수명값, 불완전한 기록의 제외, 논문과 다른 데이터 조건도 함께 밝히겠습니다.', size=9, leading=13)
-    r.paragraph('<b>출처:</b> Kaggle, itshpark/data-driven-prediction-of-battery-cycle 및 원저자 전처리 코드. '
-                'Severson et al. (2019), Nature Energy, DOI: 10.1038/s41560-019-0356-8. '
-                'DS Mini Project의 DAY 1 안내와 강의 녹음 내용을 참고했습니다.', size=8, leading=11.5, gap=0, color=GRAY)
     r.save()
     return output
 

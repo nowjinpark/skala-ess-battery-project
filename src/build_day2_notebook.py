@@ -620,7 +620,7 @@ def build():
     """)
 
     md("""
-    ## 15. 실행 방법과 참고 자료입니다
+    ## 15. 실행 방법입니다
 
     이 노트북은 저장된 파일을 읽고 예측·지표를 확인합니다.
     마지막 셀에서 데이터, 모델, 선택 기록이 변경되지 않았는지 다시 확인합니다.
@@ -639,19 +639,6 @@ def build():
     `evaluate`는 고정 모델로 별도 검증용과 B2를 평가합니다. 이미 결과가 있으면 스크립트가 중단합니다.
     구현은 `src/train_day2.py`, 과제 기준은 `docs/notion_day2_requirements.txt`에 정리했습니다.
 
-    | 과제 평가 영역 | 이 노트북에서 확인할 위치 |
-    |---|---|
-    | 전략 → 구현 20점 | 3·6절: DAY 1 근거와 입력 조합 비교 |
-    | Pipeline 40점 | 2·4·7절: 셀·충전 방식 분리, 학습 부분의 전처리, 저장 예측 재현 |
-    | 성능 보고·해석 20점 | 5·8·9절: 지표 계산, 지정 6행, Gap과 모델 비교 |
-    | 도메인 해석·한계 20점 | 10-14절: 오류 사례, 배치 차이, ESS 활용 조건 |
-
-    위 표는 과제 기준과 내용의 대응 위치를 보여 줍니다.
-
-    **참고한 자료:** DS Mini Project 안내와 강의 녹음, DAY 1 노트북·설계서,
-    Statistics·MLDL·DS Course Wrap-up·Evaluation Metrics·ML Hyperparameters,
-    Kaggle `itshpark/data-driven-prediction-of-battery-cycle`,
-    Severson et al. (2019), *Nature Energy*, DOI: 10.1038/s41560-019-0356-8.
     """)
     code(r"""
     after_hashes = {relative: sha(ROOT / relative) for relative in before_hashes}
