@@ -1,14 +1,14 @@
 {
   "status": "passed",
   "notebook": "notebooks/01_DAY1_EDA.ipynb",
-  "sha256": "f55f53e5fbcab4d18002a0cd483c861d7485dd8c5207042f6f9df8b6d7fef56c",
+  "sha256": "53c7d32bb291a11cf67be2b8d4f0ee69f726d0833aca9c01e7190f4b4eeace2e",
   "total_cells": 33,
   "executed_code_cells": 15,
   "error_outputs": 0,
   "embedded_png_charts": 7,
   "scope": "DAY1 Batch1/2/3 descriptive EDA only; no prediction model fitting or reselection",
   "source": "src/build_notebook.py",
-  "source_sha256": "52f3a2c81d11e68b1c0ebcd336f736df6011cb809922e9268a03f4a6643b7788",
+  "source_sha256": "b64502643fa62dcacbe28458022ad25202bbf763337ef0f68583b60156a7bb85",
   "supplement_json_sha256": "b6c5eedbedc147c88384ddce60fa695af092cc4465b494e0025e5da8ade6d493",
   "protected_files_checked": 25,
   "processed_data_split_and_day2_models_unchanged": true,
@@ -64,18 +64,28 @@
     "csv_json_numeric_agreement": true,
     "policy_group_counts_reconcile_to_115": true
   },
-  "validated_at": "2026-10-01T06:21:47.443120+00:00",
+  "validated_at": "2026-10-02T00:40:50.855866+00:00",
   "model_training_executed": false,
   "protected_inputs_models_results_unchanged": true,
   "final_markdown_revision": {
-    "change": "Removed redundant reference-list prose",
-    "code_cells_and_outputs_unchanged": true
+    "markdown_only": true,
+    "code_cells_and_stored_outputs_unchanged": true,
+    "all_code_cells_reexecuted_in_temporary_copy": true,
+    "new_model_training": false,
+    "change": "Preprocessing disclosure and reproduction instructions; existing results retained."
   },
   "clean_checkout_execution": {
     "status": "passed",
     "executed_code_cells": 15,
     "error_outputs": 0,
     "source": "Tracked-file checkout with the recorded project dependency versions",
-    "final_revision": "Only prose and a display-string label changed after execution; all computational statements and numeric outputs preserved."
+    "final_revision": "Current documentation revision executed in a separate copy using project dependencies; all computational cells passed without model training."
+  },
+  "documentation_revision": {
+    "markdown_only": true,
+    "code_cells_and_stored_outputs_unchanged": true,
+    "all_code_cells_reexecuted_in_temporary_copy": true,
+    "new_model_training": false,
+    "change": "Preprocessing disclosure and reproduction instructions; existing results retained."
   }
 }

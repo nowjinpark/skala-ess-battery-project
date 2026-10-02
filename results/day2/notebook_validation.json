@@ -1,15 +1,15 @@
 {
   "status": "passed",
   "notebook": "notebooks/02_DAY2_Modeling.ipynb",
-  "sha256": "7d9e9ad1f1ccce8016b896a6adbf6fcd2b81ab3cfcfa9f12c530dcb7697b9516",
-  "validated_at": "2026-10-01T06:21:47.443120+00:00",
+  "sha256": "e587e27d62d033858fcd500b1415dbf0093c29fcb205a60d714e8abe6326cf71",
+  "validated_at": "2026-10-02T04:46:48.915691+00:00",
   "total_cells": 36,
   "executed_code_cells": 17,
   "error_outputs": 0,
   "embedded_png_charts": 5,
   "model_training_executed": false,
   "protected_inputs_models_results_unchanged": true,
-  "code_and_outputs_sha256": "3f278d4fb2f644308de2da8f9282b89282bc4b69e910a02563e66eb89585e4a3",
+  "code_and_outputs_sha256": "4bc4a255da0b68a57cb00a892ef7360c39ee9196fee39f950eed80ecbe86ba48",
   "selected_candidate": "C037",
   "selection_changed": false,
   "metrics_independently_recomputed": true,
@@ -17,17 +17,25 @@
     "embedded_png_charts_reviewed": 5,
     "result": "All embedded charts visually inspected; axes, legends, labels and plots are legible and unclipped."
   },
-  "source_sha256": "e7e7acdb32401c0dcb4d73f771e8c46a059580cefcba4eb2816d13cfcd9624e6",
+  "source_sha256": "843885ebd7856ecd91c0ca14ce864917b14fabe69d3fd7177c50fcef2a8984f0",
   "clean_checkout_execution": {
     "status": "passed",
     "executed_code_cells": 17,
     "error_outputs": 0,
     "source": "Tracked-file checkout with the recorded project dependency versions",
-    "final_revision": "Only prose and a display-string label changed after execution; all computational statements and numeric outputs preserved."
+    "final_revision": "Current documentation revision executed in a separate copy using project dependencies; all computational cells passed without model training."
   },
   "code_and_outputs_hash_format": "SHA256 of UTF-8 json.dumps([{source, outputs} per code cell], ensure_ascii=False, sort_keys=True)",
   "final_revision": {
-    "change": "IR change definition clarifies that positivity applies to input readings, not their difference",
-    "computational_logic_and_numeric_outputs_unchanged": true
+    "all_code_cells_reexecuted_in_temporary_copy": true,
+    "new_model_training": false,
+    "numerical_results_unchanged": true,
+    "change": "Gap comparison labels use arrows with an explicit later-minus-baseline MAPE formula. Only the displayed summary-table labels changed."
+  },
+  "documentation_revision": {
+    "all_code_cells_reexecuted_in_temporary_copy": true,
+    "new_model_training": false,
+    "numerical_results_unchanged": true,
+    "change": "Gap comparison labels use arrows with an explicit later-minus-baseline MAPE formula. Only the displayed summary-table labels changed."
   }
 }

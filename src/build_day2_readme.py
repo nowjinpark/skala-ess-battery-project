@@ -84,15 +84,15 @@ def main():
 Python 3.12와 [requirements.txt](requirements.txt)의 버전을 사용했습니다. 아래 명령은 macOS 기준이며, 저장소를 내려받아 환경을 준비하고 저장 결과를 확인합니다.
 
 ```sh
-git clone https://github.com/nowjinpark/skala-battery-cycle-life.git
-cd skala-battery-cycle-life
+git clone https://github.com/nowjinpark/skala-ess-battery-project.git
+cd skala-ess-battery-project
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 python src/verify_day2.py
 ```
 
-[DAY 2 노트북](notebooks/02_DAY2_Modeling.ipynb)을 이 환경의 Python 커널로 실행하면 저장 모델의 예측과 지표를 확인할 수 있습니다. 처음부터 학습하는 절차와 상세 검증은 노트북 15절에 정리했습니다.
+[DAY 2 노트북](notebooks/02_DAY2_Modeling.ipynb)을 이 환경의 Python 커널로 실행하면 저장 모델의 예측과 지표를 확인할 수 있습니다. 저장 결과 확인에는 원본 MAT 파일이 필요하지 않습니다. 기존 결과를 보존하면서 별도 폴더에서 다시 학습하는 방법은 노트북 15절, 원본 파일명과 전처리 순서는 [데이터 안내](data/DATA_SOURCE.md)에 정리했습니다.
 
 ## EDA
 
@@ -155,6 +155,8 @@ DAY 1에서 정한 개발용 28개와 별도 검증용 8개를 유지했습니�
 
 결측값을 채울 중앙값과 표준화 기준은 **각 교차검증의 학습 부분에서만** 구했습니다. 선형회귀·Ridge에는 표준화를 적용했고, Random Forest에는 적용하지 않았습니다. 최종 모델의 전처리 기준은 개발용 28개에서 구해 별도 검증·B2에 그대로 적용했습니다. 전체 기록 길이, 종료 용량, 셀 ID, 100사이클 이후 측정값은 입력에 넣지 않았습니다.
 
+충전 시간은 큰 값이 평균에 미치는 영향을 줄이기 위해 `0 < chargetime < 120`인 값만 사용했습니다. 분석 대상 셀에서 B1 3개·B2 10개의 **측정값**을 제외했으며 셀은 제외하지 않았습니다. B2의 수명과의 상관계수는 처리 전 +0.087에서 처리 후 -0.917로 달라졌습니다. 잠정 기준이며 큰 값이 발생한 원인은 확인하지 못했습니다.
+
 ### 모델 선택 및 근거
 
 평균만 예측하는 모델을 기준으로 선형회귀·Ridge·Random Forest를 비교했습니다. 적은 데이터에서 단순한 모델부터 확인하고, Ridge로 중복 변수의 영향을 줄이며, Random Forest로 직선으로 설명하기 어려운 관계를 살펴보려 했습니다.
@@ -182,11 +184,11 @@ MAPE는 셀별 `|실제-예측| / 실제`를 평균 내 백분율로 표시한 �
 | Train (Batch1 CV) | {e['cv']['cv_mape_pct_mean']:.2f}% | 3개 검증 fold 평균 |
 | Valid (Batch1 Hold-out) | {e['valid']['mape_pct']:.2f}% | B1 별도 검증용 8개 |
 | Test (Batch2) | {e['test']['mape_pct']:.2f}% | B2 39개 |
-| Gap (Train-Valid) | {g['valid_minus_cv']:+.2f}%p | Valid - CV |
-| Gap (Valid-Test) | {g['test_minus_valid']:+.2f}%p | Test - Valid |
-| Gap (Target-Test) | {g['test_minus_paper_9_1']:+.2f}%p | Test - 논문 참고값 9.1% |
+| Gap (Train → Valid) | {g['valid_minus_cv']:+.2f}%p | Valid - CV |
+| Gap (Valid → Test) | {g['test_minus_valid']:+.2f}%p | Test - Valid |
+| Gap (Target → Test) | {g['test_minus_paper_9_1']:+.2f}%p | Test - 논문 참고값 9.1% |
 
-Gap은 양수가 오차 증가를 뜻하도록 계산 방향을 적었습니다. CV와 별도 검증의 차이는 작았지만, **B2에서 {g['test_minus_valid']:.2f}%p 나빠져 다른 배치로의 일반화에 실패했습니다.** 작은 표본이므로 내부 점수가 비슷하다는 이유만으로 과적합이 없다고 보지는 않았습니다.
+화살표는 비교 방향이며, Gap은 **이후 MAPE - 기준 MAPE**로 계산했습니다. 예를 들어 Target → Test는 `55.22 - 9.10 = +46.12%p`로, 논문 목표보다 오차가 커졌다는 뜻입니다. CV와 별도 검증의 차이는 작았지만, **B2에서 {g['test_minus_valid']:.2f}%p 나빠져 다른 배치로의 일반화에 실패했습니다.** 작은 표본이므로 내부 점수가 비슷하다는 이유만으로 과적합이 없다고 보지는 않았습니다.
 
 별도 검증의 MAE/RMSE는 {e['valid']['mae_cycles']:.2f}/{e['valid']['rmse_cycles']:.2f}사이클, R²는 {e['valid']['r2']:.3f}이었습니다. B2는 각각 {e['test']['mae_cycles']:.2f}/{e['test']['rmse_cycles']:.2f}사이클, {e['test']['r2']:.3f}이었습니다. B2의 음수 R²는 해당 배치의 실제 평균 수명을 아는 상수 예측보다 제곱오차가 컸다는 뜻입니다.
 
@@ -223,6 +225,8 @@ B2의 30/39개는 개발용 최소수명 534보다 짧았습니다. 초기 용�
 ### 한계와 실제 적용을 위해 필요한 사항
 
 현재 한계는 개발용 28개·별도 검증용 8개로 표본이 작고, 113개 후보 중 좋은 결과를 고르면서 CV가 실제보다 좋아 보일 수 있다는 점입니다. 불완전한 기록의 제외와 B1/B2 수명값 차이도 영향을 줄 수 있습니다. DAY 1에서 B2 분포를 이미 살펴봤으므로 완전히 처음 보는 테스트라고 표현하지 않았습니다.
+
+DAY 1에서 계획했던 품질 기준·종료 용량 판정 기준 변경에 따른 모델 성능 비교는 수행하지 않았습니다. 전처리 전후의 충전 시간 상관 비교와는 구분해 남은 점검으로 두었습니다.
 
 실험 셀의 총사이클 수를 실제 팩의 남은 사용 일수로 바로 바꿀 수는 없으며, 다른 배터리 종류·온도·운전 조건·팩 구성과 예측 불확실성도 확인해야 합니다.
 

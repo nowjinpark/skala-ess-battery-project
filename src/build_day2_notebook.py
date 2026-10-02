@@ -182,6 +182,10 @@ def build():
     이를 **ΔQ 추가 / 중복 변수 제외 / ΔQ 평균·최솟값 대체 / 저항 제외 / ΔQ 단독** 비교로 이어 갔습니다.
     각 변수는 초기 100사이클 이내에서 계산했습니다. 전체 수명, 종료 용량, knee 위치는 입력에 넣지 않았습니다.
 
+    충전 시간은 초기 2-100사이클 중 `0 < chargetime < 120`인 값만 평균에 사용했습니다.
+    분석 대상 셀에서 B1 3개·B2 10개의 측정값이 제외됐으며 셀은 제외하지 않았습니다.
+    큰 값이 평균에 미치는 영향을 줄이기 위한 잠정 기준이며, 큰 값이 발생한 원인은 확인하지 못했습니다.
+
     113개는 모델 이름의 수가 아니라 **입력 조합 × 모델 × 설정 × 수명값 변환**을 합친 후보 수입니다.
     선형회귀·Ridge는 원래 수명과 ln(수명)을 비교했고, Ridge alpha는 0.1/1/10/100으로 정했습니다.
     Random Forest는 나무 300개, 깊이 3/제한 없음, 끝 노드의 최소 표본 수 1/3,
@@ -416,7 +420,9 @@ def build():
     md("""
     ## 8. 선택한 C037의 과제 지정 성능표입니다
 
-    과제의 Gap 이름을 유지하고 **양수이면 오차가 커지는 방향**으로 계산식을 적었습니다.
+    과제의 세 비교 항목은 유지하고, 뺄셈과 혼동하지 않도록 **기준 → 이후**로 표시했습니다.
+    Gap은 **이후 MAPE - 기준 MAPE**이며, 양수이면 오차 증가를 뜻합니다.
+    예를 들어 Target → Test는 `55.22 - 9.10 = +46.12%p`입니다.
     처음 세 값은 MAPE **%**, 뒤의 차이는 **%p(퍼센트포인트)**입니다.
     `Train`은 B1 교차검증 평균이며, 개발용 데이터를 다시 예측한 오차가 아닙니다.
     """)
@@ -432,9 +438,9 @@ def build():
         ['Train (Batch1 CV)', f'{cv_mape:.2f}%', f'프로토콜 GroupKFold(3) 검증 평균; SD {winner_cv.cv_mape_pct_sd:.2f}'],
         ['Valid (Batch1 Hold-out)', f'{valid_mape:.2f}%', '고정한 B1 holdout 8셀'],
         ['Test (Batch2)', f'{test_mape:.2f}%', 'B2 39셀; 모델 선택 완료 후 평가'],
-        ['Gap (Train-Valid)', f'{gaps["valid_minus_cv"]:+.2f} %p', 'Valid - CV'],
-        ['Gap (Valid-Test)', f'{gaps["test_minus_valid"]:+.2f} %p', 'Test - Valid'],
-        ['Gap (Target-Test)', f'{gaps["test_minus_paper_9_1"]:+.2f} %p', 'Test - 논문 참고 9.1%'],
+        ['Gap (Train → Valid)', f'{gaps["valid_minus_cv"]:+.2f} %p', 'Valid - CV'],
+        ['Gap (Valid → Test)', f'{gaps["test_minus_valid"]:+.2f} %p', 'Test - Valid'],
+        ['Gap (Target → Test)', f'{gaps["test_minus_paper_9_1"]:+.2f} %p', 'Test - 논문 참고 9.1%'],
     ], columns=['구분', 'MAPE(%) / Gap(%p)', '비고'])
     assert len(required_six_rows) == 6
     display(required_six_rows)
@@ -616,27 +622,55 @@ def build():
     남은 한계는 개발용 28개·별도 검증용 8개의 작은 표본, 같은 CV에서 여러 후보를 고른 영향,
     별도 검증용의 충전 방식 일부 중복, DAY 1에서 평가 배치도 관찰한 점,
     B1/B2의 수명값·분포·버전 차이, 불완전한 기록의 제외, 해독하지 못한 물리 셀 식별자입니다.
+    DAY 1에서 계획했던 품질 기준·종료 용량 판정 기준 변경에 따른 모델 성능 비교는 수행하지 않았습니다.
     실제 ESS 운영에서 검증하지 않았으며, Batch 3 추가 모델 평가도 수행하지 않았습니다.
     """)
 
     md("""
     ## 15. 실행 방법입니다
 
-    이 노트북은 저장된 파일을 읽고 예측·지표를 확인합니다.
-    마지막 셀에서 데이터, 모델, 선택 기록이 변경되지 않았는지 다시 확인합니다.
-
-    **처음부터 학습을 재현하려면** 의존성과 DAY 1 입력 파일을 준비한 뒤,
-    `results/day2/selection_lock.json`과 `evaluation.json`이 없는 **별도의 새 작업 복제본**에서 실행해 주세요.
-    프로젝트 폴더 기준으로 다음 두 명령을 순서대로 실행합니다.
-    이 노트북은 두 명령을 자동 실행하지 않으며, 기존 결과를 지우고 반복해서 튜닝하지 않습니다.
+    **저장된 결과 확인:** 이 노트북은 저장된 모델로 예측·지표를 확인하고,
+    마지막 셀에서 데이터·모델·선택 기록이 그대로인지 점검합니다. 원본 MAT 파일은 필요하지 않습니다.
+    README의 환경 설정을 마친 뒤, 저장소 최상위에서 아래 명령으로도 검증할 수 있습니다.
 
     ```bash
-    .venv/bin/python src/train_day2.py --phase select
-    .venv/bin/python src/train_day2.py --phase evaluate
+    .venv/bin/python src/verify_day2.py
     ```
 
-    `select`는 계획 저장, 개발 CV 후보 선택, 개발용 28개 최종 학습, 선택 기록 고정을 수행합니다.
-    `evaluate`는 고정 모델로 별도 검증용과 B2를 평가합니다. 이미 결과가 있으면 스크립트가 중단합니다.
+    검증 스크립트는 재학습 없이 저장 결과를 확인하고 `results/day2/validation.json`을 갱신합니다.
+
+    **정제 데이터로 재학습:** 아래 명령은 새 임시 폴더에 코드와 입력 파일만 복사해 학습합니다.
+    기존 `results/day2/`를 복사하거나 삭제하지 않으므로 원래 모델과 결과가 보존됩니다.
+    README의 환경 설정을 마친 뒤, macOS 저장소 최상위에서 블록 전체를 순서대로 실행해 주세요.
+
+    ```bash
+    project_dir="$PWD"
+    day2_python="$project_dir/.venv/bin/python"
+    retrain_dir="$(mktemp -d "${TMPDIR:-/tmp}/battery-day2-retrain.XXXXXX")"
+    mkdir -p "$retrain_dir/data" "$retrain_dir/results" "$retrain_dir/references"
+    cp -R "$project_dir/src" "$retrain_dir/src"
+    cp -R "$project_dir/data/processed" "$retrain_dir/data/processed"
+    cp "$project_dir/results/split_assignment.csv" "$retrain_dir/results/"
+    cp "$project_dir/references/baseline_batch12_splits.csv" "$retrain_dir/references/"
+
+    "$day2_python" "$retrain_dir/src/train_day2.py" --phase select
+    "$day2_python" "$retrain_dir/src/train_day2.py" --phase evaluate
+    "$day2_python" "$retrain_dir/src/verify_day2.py"
+    ```
+
+    새 결과는 `$retrain_dir/results/day2/`에 저장됩니다. 학습에 필요한 입력은
+    `data/processed/cells_analysis.csv`와 `results/split_assignment.csv`입니다.
+    학습 후 검증에서 초기 특성과 기존 분할도 확인할 수 있도록 정제 데이터 폴더와
+    `references/baseline_batch12_splits.csv`를 함께 복사합니다.
+
+    `select`는 계획 저장, 개발 CV 후보 선택, 개발용 28개 학습과 선택 기록 고정을 수행합니다.
+    `evaluate`는 고정 모델로 별도 검증용과 B2를 평가합니다.
+    해당 단계의 결과가 이미 있으면 스크립트가 중단하므로, 다시 실행할 때도 새 임시 폴더를 만드세요.
+    이 노트북은 재학습 명령을 자동 실행하지 않습니다.
+
+    **원본 MAT부터 재생성:** 세 파일의 정확한 이름·위치와
+    `prepare_data.py → analyze.py → supplement_day1.py` 실행 순서는
+    [데이터 안내](../data/DATA_SOURCE.md)를 참고해 주세요.
     구현은 `src/train_day2.py`, 과제 기준은 `docs/notion_day2_requirements.txt`에 정리했습니다.
 
     """)
@@ -692,7 +726,7 @@ def execute_and_validate(nb):
                   'metrics_independently_recomputed': True, 'all_saved_model_predictions_reproduced': True,
                   'fold_preprocessing_audit_rows_checked': 339,
                   'required_six_row_table': ['Train (Batch1 CV)', 'Valid (Batch1 Hold-out)', 'Test (Batch2)',
-                                             'Gap (Train-Valid)', 'Gap (Valid-Test)', 'Gap (Target-Test)'],
+                                             'Gap (Train → Valid)', 'Gap (Valid → Test)', 'Gap (Target → Test)'],
                   'source_selection_lock_sha256': hashlib.sha256((ROOT/'results/day2/selection_lock.json').read_bytes()).hexdigest(),
                   'scope': 'DAY2 result walkthrough: B1 development/holdout and B2 Test; no B3 model evaluation'}
     (ROOT / 'results/day2/notebook_validation.json').write_text(json.dumps(validation, ensure_ascii=False, indent=2)+'\n')

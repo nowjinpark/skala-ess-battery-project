@@ -62,7 +62,7 @@
 
 `data/processed/cells_analysis.csv`의 label_status·analysis_eligible·exclusion_reason,
 `results/excluded_cells.csv`, `results/validation.json`, `results/split_assignment.csv`에 계산 근거가 남아 있다.
-원본 출처·체크섬은 `data/downloads/download_manifest.json`에 있다.
+원본 출처·체크섬은 [data/source_manifest.json](../data/source_manifest.json)에 있습니다.
 
 ## 재사용한 수업 개념
 

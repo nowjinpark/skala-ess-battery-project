@@ -1,10 +1,9 @@
 {
-  "repository_url": "https://github.com/nowjinpark/skala-battery-cycle-life",
+  "repository_url": "https://github.com/nowjinpark/skala-ess-battery-project",
   "visibility": "PUBLIC",
   "default_branch": "main",
-  "public_http_status": 200,
-  "published_at": "2026-10-01T04:53:36.779969+00:00",
-  "fresh_staged_copy_validation": "passed (10 checks)",
+  "status": "prepared_for_upload",
+  "fresh_staged_copy_validation": "passed (10 checks; DAY1 15 and DAY2 17 notebook code cells)",
   "slack_sent": false,
   "publication_authorized_by_user": true
 }
