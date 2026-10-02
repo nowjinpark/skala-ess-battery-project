@@ -2,8 +2,27 @@
   "repository_url": "https://github.com/nowjinpark/skala-ess-battery-project",
   "visibility": "PUBLIC",
   "default_branch": "main",
-  "status": "prepared_for_upload",
-  "fresh_staged_copy_validation": "passed (10 checks; DAY1 15 and DAY2 17 notebook code cells)",
+  "status": "published_and_verified",
+  "public_http_status": 200,
+  "verified_at": "2026-10-02T04:50:19.748004+00:00",
+  "verified_content_commit": "7eaeb6f3f00b8821f038efb48e2dc065b092ffde",
+  "tracked_files": 107,
+  "fresh_public_checkout_validation": "passed (10 checks)",
+  "notebook_execution": [
+    {
+      "notebook": "01_DAY1_EDA.ipynb",
+      "executed_code_cells": 15,
+      "errors": 0
+    },
+    {
+      "notebook": "02_DAY2_Modeling.ipynb",
+      "executed_code_cells": 17,
+      "errors": 0
+    }
+  ],
+  "submitted_day1_pdf_sha256": "06c1dd81357896b533a38bbdb076637682a9cac994fad1c8567ac6e972a35383",
+  "submitted_day1_pdf_unchanged": true,
+  "model_training_executed": false,
   "slack_sent": false,
   "publication_authorized_by_user": true
 }
